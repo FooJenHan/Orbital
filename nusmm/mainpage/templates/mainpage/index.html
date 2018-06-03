@@ -1,0 +1,26 @@
+<body>
+	
+	<p> NUS Module Mappings </p>
+
+	<table>
+		<tr>
+      <th>NUS Code</th>
+      <th>NUS Credits</th>
+      <th>PU Name</th>
+      <th>PU Code</th>
+      <th>PU Title</th>
+      <th>PU Credits</th>
+    </tr>
+    {% for item in query %}
+    <tr> 
+      <td>{{ item.nus_code }}</td>
+      <td>{{ item.nus_credits }}</td>
+      <td>{{ item.pu_name }}</td>
+      <td>{{ item.pu_code }}</td>
+      <td>{{ item.pu_title }}</td>
+      <td>{{ item.pu_credits }}</td>
+    </tr>
+    {% endfor %}
+	</table>
+
+</body>
