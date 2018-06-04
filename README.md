@@ -5,7 +5,7 @@ To search for module mappings for Student Exchange Programme (SEP) more quickly 
 ##
 __Team Name__: TeamFAC  
 __Members__: Enzio Kam Hai Hong, Foo Jen Han  
-__Work Focus__: _Backend and Database_ (Enzio), _Frontend_ (Jen Han)
+__Work Focus__: _Backend and Database_ (Enzio), _Frontend_ (Jen Han)  
 __Dependencies__: _Python 3.6.5, Django 2.0.6, PostgreSQL 10.3_  
 
 
