@@ -1,9 +1,27 @@
+<head>
+  <title> NUS Module Mappings</title>
+  <link rel="import" href="table.html">
+</head>
+
 <body>
 	
-	<p> NUS Module Mappings </p>
+  <header> 
+    <h1> NUS Module Mappings </h1>
+  </header>
 
-	<table>
-		<tr>
+  <p> 
+    Enter nus module code, partner institution name, partner institution code,
+    and/or partner institution's module title.
+  </p>
+
+  <form action="." method="GET">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Search Mappings" />
+  </form>
+  
+  <table>
+    <tr>
       <th>NUS Code</th>
       <th>NUS Credits</th>
       <th>PU Name</th>
@@ -11,7 +29,7 @@
       <th>PU Title</th>
       <th>PU Credits</th>
     </tr>
-    {% for item in query %}
+    {% for item in mappings %}
     <tr> 
       <td>{{ item.nus_code }}</td>
       <td>{{ item.nus_credits }}</td>
@@ -21,6 +39,6 @@
       <td>{{ item.pu_credits }}</td>
     </tr>
     {% endfor %}
-	</table>
+  <table>
 
 </body>
