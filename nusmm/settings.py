@@ -61,7 +61,10 @@ ROOT_URLCONF = 'nusmm.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            'mainpage/templates',
+            'admin/templates',
+        ],
         #'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -12,11 +12,13 @@
     background: #205067;
 
     /* Reset the indents of django-flat-theme
-      (need to restore 40px on branding+user-tools instead) */
+      (need to restore 40px on branding+user-tools instead) 
     padding-left: 0;
     padding-right: 0;
+    */
 }
 
+/*
 #header #branding h1 {
     margin: 0;
     padding: 5px 10px;
@@ -24,6 +26,11 @@
     background: transparent url(images/django.png) 10px 5px no-repeat;
     height: 31px;
     width: 93px;
+}
+*/
+
+#branding h1, #branding h1 a:link, #branding h1 a:visited {
+    color: white;
 }
 
 #header #user-tools {

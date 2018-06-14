@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.db import IntegrityError, transaction
 
 # Create your models here.
 class Mapping(models.Model):
@@ -16,12 +17,20 @@ class Mapping(models.Model):
     def __str__(self):
     	return self.nus_code
 
-    def save(self):
+    def save(self, **kwargs):
         self.nus_code = self.nus_code.upper()
         self.pu_name = self.pu_name.upper()
         self.pu_code = self.pu_code.upper()
         self.pu_title = self.pu_title.upper()
-        super(Mapping,self).save()
+        try:
+            with transaction.atomic():
+                super(Mapping,self).save()
+        except IntegrityError:
+            pass
+
+    class Meta:
+        unique_together = (('nus_code', 'nus_credits', 'pu_name', 'pu_code',
+            'pu_title', 'pu_credits'),)
 
 """
 Format:
