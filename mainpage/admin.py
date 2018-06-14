@@ -11,5 +11,9 @@ class MappingAdmin(admin.ModelAdmin):
 		list_filter = ['nus_code']
 		search_fields = ['nus_code', 'pu_name', 'pu_code', 'pu_title']
 
+		def get_queryset(self, request):
+			queryset = super(MappingAdmin, self).get_queryset(request)
+			queryset = queryset.order_by('nus_code', 'pu_name')
+			return queryset
 
 admin.site.register(Mapping, MappingAdmin)
