@@ -139,7 +139,7 @@ USE_TZ = False
 ADMIN_TOOLS_MENU = 'admin.menu.CustomMenu'
 ADMIN_TOOLS_INDEX_DASHBOARD = 'admin.dashboard.CustomIndexDashboard'
 ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'admin.dashboard.CustomAppIndexDashboard'
-ADMIN_TOOLS_THEMING_CSS = 'admin/theming.css'
+ADMIN_TOOLS_THEMING_CSS = 'admin_tools/theming.css'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
