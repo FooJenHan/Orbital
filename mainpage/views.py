@@ -26,3 +26,6 @@ def index(request):
 
 		return render(request, 'mainpage/index.html', {'mappings':mappings,
 				'form':form })
+
+def mod_list(request):
+	return render(request, 'mainpage/mod_list.html')
