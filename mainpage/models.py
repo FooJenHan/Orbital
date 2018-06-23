@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.db import IntegrityError, transaction
 
+
 # Create your models here.
 class Mapping(models.Model):
     nus_code = models.CharField(max_length=200)
@@ -13,6 +14,7 @@ class Mapping(models.Model):
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
 
     def __str__(self):
     	return self.nus_code
