@@ -7,6 +7,9 @@
 
 {% block body %}
 <body>
+  {% load static %} 
+  <script type ="text/javascript" src="{% static '/mainpage/index.js' %}"> </script>
+
   <br>
 	<div class="position-relative">
     <div class="container">
@@ -31,6 +34,7 @@
     <table class="table">
       <thead class="thead-dark">
         <tr>
+          <th scope="col">Select</th>
           <th scope="col">NUS Code</th>
           <th scope="col">NUS Credits</th>
           <th scope="col">PU Name</th>
@@ -39,8 +43,18 @@
           <th scope="col">PU Credits</th>
         </tr>
       </thead>
+
+        <button type="button" onclick="selectAll()" id="select-all">
+          Select all
+        </button>
+
+        <button type="button" onclick="saveSelected()" id="save-selected">
+          Save selected
+        </button>
+
         {% for item in mappings %}
         <tr> 
+          <td><input type="checkbox" class="table-checkbox"/></td>
           <td>{{ item.nus_code }}</td>
           <td>{{ item.nus_credits }}</td>
           <td>{{ item.pu_name }}</td>
