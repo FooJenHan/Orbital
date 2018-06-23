@@ -11,6 +11,7 @@ gunicorn = "*"
 django-heroku = "*"
 whitenoise = "*"
 django-admin-tools = "*"
+django-filter = "*"
 
 [dev-packages]
 
