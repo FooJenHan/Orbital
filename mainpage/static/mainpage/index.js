@@ -1,21 +1,36 @@
-function selectAll() {
-  var text = document.getElementById('select-all').innerText;
-  var cond = (text == "Select all")
-  var checkboxes =  document.querySelectorAll("input.table-checkbox")
+function saveSelected(){
+  var table = document.querySelector('table');
+  var arr = new Array;
 
-  for (i = 0; i < checkboxes.length; i++){
-    if (cond){
-      checkboxes[i].checked = true;
+  for (var i=1; i<table.rows.length; i++){
+    if (table.rows[i].cells[0].firstChild.checked == false){
+      continue;
     }
-    else{
-      checkboxes[i].checked = false;
+    var temp = new Array;
+    for (var j=1; j<table.rows[i].cells.length; j++){
+      temp.push(table.rows[i].cells[j].textContent)
     }
+
+    arr.push(temp);
   }
-  if (cond){
-    document.getElementById('select-all').innerText = 'Unselect all';
+
+  var stored = localStorage.getItem('selected_mappings');
+  if (stored == "undefined" || stored == null){
+    var data = JSON.stringify(arr);
+    localStorage.setItem('selected_mappings', data);
   }
   else{
-    document.getElementById('select-all').innerText = 'Select all';
+    var stored_arr = JSON.parse(stored);
+    var len = arr.length 
+
+    for (var k=0; k<len; k++){
+      if (checkContains(stored_arr, arr[k]) == false){
+        stored_arr.push(arr[k]);
+      }
+    }
+
+    var comb_data = JSON.stringify(stored_arr);
+    localStorage.setItem('selected_mappings', comb_data);
   }
 
 }
