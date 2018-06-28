@@ -41,18 +41,26 @@ $(document).ready(function(){
 
   $("#id_pu_name").on("keyup", function() {
     var search = $(this).val().toUpperCase();
-    $("#tabledata tr").hide().filter(function() {
-      return $(this).find('.pu-name').text().toUpperCase().indexOf(search) > -1
-    }).show();
+    if (!search && !$("#id_pu_name").val()){
+      $("#tabledata tr").addClass('hidden');
+    }
+    else{
+      $("#tabledata tr").removeClass('hidden').filter(function() {
+        return !($(this).find('.pu-name').text().toUpperCase().indexOf(search) > -1);
+      }).addClass('hidden');
+    }
   });
-
 
   $("#id_general").on("keyup", function() {
     var search = $(this).val().toUpperCase();
-    $("#tabledata tr").hide().filter(function() {
-      return $(this).text().toUpperCase().indexOf(search) > -1
-    }).show();
-  });
-
+    if (!search && !$("#id_general").val()){
+      $("#tabledata tr").addClass('hidden');
+    }
+    else{
+      $("#tabledata tr").removeClass('hidden').filter(function() {
+        return !($(this).text().toUpperCase().indexOf(search) > -1);
+      }).addClass('hidden');
+    }
+  });  
 
 });
