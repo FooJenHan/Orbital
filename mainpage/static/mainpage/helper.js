@@ -1,14 +1,18 @@
 function selectAll() {
   var text = document.getElementById('select-all').innerText;
   var cond = (text == "Select all")
+  var table = document.querySelector('table');
   var checkboxes =  document.querySelectorAll("input.table-checkbox")
 
   for (i = 0; i < checkboxes.length; i++){
-    if (cond){
+    if (cond && table.rows[i+1].style.display == ""){
       checkboxes[i].checked = true;
     }
-    else{
+    else if (!cond && table.rows[i+1].style.display == ""){
       checkboxes[i].checked = false;
+    }
+    else{
+      continue;
     }
   }
   if (cond){
