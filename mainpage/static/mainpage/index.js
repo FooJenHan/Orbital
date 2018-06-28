@@ -34,3 +34,25 @@ function saveSelected(){
   }
 
 }
+
+
+//Filtering functions
+$(document).ready(function(){
+
+  $("#id_pu_name").on("keyup", function() {
+    var search = $(this).val().toUpperCase();
+    $("#tabledata tr").hide().filter(function() {
+      return $(this).find('.pu-name').text().toUpperCase().indexOf(search) > -1
+    }).show();
+  });
+
+
+  $("#id_general").on("keyup", function() {
+    var search = $(this).val().toUpperCase();
+    $("#tabledata tr").hide().filter(function() {
+      return $(this).text().toUpperCase().indexOf(search) > -1
+    }).show();
+  });
+
+
+});

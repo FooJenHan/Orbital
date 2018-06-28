@@ -1,18 +1,8 @@
-<head>
-  <title> NUS Module Mappings</title>
 
-  {% extends 'base.html' %}
+{% extends 'base.html' %}
 
-</head>
 
 {% block body %}
-
-<body>
-  {% load static %} 
-  <script type ="text/javascript" src="{% static 'mainpage/index.js' %}"> 
-  </script>
-  <script type ="text/javascript" src="{% static 'mainpage/helper.js' %}"> 
-  </script>
 
   <br>
 	<div class="position-relative">
@@ -32,7 +22,6 @@
     <form action="." method="GET">
       {% csrf_token %}
       {{ form }}
-      <input id="search" type="submit" value="Search Mappings" />
     </form>
     
     <table class="table">
@@ -56,20 +45,32 @@
           Save selected
         </button>
 
+        <tbody id="tabledata">
         {% for item in mappings %}
-        <tr> 
-          <td><input type="checkbox" class="table-checkbox"/></td>
-          <td>{{ item.nus_code }}</td>
-          <td>{{ item.nus_credits }}</td>
-          <td>{{ item.pu_name }}</td>
-          <td>{{ item.pu_code }}</td>
-          <td>{{ item.pu_title }}</td>
-          <td>{{ item.pu_credits }}</td>
-        </tr>
-        {% endfor %}
+          <tr> 
+            <td><input type="checkbox" class="table-checkbox"/></td>
+            <td>{{ item.nus_code }}</td>
+            <td>{{ item.nus_credits }}</td>
+            <td class="pu-name">{{ item.pu_name }}</td>
+            <td>{{ item.pu_code }}</td>
+            <td>{{ item.pu_title }}</td>
+            <td>{{ item.pu_credits }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+
       </table>
     </div>
   </div>
 
-</body>
 {% endblock %}
+
+{% block scripts %}
+
+  {% load static %} 
+  <script type ="text/javascript" src="{% static 'mainpage/index.js' %}"> 
+  </script>
+  <script type ="text/javascript" src="{% static 'mainpage/helper.js' %}"> 
+  </script>
+
+{% endblock %} 

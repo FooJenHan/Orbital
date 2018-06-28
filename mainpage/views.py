@@ -19,17 +19,7 @@ def index(request):
 				output_field=CharField()
 				)
 			)
-
-		if request.method == 'GET':
-			form = QueryForm(request.GET)
-			if form.is_valid():
-				if form['general'].value():
-					mappings = mappings.filter(combined__icontains = form['general'].value())
-				if form['pu_name'].value():
-					mappings = mappings.filter(pu_name__icontains = form['pu_name'].value())
-					
-		else:
-			form = QueryForm()
+		form = QueryForm()
 
 		return render(request, 'mainpage/index.html', {'mappings':mappings, 
 				'form':form })
