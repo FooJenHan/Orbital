@@ -13,11 +13,11 @@ __Dependencies__: Can be found in Pipfile
 
 **Week 1 (4 Jun)**: Initial setup, implementation of search bar and filters, minor update of UI    
 
-**Week 2 (11 Jun)**: Partial search(dynamic), Changing of search boxes, Table view, Updating admin panel  
+**Week 2 (11 Jun)**: Changing of search boxes and Table view, Updating admin panel, .csv importing of data  
 
-**Week 3 (18 Jun)**:  
+**Week 3 (18 Jun)**:  Implement partial searching, Secondary filter by PU name, Mapping storing functionality with deletion, Simple testcases, PDF scraping to .csv using tabula-py  
 
-**Week 4 (25 Jun)**:  
+**Week 4 (25 Jun)**:  Dynamic(as you type) search, Stored mappings box group view, UI revamp  
 
 ### July: 
 
