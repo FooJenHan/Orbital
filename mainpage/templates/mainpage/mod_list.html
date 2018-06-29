@@ -8,11 +8,6 @@
 {% block body %}
 
 <body onload="getData()">
-  {% load static %} 
-  <script type ="text/javascript" src="{% static 'mainpage/mod_list.js' %}"> 
-  </script>
-  <script type ="text/javascript" src="{% static 'mainpage/helper.js' %}"> 
-  </script>
 
   <br>
 	<div class="position-relative">
@@ -27,32 +22,21 @@
         This is a list of module mappings that you have chosen.
       </p>
 
-      <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Select</th>
-            <th scope="col">NUS Code</th>
-            <th scope="col">NUS Credits</th>
-            <th scope="col">PU Name</th>
-            <th scope="col">PU Code</th>
-            <th scope="col">PU Title</th>
-            <th scope="col">PU Credits</th>
-          </tr>
-        </thead>
-
-        <button type="button" onclick="selectAll()" id="select-all">
-          Select all
-        </button>
-
-        <button type="button" onclick="DeleteSelected()" id="delete-selected">
-          Delete selected
-        </button>
-
-      </table>    
-
     </div>
   </div>
 
 </body>
 
 {% endblock %}
+
+{% block scripts %}
+
+  {% load static %} 
+  <script type ="text/javascript" src="{% static 'mainpage/mod_list.js' %}"> 
+  </script>
+  <script type ="text/javascript" src="{% static 'mainpage/helper.js' %}"> 
+  </script>
+  <script type ="text/javascript" src="{% static 'mainpage/box_methods.js' %}"> 
+  </script>
+
+{% endblock %} 

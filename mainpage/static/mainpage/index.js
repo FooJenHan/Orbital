@@ -35,6 +35,34 @@ function saveSelected(){
 
 }
 
+function selectAll() {
+  var text = document.getElementById('select-all').innerText;
+  var cond = (text == "Select all")
+  var table = document.querySelector('table');
+  var checkboxes =  document.querySelectorAll("input.table-checkbox")
+  var selected = false;
+
+  for (i = 0; i < checkboxes.length; i++){
+    if (cond && table.rows[i+1].classList.contains('hidden') == ""){
+      checkboxes[i].checked = true;
+      selected = true;
+    }
+    else if (!cond && table.rows[i+1].classList.contains('hidden') == ""){
+      checkboxes[i].checked = false;
+    }
+    else{
+      continue;
+    }
+  }
+  if (cond && selected){
+    document.getElementById('select-all').innerText = 'Unselect all';
+  }
+  else{
+    document.getElementById('select-all').innerText = 'Select all';
+  }
+
+}
+
 
 //Filtering functions
 $(document).ready(function(){
