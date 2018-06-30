@@ -6,35 +6,29 @@
 
 <body>
   <br>
-	<div class="position-relative">
+  <div class="position-relative">
     <div class="container">
       <header>
-        <div class="shadow p-3 mb-5 bg-white rounded">
-          <h1 class="font-weight-bold"> NUS Module Mappings </h1>
-        </div>
       </header>
 
-      <p> 
-        Enter nus module code, partner institution name, partner institution code,
-        and/or partner institution's module title.
-      </p>
+      <br>
+      
 
-
-    <form action="." method="GET">
+    <form action="." method="GET" autocomplete="off">
       {% csrf_token %}
       {{ form }}
     </form>
     
-    <table class="table">
-      <thead class="thead-dark">
+    <table class="responsive-table striped">
+      <thead class="grey darken-3">
         <tr>
-          <th scope="col">Select</th>
-          <th scope="col">NUS Code</th>
-          <th scope="col">NUS Credits</th>
-          <th scope="col">PU Name</th>
-          <th scope="col">PU Code</th>
-          <th scope="col">PU Title</th>
-          <th scope="col">PU Credits</th>
+          <th scope="col" style="color: white">Select</th>
+          <th scope="col" style="color: white">NUS Code</th>
+          <th scope="col" style="color: white">NUS Credits</th>
+          <th scope="col" style="color: white">PU Name</th>
+          <th scope="col" style="color: white">PU Code</th>
+          <th scope="col" style="color: white">PU Title</th>
+          <th scope="col" style="color: white">PU Credits</th>
         </tr>
       </thead>
 
@@ -49,7 +43,10 @@
         <tbody id="tabledata">
         {% for item in mappings %}
           <tr class="hidden"> 
-            <td><input type="checkbox" class="table-checkbox"/></td>
+            <td>
+              <input id="{{ forloop.counter }}" type="checkbox" class="filled-in"/>
+              <label for="{{ forloop.counter }}"></label>
+            </td>
             <td>{{ item.nus_code }}</td>
             <td>{{ item.nus_credits }}</td>
             <td class="pu-name">{{ item.pu_name }}</td>

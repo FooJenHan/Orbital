@@ -3,7 +3,7 @@ function saveSelected(){
   var arr = new Array;
 
   for (var i=1; i<table.rows.length; i++){
-    if (table.rows[i].cells[0].firstChild.checked == false){
+    if (table.rows[i].cells[0].firstElementChild.checked == false){
       continue;
     }
     var temp = new Array;
@@ -39,7 +39,7 @@ function selectAll() {
   var text = document.getElementById('select-all').innerText;
   var cond = (text == "Select all")
   var table = document.querySelector('table');
-  var checkboxes =  document.querySelectorAll("input.table-checkbox")
+  var checkboxes =  document.querySelectorAll("input.filled-in")
   var selected = false;
 
   for (i = 0; i < checkboxes.length; i++){
