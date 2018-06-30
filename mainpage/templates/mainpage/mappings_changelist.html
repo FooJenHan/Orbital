@@ -1,7 +1,9 @@
 {% extends 'admin/change_list.html' %}
 
 {% block object-tools %}
-    <a href="import-csv/">Import CSV</a>
+    <a href="import-csv/">
+    	<input type="button" value="Import CSV File">
+    </a>
     <br />
     {{ block.super }}
 {% endblock %}
