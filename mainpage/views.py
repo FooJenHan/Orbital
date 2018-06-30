@@ -14,15 +14,15 @@ from django.template import loader
 
 def index(request):
 
-		mappings = Mapping.objects.annotate(
-			combined=Concat('nus_code', V(' '), 'pu_name', V(' '), 'pu_code', V(' '), 'pu_title',
-				output_field=CharField()
-				)
+	mappings = Mapping.objects.annotate(
+		combined=Concat('nus_code', V(' '), 'pu_name', V(' '), 'pu_code', V(' '), 'pu_title',
+			output_field=CharField()
 			)
-		form = QueryForm()
+		)
+	form = QueryForm()
 
-		return render(request, 'mainpage/index.html', {'mappings':mappings, 
-				'form':form })
+	return render(request, 'mainpage/index.html', {'mappings':mappings, 
+			'form':form })
 
 
 
