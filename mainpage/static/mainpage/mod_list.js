@@ -38,7 +38,7 @@ function createContainer(pu_name, data){
     td = document.createElement('td')
     var checkbox = document.createElement('input');
     checkbox.type = "checkbox";
-    checkbox.className = "table-checkbox";
+    checkbox.className = "filled-in";
     td.appendChild(checkbox);
     row.appendChild(td);
 
