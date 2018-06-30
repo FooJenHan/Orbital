@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<!-- bootstrap !-->
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+		<!-- Materalise CSS !-->
+		<!-- Compiled and minified CSS -->
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+	    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+	    <!-- Compiled and minified JavaScript -->
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
 
 		<!-- maintains base colour scheme for all pages !-->
 		{% load static %}
@@ -11,35 +17,37 @@
 	</head>
 
 <!-- navigation bar !-->
-  <body>
-  	<div class="position-relative">
-			<nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark">
-			  <a class="navbar-brand" href="{% url 'index' %}">
-			  	<div class="font-weight-bold">NUS Module Mappings</div>
-			  </a>
-			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			    <span class="navbar-toggler-icon"></span>
-			  </button>
+<body>
+  <div class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper blue-grey darken-3">
+      <a href="/" class="brand-logo center">NUS Module Mappings</a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/mod_list/">Selected Modules</a></li>
+      </ul>
+    </div>
+  </nav>
+  </div>
 
-			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-			    <ul class="navbar-nav mr-auto">
-			    	<!-- insert anything here that you want to align left on navbar!-->
-			    </ul>
-			    <ul class="navbar-nav ml-auto">
-			    	<li>
-			    		<a class="btn btn-light" href="{% url 'mod_list' %}">
-			    			Selected Modules
-			    		</a>
-			    	</li>
-			    </ul>
-			  </div>
-			</nav>
-		</div>
+  	<ul class="sidenav" id="mobile-demo">
+  		<li><a href="/">Search Modules</a></li>
+    	<li><a href="/mod_list/">Selected Modules</a></li>
+  	</ul>
+
+  	<ul class="grey lighten-2 side-nav fixed">
+    	<li><a href="#">Icon 1</a></li>
+        <li><a href="#">Icon 2</a></li>
+    </ul> 
+   
+
 
 		{% block body %}
 		{% endblock %}
 
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	  <script type ="text/javascript" src="{% static 'mainpage/base.js' %}"> 
+  	  </script>
 		{% block scripts %}
 		{% endblock %} 
 
