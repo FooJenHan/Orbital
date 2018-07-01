@@ -36,8 +36,8 @@ function saveSelected(){
 }
 
 function selectAll() {
-  var text = document.getElementById('select-all').innerText;
-  var cond = (text == "Select all")
+  var text = document.getElementById('select-all').innerHTML.trim();
+  var cond = (text == "Select all<i class=\"material-icons right\">select_all</i>")
   var table = document.querySelector('table');
   var checkboxes =  document.querySelectorAll("input.filled-in")
   var selected = false;
@@ -55,10 +55,12 @@ function selectAll() {
     }
   }
   if (cond && selected){
-    document.getElementById('select-all').innerText = 'Unselect all';
+    document.getElementById('select-all').innerHTML 
+      = "Unselect all<i class=\"material-icons right\">clear</i>";
   }
   else{
-    document.getElementById('select-all').innerText = 'Select all';
+    document.getElementById('select-all').innerHTML 
+      = "Select all<i class=\"material-icons right\">select_all</i>";
   }
 
 }

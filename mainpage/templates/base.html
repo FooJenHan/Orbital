@@ -25,20 +25,39 @@
 					</a>
 					<ul class="right hide-on-med-and-down">
 						<li><a href="/mod_list/">Selected Modules</a></li>
+						<li><a href="https://goo.gl/forms/Y5glUw9WYpWhBctX2">Feedback</a></li>
+						<li><a class="modal-trigger" href="#modal1">About</a></li>
+					</ul>
+					<ul class="left hide-on-med-and-down">
+						<li><a href="{% url 'admin:index' %}">Admin</a></li>
+						<li><a href="https://github.com/EnzioKam/Orbital">GitHub</a></li>
 					</ul>
 				</div>
 			</nav>
 		</div>
 
+<!-- shrinks nav for mobile !-->
 		<ul class="sidenav" id="mobile-demo">
 			<li><a href="/">Search Modules</a></li>
 			<li><a href="/mod_list/">Selected Modules</a></li>
 		</ul>
 
+<!-- Modal -->
+	  <div id="modal1" class="modal">
+	    <div class="modal-content">
+	      <h4>About NUS Module Mappings</h4>
+	      <p>
+	      	NUS Module Mappings consolidates all previously approved mappings for SEP programmes in NUS, and stores the mappings in a database. Students can now search for prospective mappings and store them on NUS Module Mappings to keep track of desired mappings.
+	      </p>
+	    </div>
+	  </div>
+
+<!--
 		<ul class="blue-grey lighten-3 side-nav fixed">
 			<li><a href="#">Icon 1</a></li>
 			<li><a href="#">Icon 2</a></li>
 		</ul> 
+!-->
 
 		{% block body %}
 		{% endblock %}

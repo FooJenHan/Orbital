@@ -1,7 +1,13 @@
-
+/*
 body {
   background-color: hsla(39, 100%, 50%, 0.8);
 }
+*/
+
+body {
+  background-color: rgb(220,220,220);
+}
+
 
 .hidden {
   display:none;
@@ -10,7 +16,7 @@ body {
 
 tbody {
     display:block;
-    height:300px;
+    height:400px;
     overflow:auto;
 }
 thead, tbody tr {
@@ -28,4 +34,9 @@ table {
 .side-nav {
   top: 64px;
     width: 130px;
+}
+
+.modal {
+  width: 90%;
+  height: 90%;
 }

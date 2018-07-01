@@ -10,8 +10,6 @@
     <div class="container">
       <header>
       </header>
-
-      <br>
       
 
     <form action="." method="GET" autocomplete="off">
@@ -22,22 +20,24 @@
     <table class="responsive-table striped">
       <thead class="grey darken-3">
         <tr>
-          <th scope="col" style="color: white">Select</th>
-          <th scope="col" style="color: white">NUS Code</th>
-          <th scope="col" style="color: white">NUS Credits</th>
-          <th scope="col" style="color: white">PU Name</th>
-          <th scope="col" style="color: white">PU Code</th>
-          <th scope="col" style="color: white">PU Title</th>
-          <th scope="col" style="color: white">PU Credits</th>
+          <th scope="col" style="color: white;">Select</th>
+          <th scope="col" style="color: white;">NUS Code</th>
+          <th scope="col" style="color: white;">NUS Credits</th>
+          <th scope="col" style="color: white;">PU Name</th>
+          <th scope="col" style="color: white;">PU Code</th>
+          <th scope="col" style="color: white;">PU Title</th>
+          <th scope="col" style="color: white;">PU Credits</th>
         </tr>
       </thead>
 
-        <button type="button" onclick="selectAll()" id="select-all">
-          Select all
+        <button class="btn wave-effect wave-light" type="button" 
+          onclick="selectAll()" id="select-all">
+          Select all<i class="material-icons right">select_all</i>
         </button>
 
-        <button type="button" onclick="saveSelected()" id="save-selected">
-          Save selected
+        <button class="btn wave-effect wave-light" type="button" 
+          onclick="saveSelected()" id="save-selected">
+          Save selected<i class="material-icons right">save</i>
         </button>
 
         <tbody id="tabledata">
