@@ -1,39 +1,64 @@
 
 body {
-  background-color: hsla(39, 100%, 50%, 0.8);
-}
-
-/*
-body {
   background-color: rgb(220,220,220);
 }
-*/
 
 .hidden {
-  display:none;
+  display: none;
 }
 
+::placeholder {
+  color: black;
+}
 
 tbody {
-    display:block;
-    height:400px;
-    overflow:auto;
+  display: block;
+  height: 400px;
+  overflow: auto;
 }
+
 thead, tbody tr {
-    display:table;
-    width:100%;
-    table-layout:fixed;
+  display: table;
+  width: 100%;
+  table-layout:fixed;
 }
+
 thead {
-    width: calc( 100% - 1em )
+  width: calc( 100% - 1em );
 }
+
+th {
+  color: white;
+}
+
+.mainpage-row {
+  background-color: #9fa8da;
+}
+
+.modlist-row {
+  background-color: #80cbc4;
+}
+
 table {
-    width:100%;
+  width: 100%;
+}
+
+#describe {
+  font-size: 18px;
+}
+
+.table-container {
+  padding: 30px;
+}
+
+.pu-header {
+  color: #000000;
+  font-size: 23px;
 }
 
 .side-nav {
   top: 64px;
-    width: 130px;
+  width: 130px;
 }
 
 .modal {

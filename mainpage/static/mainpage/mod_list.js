@@ -1,7 +1,7 @@
 function createContainer(pu_name, data){
 
   var table = document.createElement('table');
-  $(table).addClass('highlight');
+  $(table).addClass('responsive-table striped');
 
 
   var pos_rel = document.createElement('div');
@@ -11,8 +11,12 @@ function createContainer(pu_name, data){
   var container = document.createElement('div');
   $(container).addClass('container');
 
-  $(container).append('<button type="button" class="selector">Select all</button>');
-  $(container).append('<button type="button" class="deletor">Delete selected</button>');
+  $(container).append('<p class="pu-header">' + pu_name + '</p>');
+  $(container).append('<br>');
+  $(container).append(
+    '<button class="btn wave-effect wave-light selector" type="button">Select all<i class="material-icons right">select_all</i> </button>');
+  $(container).append(
+    '<button class="btn wave-effect wave-light deletor" type="button">Delete selected<i class="material-icons right">delete_forever</i> </button>');
 
   container.appendChild(table);
   pos_rel.appendChild(container);
@@ -20,7 +24,7 @@ function createContainer(pu_name, data){
 
   document.body.appendChild(pos_rel);
 
-  $(table).append('<thead class="grey darken-3" style="color: white;"></thead>');
+  $(table).append('<thead class="grey darken-3"></thead>');
 
   thead = table.firstChild;
 
@@ -35,6 +39,7 @@ function createContainer(pu_name, data){
 
   for (var i=0; i<data.length; i++){
     var row = table.insertRow(-1)
+    row.className = "modlist-row"
 
     td = document.createElement('td')
     var checkbox = document.createElement('input');

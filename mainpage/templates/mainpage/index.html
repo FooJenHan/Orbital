@@ -17,16 +17,16 @@
       {{ form }}
     </form>
     
-    <table class="responsive-table striped">
+    <table class="responsive-table highlight centered">
       <thead class="grey darken-3">
         <tr>
-          <th scope="col" style="color: white;">Select</th>
-          <th scope="col" style="color: white;">NUS Code</th>
-          <th scope="col" style="color: white;">NUS Credits</th>
-          <th scope="col" style="color: white;">PU Name</th>
-          <th scope="col" style="color: white;">PU Code</th>
-          <th scope="col" style="color: white;">PU Title</th>
-          <th scope="col" style="color: white;">PU Credits</th>
+          <th scope="col">Select</th>
+          <th scope="col">NUS Code</th>
+          <th scope="col">NUS Credits</th>
+          <th scope="col">PU Name</th>
+          <th scope="col">PU Code</th>
+          <th scope="col">PU Title</th>
+          <th scope="col">PU Credits</th>
         </tr>
       </thead>
 
@@ -42,7 +42,7 @@
 
         <tbody id="tabledata">
         {% for item in mappings %}
-          <tr class="hidden"> 
+          <tr class="hidden mainpage-row"> 
             <td>
               <input id="{{ forloop.counter }}" type="checkbox" class="filled-in"/>
               <label for="{{ forloop.counter }}"></label>

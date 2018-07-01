@@ -2,8 +2,8 @@ function boxSelectAll(id){
   var elements = document.getElementById(id).firstChild.childNodes;
   var button = elements[0];
   var table = elements[2];
-  var text = button.innerText;
-  var cond = (text == "Select all")
+  var text = button.innerHTML.trim();
+  var cond = (text == 'Select all<i class="material-icons right">select_all</i>');
   var selected = false;
 
   for (var i=0; i<table.rows.length; i++){
@@ -21,10 +21,10 @@ function boxSelectAll(id){
   }
 
   if (cond && selected){
-    button.innerText = 'Unselect all';
+    button.innerHTML = 'Unselect all<i class="material-icons right">clear</i>';
   }
   else{
-    button.innerText = 'Select all';
+    button.innerHTML = 'Select all<i class="material-icons right">select_all</i>';
   }
 
 }
