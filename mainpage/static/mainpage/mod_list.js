@@ -1,7 +1,7 @@
 function createContainer(pu_name, data){
 
   var table = document.createElement('table');
-  $(table).addClass('table table-dark');
+  $(table).addClass('highlight');
 
   var pos_rel = document.createElement('div');
   $(pos_rel).addClass('position-relative');
@@ -19,7 +19,7 @@ function createContainer(pu_name, data){
 
   document.body.appendChild(pos_rel);
 
-  $(table).append('<thead class="thead-light"><tr></tr></thead>');
+  $(table).append('<thead class="grey darken-3"></thead>');
 
   thead = table.firstChild;
 
@@ -39,7 +39,14 @@ function createContainer(pu_name, data){
     var checkbox = document.createElement('input');
     checkbox.type = "checkbox";
     checkbox.className = "filled-in";
+    var box_id = pu_name + String(i);
+    checkbox.setAttribute('id', box_id)
     td.appendChild(checkbox);
+
+    label = document.createElement('label');
+    label.htmlFor = box_id;
+    td.appendChild(label);
+    
     row.appendChild(td);
 
     for (var j=0; j<data[i].length; j++){
