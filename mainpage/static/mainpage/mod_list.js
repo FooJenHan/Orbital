@@ -3,6 +3,7 @@ function createContainer(pu_name, data){
   var table = document.createElement('table');
   $(table).addClass('highlight');
 
+
   var pos_rel = document.createElement('div');
   $(pos_rel).addClass('position-relative');
   $(pos_rel).addClass('table-container');
@@ -19,7 +20,7 @@ function createContainer(pu_name, data){
 
   document.body.appendChild(pos_rel);
 
-  $(table).append('<thead class="grey darken-3"></thead>');
+  $(table).append('<thead class="grey darken-3" style="color: white;"></thead>');
 
   thead = table.firstChild;
 
