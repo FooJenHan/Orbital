@@ -74,3 +74,7 @@ table {
 .alert {
   background-color: #37474f;
 }
+
+.filled-in {
+  visibility: hidden;
+}
