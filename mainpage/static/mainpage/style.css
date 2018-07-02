@@ -65,3 +65,12 @@ table {
   width: 90%;
   height: 90%;
 }
+
+#toast-container {
+  top: 20%;
+  right: 35%;
+}
+
+.alert {
+  background-color: #37474f;
+}

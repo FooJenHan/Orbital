@@ -1,7 +1,7 @@
 function boxSelectAll(id){
   var elements = document.getElementById(id).firstChild.childNodes;
-  var button = elements[0];
-  var table = elements[2];
+  var button = elements[2];
+  var table = elements[4];
   var text = button.innerHTML.trim();
   var cond = (text == 'Select all<i class="material-icons right">select_all</i>');
   var selected = false;
@@ -31,8 +31,8 @@ function boxSelectAll(id){
 
 function boxDeleteSelected(id){
   var elements = document.getElementById(id).firstChild.childNodes;
-  var button = elements[1];
-  var table = elements[2];
+  var button = elements[3];
+  var table = elements[4];
   var arr = new Array;
 
   for (var i=0; i<table.rows.length; i++){
@@ -66,8 +66,14 @@ function boxDeleteSelected(id){
 
     var comb_data = JSON.stringify(removed);
     localStorage.setItem('selected_mappings', comb_data);
-    window.location.reload();
-  }  
+    if (arr.length == 0){
+      M.toast({html: "You have not selected any modules from " + id, 
+        classes: 'alert-modlist'});      
+    }        
+    else{
+      window.location.reload();
+    }
+  }
 }
 
 

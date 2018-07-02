@@ -32,7 +32,14 @@ function saveSelected(){
     var comb_data = JSON.stringify(stored_arr);
     localStorage.setItem('selected_mappings', comb_data);
   }
-
+  if (arr.length == 0){
+    M.toast({html: "You have not selected any modules", 
+      classes: 'alert'});
+  }
+  else{
+    M.toast({html: "Your selected modules have been saved",
+      classes: 'alert'});
+  }
 }
 
 function selectAll() {
