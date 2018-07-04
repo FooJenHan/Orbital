@@ -105,14 +105,14 @@ $(document).ready(function(){
     var compositeCSV = "NUS Code,NUS Credits,PU Name,PU Code,PU Title,PU Credits";
     var pu_name;
     for (var i = 0; i < arr.length; i++) {
-      if (!pu_name || pu_name != arr[i][2]){
-        pu_name = arr[i][2];
+      if (!pu_name || pu_name != arr[i][2].replace(";", " ")){
+        pu_name = arr[i][2].replace(";", " ");
         compositeCSV += "\n\n" + pu_name;
       }
 
       compositeCSV += "\n";      
       for (var j = 0; j < arr[j].length; j++){
-        var cell = arr[i][j].replace(";", " ")
+        var cell = arr[i][j].replace(";", " ");
         compositeCSV += cell + ",";
       }
     }
