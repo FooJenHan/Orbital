@@ -61,7 +61,36 @@ function createContainer(pu_name, data){
     }
   }
 
+  var lastrow = table.insertRow(-1)
+  lastrow.className = "sumcredit-row"
+
+  td = document.createElement('td')
+    
+  lastrow.appendChild(td);
+
+  var nus_cred = 0;
+  var pu_cred = 0;
+  for (n=0; n<data.length; n++){
+    nus_cred += Number(data[n][1]);
+    pu_cred += Number(data[n][5]);
+  }
+
+  for (var q=0; q<data[0].length; q++){
+    var lastcell = lastrow.insertCell(-1);
+    if (q==0){
+      lastcell.textContent = "Total NUS Credits:";
+    }else if (q==1){
+      lastcell.textContent = nus_cred.toString();
+    }else if (q==4){
+      lastcell.textContent = "Total PU Credits:";
+    }else if (q==5){
+      lastcell.textContent = pu_cred.toString();
+    }
+  }
+  
 }
+
+
 
 function getData(){
   var strData = localStorage.getItem('selected_mappings');
@@ -99,3 +128,26 @@ function getData(){
   createContainer(id, curr);
 
 }
+
+
+
+
+
+
+  /*
+  var nus_cred = 0;
+  var pu_cred = 0;
+
+  for (n=0; n<data.length; n++){
+    nus_cred += parseInt(data[n][1]);
+    pu_cred += parseInt(data[n][5]);
+  }
+
+  var nusc = nus_cred.toString();
+  var nus_cell = row.insertCell(1);
+  nus_cell.textContent = nusc;
+  
+  var puc = pu_cred.toString();
+  var pu_cell = row.insertCell(5);
+  pu_cell.textContent = puc;
+  */
