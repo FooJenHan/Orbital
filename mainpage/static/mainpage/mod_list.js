@@ -95,7 +95,7 @@ $(document).ready(function(){
   $('#download-button').click(function(){
     var data = localStorage.getItem('selected_mappings');
     var arr = JSON.parse(data);
-    if (arr.length == 0){
+    if (!arr || arr.length == 0){
        M.toast({html: 
         "You have no modules selected. Go back to the previous page to Select some modules.", 
         classes: 'alert'});
