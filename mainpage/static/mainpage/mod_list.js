@@ -11,7 +11,30 @@ function createContainer(pu_name, data){
   var container = document.createElement('div');
   $(container).addClass('container');
 
-  $(container).append('<p class="pu-header">' + pu_name + '</p>');
+  var nus_cred = 0;
+  var pu_cred = 0;
+  for (n=0; n<data.length; n++){
+    nus_cred += Number(data[n][1]);
+    pu_cred += Number(data[n][5]);
+  }
+
+  var nusc = nus_cred.toString();
+  var puc = pu_cred.toString();
+
+  $(container).append(
+    '<div class="pu-header">' + 
+      '<div class="card horizontal teal lighten-2">' + 
+        '<div class="card-stacked">' + 
+          '<div class="card-content">' + 
+          '<p>'+ pu_name + '</p>' +
+          '<p>' + 'Total NUS Credits: ' + nusc + '</p>' + 
+          '<p>' + 'Total PU Credits: ' + puc + '</p>' +
+          '</div>' +
+        '</div>' +
+      '</div>' + 
+    '</div>');
+
+
   $(container).append('<br>');
   $(container).append(
     '<button class="btn wave-effect wave-light selector" type="button">Select all<i class="material-icons right">select_all</i> </button>');
@@ -61,33 +84,6 @@ function createContainer(pu_name, data){
     }
   }
 
-  var lastrow = table.insertRow(-1)
-  lastrow.className = "sumcredit-row"
-
-  td = document.createElement('td')
-    
-  lastrow.appendChild(td);
-
-  var nus_cred = 0;
-  var pu_cred = 0;
-  for (n=0; n<data.length; n++){
-    nus_cred += Number(data[n][1]);
-    pu_cred += Number(data[n][5]);
-  }
-
-  for (var q=0; q<data[0].length; q++){
-    var lastcell = lastrow.insertCell(-1);
-    if (q==0){
-      lastcell.textContent = "Total NUS Credits:";
-    }else if (q==1){
-      lastcell.textContent = nus_cred.toString();
-    }else if (q==4){
-      lastcell.textContent = "Total PU Credits:";
-    }else if (q==5){
-      lastcell.textContent = pu_cred.toString();
-    }
-  }
-  
 }
 
 
@@ -130,24 +126,53 @@ function getData(){
 }
 
 
+  /*
+  var nusc = nus_cred.toString();
+  var puc = pu_cred.toString();
 
+  $(table).append('<tfoot class="blue lighten-3"></tfoot>');
+  tfoot = table.lastChild;
 
+  var summation = ['', 'Total NUS Credits:', nusc, '', '', 'Total PU Credits:',  puc];
 
+  for (var i = 0; i < summation.length; i++) {
+    var tr = document.createElement('tr');
+    var node = document.createTextNode(summation[i]);
+    tr.appendChild(node);
+    tfoot.appendChild(tr);
+  }
+  */
 
   /*
-  var nus_cred = 0;
-  var pu_cred = 0;
+  var nusc = nus_cred.toString();
+  var puc = pu_cred.toString();
 
-  for (n=0; n<data.length; n++){
-    nus_cred += parseInt(data[n][1]);
-    pu_cred += parseInt(data[n][5]);
+  $(table).append('<tfoot class="blue lighten-3"></tfoot>');
+  tfoot = table.lastChild;
+
+  var empty = document.createTextNode('');
+
+  for (var p=0; p<data[0].length; p++){
+    if (p==0){
+      var text1 = document.createTextNode('Total NUS Credits:');
+      td.appendChild(text1);
+      tfoot.appendChild(td);
+    }else if (p==1){
+      var text2 = document.createTextNode(nusc);
+      td.appendChild(text2);
+      tfoot.appendChild(td);
+    }else if (p==4){
+      var text3 = document.createTextNode('Total PU Credits:');
+      td.appendChild(text3);
+      tfoot.appendChild(td);
+    }else if (p==5){
+      var text4 = document.createTextNode(puc);
+      td.appendChild(text4);
+      tfoot.appendChild(td);
+    }else{
+      td.appendChild(empty);
+      tfoot.appendChild(td);
+    }
   }
 
-  var nusc = nus_cred.toString();
-  var nus_cell = row.insertCell(1);
-  nus_cell.textContent = nusc;
-  
-  var puc = pu_cred.toString();
-  var pu_cell = row.insertCell(5);
-  pu_cell.textContent = puc;
-  */
+*/

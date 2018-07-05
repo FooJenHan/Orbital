@@ -6,7 +6,7 @@ function boxSelectAll(id){
   var cond = (text == 'Select all<i class="material-icons right">select_all</i>');
   var selected = false;
 
-  for (var i=0; i<table.rows.length-1; i++){
+  for (var i=0; i<table.rows.length; i++){
     var check = table.rows[i].cells[0].firstChild.checked;
     if (cond && check == false){
       table.rows[i].cells[0].firstChild.checked = true;
@@ -35,7 +35,7 @@ function boxDeleteSelected(id){
   var table = elements[4];
   var arr = new Array;
 
-  for (var i=0; i<table.rows.length-1; i++){
+  for (var i=0; i<table.rows.length; i++){
     if (table.rows[i].cells[0].firstChild.checked == false){
       continue;
     }
