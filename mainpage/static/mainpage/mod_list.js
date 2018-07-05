@@ -22,16 +22,16 @@ function createContainer(pu_name, data){
   var puc = pu_cred.toString();
 
   $(container).append(
-    '<div class="pu-header">' + 
-      '<div class="card horizontal teal lighten-2">' + 
+    '<div class="pu-header" style="font-weight:bold">' + 
+      '<div class="card horizontal teal lighten-2">' +
         '<div class="card-stacked">' + 
           '<div class="card-content">' + 
           '<p>'+ pu_name + '</p>' +
-          '<p>' + 'Total NUS Credits: ' + nusc + '</p>' + 
-          '<p>' + 'Total PU Credits: ' + puc + '</p>' +
+          '<p>' + '<font size="3">' + 'Total NUS Credits: ' + nusc + '</p>' + '</font>' +
+          '<p>' + '<font size="3">' + 'Total PU Credits: ' + puc + '</p>' + '</font>' +
           '</div>' +
         '</div>' +
-      '</div>' + 
+      '</div>' +
     '</div>');
 
 
