@@ -31,6 +31,10 @@ th {
   color: white;
 }
 
+.sumcredit-row{
+  background-color: #80cbc4;
+}
+
 .mainpage-row {
   background-color: #9fa8da;
 }
@@ -79,3 +83,14 @@ table {
   visibility: hidden;
 }
 
+.card-content {
+  background-color: white;
+  margin: 10px;
+  padding: 10px;
+  height: 125px;
+  width: 525px;
+}
+
+.card {
+  width: 545px;
+}

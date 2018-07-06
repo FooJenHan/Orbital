@@ -10,8 +10,32 @@ function createContainer(pu_name, data){
 
   var container = document.createElement('div');
   $(container).addClass('container');
+  $(container).addClass('position-relative');
 
-  $(container).append('<p class="pu-header">' + pu_name + '</p>');
+  var nus_cred = 0;
+  var pu_cred = 0;
+  for (n=0; n<data.length; n++){
+    nus_cred += Number(data[n][1]);
+    pu_cred += Number(data[n][5]);
+  }
+
+  var nusc = nus_cred.toString();
+  var puc = pu_cred.toString();
+
+  $(container).append(
+    '<div class="pu-header" style="font-weight:bold">' + 
+      '<div class="card horizontal teal lighten-2">' +
+        '<div class="card-stacked">' + 
+          '<div class="card-content">' + 
+          '<p>'+ pu_name + '</p>' +
+          '<p>' + '<font size="3">' + 'Total NUS MCs: ' + nusc + '</p>' + '</font>' +
+          '<p>' + '<font size="3">' + 'Total PU Credits: ' + puc + '</p>' + '</font>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>');
+
+
   $(container).append('<br>');
   $(container).append(
     '<button class="btn wave-effect wave-light selector" type="button">Select all<i class="material-icons right">select_all</i> </button>');
@@ -62,6 +86,8 @@ function createContainer(pu_name, data){
   }
 
 }
+
+
 
 function getData(){
   var strData = localStorage.getItem('selected_mappings');
