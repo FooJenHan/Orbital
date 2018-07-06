@@ -82,3 +82,15 @@ table {
 .filled-in {
   visibility: hidden;
 }
+
+.card-content {
+  background-color: white;
+  margin: 10px;
+  padding: 10px;
+  height: 125px;
+  width: 525px;
+}
+
+.card {
+  width: 545px;
+}

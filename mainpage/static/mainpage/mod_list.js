@@ -10,6 +10,7 @@ function createContainer(pu_name, data){
 
   var container = document.createElement('div');
   $(container).addClass('container');
+  $(container).addClass('position-relative');
 
   var nus_cred = 0;
   var pu_cred = 0;
@@ -27,7 +28,7 @@ function createContainer(pu_name, data){
         '<div class="card-stacked">' + 
           '<div class="card-content">' + 
           '<p>'+ pu_name + '</p>' +
-          '<p>' + '<font size="3">' + 'Total NUS Credits: ' + nusc + '</p>' + '</font>' +
+          '<p>' + '<font size="3">' + 'Total NUS MCs: ' + nusc + '</p>' + '</font>' +
           '<p>' + '<font size="3">' + 'Total PU Credits: ' + puc + '</p>' + '</font>' +
           '</div>' +
         '</div>' +
