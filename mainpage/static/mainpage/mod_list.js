@@ -116,6 +116,7 @@ function getData(){
 
 }
 
+
 $(document).ready(function(){
 
   $('#download-button').click(function(){
@@ -137,7 +138,7 @@ $(document).ready(function(){
       }
 
       compositeCSV += "\n";      
-      for (var j = 0; j < arr[j].length; j++){
+      for (var j = 0; j < arr[i].length; j++){
         var cell = arr[i][j].replace(";", " ");
         compositeCSV += cell + ",";
       }
