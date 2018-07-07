@@ -2,6 +2,7 @@ tbody {
   display: block;
   height: 400px;
   overflow: auto;
+  position: relative;
 }
 
 thead, tbody tr {
@@ -20,6 +21,10 @@ th {
 
 table {
   width: 100%;
+}
+
+td {
+  overflow: auto;
 }
 
 #toast-container {
