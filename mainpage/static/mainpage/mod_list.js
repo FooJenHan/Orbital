@@ -79,7 +79,14 @@ function createContainer(pu_name, data){
     
     row.appendChild(td);
 
-    for (var j=0; j<data[i].length; j++){
+    var cell = row.insertCell(-1);
+    cell.textContent = data[i][0];
+    cell.className = "modal-trigger";
+    var link = '#modal' + pu_name + data[i][3];
+    cell.setAttribute("href", link);
+    createModal(link, data[i][0]);
+
+    for (var j=1; j<data[i].length; j++){
       var cell = row.insertCell(-1);
       cell.textContent = data[i][j];
     }
@@ -87,6 +94,16 @@ function createContainer(pu_name, data){
 
 }
 
+function createModal(link, mod_code){
+  var modal = document.createElement('div');
+  modal.id = link.substring(1);
+  modal.className = "modal";
+  $(modal).append(
+    '<div class="modal-content">' +
+      '<h4>' + mod_code + '</h4>' +
+    '</div>' );
+  $('#modals-container').append(modal);
+}
 
 
 function getData(){
