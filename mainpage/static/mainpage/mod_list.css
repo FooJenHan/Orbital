@@ -38,3 +38,25 @@
 .alert-modlist{
   background-color: #37474f;
 }
+
+.tree-entry {
+  margin: 5px;
+}
+
+.tree-left {
+  float: left;
+  transform: translate(200px, 100px);
+}
+
+.tree-mid {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transform: translate(0px, 150px);
+}
+
+.tree-right {
+  float: right;
+  transform: translate(-150px, 100px);
+}
