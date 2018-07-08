@@ -254,6 +254,7 @@ $(document).ready(function(){
 
         });
         temp.push('</ul>');
+        temp.push('<br>');
         prereq_items.push(temp.join(""));
 
         prereq_items.push('</li>');
