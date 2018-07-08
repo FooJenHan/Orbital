@@ -100,7 +100,8 @@ function createModal(link, mod_code){
   modal.className = "modal mod-modal";
   $(modal).append(
     '<div class="modal-content">' +
-      '<h4 align="center">' + mod_code + '</h4>' +
+      '<h4 class="flow-text">' + '<a href="https://nusmods.com/modules/' + mod_code + 
+      '" target="_blank">' + mod_code + '</a>' + '</h4>' +
     '</div>' );
   $('#modals-container').append(modal);
 }
@@ -231,15 +232,14 @@ $(document).ready(function(){
       var postreq_items = ['<ul align="center">'];
       $.each(postreq, function(i, item) {
         postreq_items.push('<li class="tree-entry">' +
+          '<button class="waves-effect waves-light btn-small green lighten-3">' + 
           '<a href="https://nusmods.com/modules/' + postreq[i] + '" target="_blank">'
-          + postreq[i] + '<a>' + '</li>');
+          + postreq[i] + '</a>' + '</button>' + '</li>');
       });
       postreq_items.push('</ul>');
-      $(div).append('<div class="tree-left">' + postreq_items.join("") + '</div>');
+      $(div).append('<div class="tree-left">' + '<h5 class="flow-text">Unlocks:</h5>'
+        + postreq_items.join("") + '</div>');
 
-      $(div).append('<div class="tree-mid" align="center">' +
-        '<a href="https://nusmods.com/modules/' + mod_code + '" target="_blank">'
-        + mod_code + '<a>' + '</div>');
 
       var prereq_items = ['<ul align="center">'];
       var converted = convertTree(prereq);
@@ -249,8 +249,9 @@ $(document).ready(function(){
         var temp = ['<ul align="center">'];
         $.each(converted[i], function(j, item) {
           temp.push('<li class="tree-entry">' +
+            '<button class="waves-effect waves-light btn-small yellow lighten-3">' +
             '<a href="https://nusmods.com/modules/' + converted[i][j] + '" target="_blank">'
-            + converted[i][j] + '<a>' + '</li>');
+            + converted[i][j] + '</a>'+ '</button>' + '</li>');
 
         });
         temp.push('</ul>');
@@ -261,7 +262,8 @@ $(document).ready(function(){
       });
       prereq_items.push('</ul>');
 
-      $(div).append('<div class="tree-right">' + prereq_items.join("") + '</div>');
+      $(div).append('<div class="tree-right">' + '<h5 class="flow-text">Requires:</h5>' +
+        prereq_items.join("") + '</div>');
 
     });
 

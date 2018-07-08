@@ -45,18 +45,18 @@
 
 .tree-left {
   float: left;
-  transform: translate(200px, 100px);
-}
-
-.tree-mid {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: auto;
-  transform: translate(0px, 150px);
+  transform: translate(400px, 100px);
 }
 
 .tree-right {
   float: right;
-  transform: translate(-150px, 100px);
+  transform: translate(-400px, 100px);
+}
+
+h4 {
+  text-align: center;
+}
+
+a {
+  color: black;
 }
