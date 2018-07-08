@@ -17,13 +17,13 @@ __Dependencies__: Can be found in Pipfile
 
 **Week 3 (18 Jun)**:  Implement partial searching, Secondary filter by PU name, Mapping storing functionality with deletion, Simple testcases, PDF scraping to .csv using tabula-py  
 
-**Week 4 (25 Jun)**:  Dynamic(as you type) search, Stored mappings box group view, UI revamp  
+**Week 4 (25 Jun)**:  Dynamic(as you type) search, Stored mappings box group view, UI revamp, admin panel UI changes  
 
 ### July: 
 
-**Week 1 (2 July)**:  
+**Week 1 (2 July)**:  Post/pre requisites skeleton structure, dual-searchbox searching, UI updates (navbar and group view)  
 
-**Week 2 (9 July)**:  
+**Week 2 (9 July)**:  Improving post/pre view, implementing module planner  
 
 **Week 3 (16 July)**:  
 
