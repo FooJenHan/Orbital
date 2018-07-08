@@ -27,3 +27,7 @@ def index(request):
 
 def mod_list(request):
     return render(request, 'mainpage/mod_list.html')
+
+
+def grad_plan(request):
+    return render(request, 'mainpage/grad_plan.html')
