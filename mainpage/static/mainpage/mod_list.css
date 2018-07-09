@@ -38,3 +38,54 @@
 .alert-modlist{
   background-color: #37474f;
 }
+
+.tree-entry {
+  margin: 5px;
+}
+
+.tree-left {
+  float: left;
+  transform: translate(400px, 100px);
+}
+
+.tree-right {
+  float: right;
+  transform: translate(-400px, 100px);
+}
+
+.prereq-node {
+  background-color: #fff59d;
+}
+
+.prereq-node:hover {
+  background-color: #fdd835;
+}
+
+.postreq-node {
+  background-color: #a5d6a7;
+}
+
+.postreq-node:hover {
+  background-color: #43a047;
+}
+
+h4 {
+  text-align: center;
+  transform: translate(0, 50px);
+}
+
+h4 button a {
+  font-size: 50px;
+}
+
+h4 .btn-flat {
+  background-color: #eeeeee;
+}
+
+h4 .btn-flat:hover {
+  background-color: #bdbdbd;
+}
+
+a {
+  color: black;
+}

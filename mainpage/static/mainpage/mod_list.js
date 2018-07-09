@@ -97,10 +97,13 @@ function createContainer(pu_name, data){
 function createModal(link, mod_code){
   var modal = document.createElement('div');
   modal.id = link.substring(1);
-  modal.className = "modal";
+  modal.className = "modal mod-modal";
   $(modal).append(
     '<div class="modal-content">' +
-      '<h4>' + mod_code + '</h4>' +
+      '<h4>' +
+      '<button class="waves-effect waves-light btn-large btn-flat">' +
+      '<a href="https://nusmods.com/modules/' + mod_code +
+      '" target="_blank">' + mod_code + '</button>' + '</a>' + '</h4>' +
     '</div>' );
   $('#modals-container').append(modal);
 }
@@ -115,6 +118,23 @@ function getData(){
   else{
     data = JSON.parse(strData);
   }
+
+  data.sort(function(a,b){
+    if (a[2] < b[2]){
+      return -1;
+    }
+    else if (a[2] == b[2]){
+      if (a[0] <= b[0]){
+        return -1;
+      }
+      else{
+        return 1;
+      }
+    }
+    else{
+      return 1;
+    }
+  });
 
   var id = data[0][2];
   var curr = [];
@@ -131,6 +151,47 @@ function getData(){
   }
   createContainer(id, curr);
 
+}
+
+
+function convertTree(prereq){
+  var output = [];
+
+  function helper(data){
+    if (typeof(data) == "object" && Array.isArray(data) == false){
+      output.push(data["name"]);
+      if ( !Array.isArray(data["children"])){
+        helper(data["children"]);
+      }
+      else{
+        for (var i=0; i<data["children"].length; i++){
+          helper(data["children"][i]);
+        }
+      }
+    }
+    else if (Array.isArray(data) == true){
+      for (var i=0; i<data.length; i++){
+        helper(data[i]);
+      }
+    }
+  }
+
+  helper(prereq);
+
+  var final = [];
+  var temp = [];
+  for (var x=1; x<output.length; x++){
+    if (output[x] != "and" && output[x] != "or"){
+      temp.push(output[x]);
+    }
+    else if (output[x] == "or"){
+      final.push(temp);
+      temp = [];
+    }
+  }
+  final.push(temp);
+
+  return final;
 }
 
 
@@ -164,6 +225,69 @@ $(document).ready(function(){
     var filename = "mappings.csv"
     var content =  "data:text/csv;charset=utf-8," + encodeURIComponent(compositeCSV);
     $(this).attr("href", content).attr("download", filename);
+
+  });
+
+
+  $('.mod-modal > .modal-content').each(function(){
+    var div = $(this);
+    var mod_code = $(div.children()[0]).text();
+    var link = 'https://api.nusmods.com/2017-2018/reqTree.json';
+
+    var json_data = "";
+    var request = $.getJSON(link, function(data) {
+      json_data = data;
+      var mod_data = json_data[mod_code];
+      var prereq, postreq;
+      if (mod_data){
+        prereq = mod_data['ModmavenTree'];
+        postreq = mod_data['LockedModules'];
+      }
+      else{
+        prereq = [];
+        postreq = [];
+      }
+
+      var postreq_items = ['<ul align="center">'];
+      $.each(postreq, function(i, item) {
+        postreq_items.push('<li class="tree-entry">' +
+          '<button class="waves-effect waves-light btn-small postreq-node">' +
+          '<a href="https://nusmods.com/modules/' + postreq[i] + '" target="_blank">'
+          + postreq[i] + '</a>' + '</button>' + '</li>');
+      });
+      postreq_items.push('</ul>');
+      $(div).append('<div class="tree-left">' + '<h5 class="flow-text">Unlocks:</h5>'
+        + postreq_items.join("") + '</div>');
+
+
+      var prereq_items = ['<ul align="center">'];
+      var converted = convertTree(prereq);
+      $.each(converted, function(i, item) {
+        prereq_items.push('<li class="tree-entry">');
+
+        var temp = ['<ul align="center">'];
+        $.each(converted[i], function(j, item) {
+          temp.push('<li class="tree-entry">' +
+            '<button class="waves-effect waves-light btn-small prereq-node">' +
+            '<a href="https://nusmods.com/modules/' + converted[i][j] + '" target="_blank">'
+            + converted[i][j] + '</a>'+ '</button>' + '</li>');
+
+        });
+        temp.push('</ul>');
+        temp.push('<br>');
+        if (converted && i != 0){
+          prereq_items.push('<h6>One of</h6>');
+        }
+        prereq_items.push(temp.join(""));
+
+        prereq_items.push('</li>');
+      });
+      prereq_items.push('</ul>');
+
+      $(div).append('<div class="tree-right">' + '<h5 class="flow-text">Requires:</h5>' +
+        prereq_items.join("") + '</div>');
+
+    });
 
   });
 
