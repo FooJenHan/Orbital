@@ -37,7 +37,7 @@
           <label for="mod_grade">NUS Module Grade</label>
         </div>
         <div class="input-field col s4">
-          <select>
+          <select id="sem_taken">
             <option value="" disabled selected>Taken in Semester</option>
             <option value="1617sem1">AY16/17 Semester 1</option>
             <option value="1617sem2">AY16/17 Semester 2</option>
@@ -46,7 +46,8 @@
           </select>
         </div>
       </div>
-      <button class="btn wave-effect wave-light submission" type="button">Submit<i class="material-icons right"></i> </button>
+      <button class="btn wave-effect wave-light submission" onclick="saveModule()" 
+      type="button">Submit<i class="material-icons right">send</i></button>
     </form>
   </div>
 </body>  
