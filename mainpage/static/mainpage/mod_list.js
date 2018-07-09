@@ -117,6 +117,23 @@ function getData(){
     data = JSON.parse(strData);
   }
 
+  data.sort(function(a,b){
+    if (a[2] < b[2]){
+      return -1;
+    }
+    else if (a[2] == b[2]){
+      if (a[0] <= b[0]){
+        return -1;
+      }
+      else{
+        return 1;
+      }
+    }
+    else{
+      return 1;
+    }
+  });
+
   var id = data[0][2];
   var curr = [];
   for (var x=0; x<data.length; x++){
@@ -256,6 +273,9 @@ $(document).ready(function(){
         });
         temp.push('</ul>');
         temp.push('<br>');
+        if (converted && i != 0){
+          prereq_items.push('<h6>One of</h6>');
+        }
         prereq_items.push(temp.join(""));
 
         prereq_items.push('</li>');
