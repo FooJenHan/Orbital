@@ -94,7 +94,7 @@ function createBox(modules, year_sem){
 
 
 
-function showData(){
+function showModules(){
   var str_modules = localStorage.getItem('stored_modules');
   if (str_modules == null || str_modules == 'undefined' || str_modules == "[]"){
     return;
