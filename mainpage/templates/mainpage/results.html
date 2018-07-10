@@ -1,0 +1,18 @@
+{% block table-data %}
+
+  {% for item in mappings %}
+    <tr class="hidden mainpage-row">
+      <td>
+        <input id="{{ forloop.counter }}" type="checkbox" class="filled-in"/>
+        <label for="{{ forloop.counter }}"></label>
+      </td>
+      <td>{{ item.nus_code }}</td>
+      <td>{{ item.nus_credits }}</td>
+      <td class="pu-name">{{ item.pu_name }}</td>
+      <td>{{ item.pu_code }}</td>
+      <td>{{ item.pu_title }}</td>
+      <td>{{ item.pu_credits }}</td>
+    </tr>
+    {% endfor %}
+
+{% endblock %}

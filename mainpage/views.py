@@ -8,22 +8,25 @@ from django.db.models import CharField, Value as V
 from django.db.models.functions import Concat
 
 from django.views.generic.base import View
+from django.views.generic import TemplateView
 from django.template import loader
 # Create your views here.
 
+class IndexView(TemplateView):
+    template_name = "mainpage/index.html"
 
-def index(request):
-    mappings = Mapping.objects.annotate(
-        combined=Concat('nus_code', V(' '), 'pu_name', V(' '), 
-            'pu_code', V(' '), 'pu_title', output_field=CharField()
-        )
-    )
-    form = QueryForm()
-    mappings = mappings.order_by('pu_name', 'nus_code')
+    def post(self, request):
+        template = loader.get_template(self.template_name)
+        query = request.POST.get('search', '')
 
-    return render(request, 'mainpage/index.html', {'mappings':mappings,
-        'form':form })
+        mappings = Mapping.objects.filter(pu_name__icontains = query.upper())
+        context = {'query': query, 'mappings': mappings}
 
+        rendered_template = template.render(context, request)
+        return HttpResponse(rendered_template, content_type='text/html')
+
+class SearchAjaxSubmitView(IndexView):
+    template_name = 'mainpage/results.html'
 
 def mod_list(request):
     return render(request, 'mainpage/mod_list.html')
