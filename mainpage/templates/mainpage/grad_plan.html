@@ -10,34 +10,34 @@
 <link rel="stylesheet" href="{% static 'mainpage/grad_plan.css' %}" type="text/css">
 
 
-<body>
+<body onload="showData()">
   <br>
     <div class="row">
-    <form class="col s12">
+    <form class="col s12" action="#" onsubmit="showData()">
 
       {% csrf_token %}
 
       <div class="row">
         <div class="input-field col s6">
-          <input placeholder="NUS Module Code" id="mod_code" type="text" class="validate">
+          <input placeholder="NUS Module Code" id="mod_code" type="text" class="validate" required="" aria-required="true">
           <label for="mod_code">NUS Module Code</label>
         </div>
         <div class="input-field col s6">
-          <input placeholder="NUS Module Title" id="mod_title" type="text" class="validate">
+          <input placeholder="NUS Module Title" id="mod_title" type="text" class="validate" required="" aria-required="true">
           <label for="mod_title">NUS Module Title</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s4">
-          <input placeholder="NUS Modular Credits" id="mod_mc" type="text" class="validate">
+          <input placeholder="NUS Modular Credits" id="mod_mc" type="text" class="validate" required="" aria-required="true">
           <label for="mod_mc">NUS Modular Credits</label>
         </div>
         <div class="input-field col s4">
-          <input placeholder="Grade of module" id="mod_grade" type="text" class="validate">
+          <input placeholder="Grade of module" id="mod_grade" type="text" class="validate" required="" aria-required="true">
           <label for="mod_grade">NUS Module Grade</label>
         </div>
         <div class="input-field col s4">
-          <select id="sem_taken">
+          <select id="sem_taken" required="" aria-required="true">
             <option value="" disabled selected>Taken in Semester</option>
             <option value="1617sem1">AY16/17 Semester 1</option>
             <option value="1617sem2">AY16/17 Semester 2</option>
@@ -46,10 +46,17 @@
           </select>
         </div>
       </div>
-      <button class="btn wave-effect wave-light submission" onclick="saveModule()" 
+      <button class="btn wave-effect wave-light submission" onclick="saveModule();" 
       type="button">Submit<i class="material-icons right">send</i></button>
     </form>
   </div>
+  <br>
+
+
+
+
+
+
 </body>  
 
 
