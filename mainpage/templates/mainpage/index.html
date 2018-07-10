@@ -18,10 +18,16 @@
 
     <form id="form" role="form" action="." method="post">
       {% csrf_token %}
-        <input name="search"
-               id="search"
+        <input name="general"
                type="search"
-               placeholder="Start typing here"
+               placeholder="Search by NUS module code, Partner University module code or module title"
+               ic-post-to="{% url 'search-ajax-submit' %}"
+               ic-trigger-on="keyup changed"
+               ic-trigger-delay="300ms"
+               ic-target="#tabledata"/>
+        <input name="pu_name"
+               type="search"
+               placeholder="Please enter institution name"
                ic-post-to="{% url 'search-ajax-submit' %}"
                ic-trigger-on="keyup changed"
                ic-trigger-delay="300ms"

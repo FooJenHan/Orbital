@@ -17,10 +17,22 @@ class IndexView(TemplateView):
 
     def post(self, request):
         template = loader.get_template(self.template_name)
-        query = request.POST.get('search', '')
+        query_name = request.POST.get('pu_name', '')
+        query_general = request.POST.get('general', '')
 
-        mappings = Mapping.objects.filter(pu_name__icontains = query.upper())
-        context = {'query': query, 'mappings': mappings}
+        if query_name == "" and query_general == "":
+            return HttpResponse(template.render({}, request), \
+                content_type='text/html')
+
+        mappings = Mapping.objects.annotate(
+            combined=Concat('nus_code', V(' '), 'pu_name', V(' '),
+                'pu_code', V(' '), 'pu_title', output_field=CharField()
+            )
+        )
+
+        mappings = mappings.filter(pu_name__icontains = query_name.upper())
+        mappings = mappings.filter(combined__icontains = query_general.upper())
+        context = {'query_name': query_name, 'mappings': mappings}
 
         rendered_template = template.render(context, request)
         return HttpResponse(rendered_template, content_type='text/html')
