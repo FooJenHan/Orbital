@@ -15,24 +15,31 @@ from django.template import loader
 class IndexView(TemplateView):
     template_name = "mainpage/index.html"
 
+    def pu_namelist(self):
+        data = Mapping.objects.values_list('pu_name').distinct()
+        pu_names = list(map(lambda x: x[0], data))
+        pu_names.sort()
+        return pu_names
+
     def post(self, request):
         template = loader.get_template(self.template_name)
-        query_name = request.POST.get('pu_name', '')
         query_general = request.POST.get('general', '')
+        pu_name = request.POST.getlist('pu_name')
 
-        if len(query_name) < 2 and len(query_general) < 2:
+        if len(query_general) < 2 and pu_name == []:
             return HttpResponse(template.render({}, request), \
                 content_type='text/html')
 
         mappings = Mapping.objects.annotate(
-            combined=Concat('nus_code', V(' '), 'pu_name', V(' '),
-                'pu_code', V(' '), 'pu_title', output_field=CharField()
+            combined=Concat('nus_code', V(' '), 'pu_code', V(' '),
+                'pu_title', output_field=CharField()
             )
         )
 
-        mappings = mappings.filter(pu_name__icontains = query_name.upper())
         mappings = mappings.filter(combined__icontains = query_general.upper())
-        context = {'query_name': query_name, 'mappings': mappings}
+        if pu_name != []:
+            mappings = mappings.filter(pu_name__in = pu_name)
+        context = {'mappings': mappings}
 
         rendered_template = template.render(context, request)
         return HttpResponse(rendered_template, content_type='text/html')

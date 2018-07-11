@@ -80,3 +80,9 @@ function selectAll() {
   }
 
 }
+
+$(document).ready(function() {
+
+  $('select').select2();
+
+});

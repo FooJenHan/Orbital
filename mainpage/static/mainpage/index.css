@@ -14,3 +14,7 @@
 .alert {
   background-color: #37474f;
 }
+
+.select2 {
+  width: 100% !important;
+}

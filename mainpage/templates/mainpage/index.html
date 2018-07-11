@@ -7,6 +7,7 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'mainpage/index.css' %}" type="text/css">
 <link rel="stylesheet" href="{% static 'mainpage/table.css' %}" type="text/css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
 <body>
   <br>
@@ -15,24 +16,30 @@
       <header>
       </header>
 
-
     <form id="form" role="form" action="." method="post">
       {% csrf_token %}
         <input name="general"
-               type="search"
-               placeholder="Search by NUS module code, Partner University module code or module title"
-               ic-post-to="{% url 'search-ajax-submit' %}"
-               ic-trigger-on="keyup changed"
-               ic-trigger-delay="300ms"
-               ic-target="#tabledata"/>
-        <input name="pu_name"
-               type="search"
-               placeholder="Please enter institution name"
-               ic-post-to="{% url 'search-ajax-submit' %}"
-               ic-trigger-on="keyup changed"
-               ic-trigger-delay="300ms"
-               ic-target="#tabledata"/>
+          type="search"
+          placeholder="Search by NUS module code, Partner University module code or module title"
+          ic-post-to="{% url 'search-ajax-submit' %}"
+          ic-trigger-on="keyup changed"
+          ic-trigger-delay="300ms"
+          ic-target="#tabledata"/>
+
+        <p>Choose the institutions to filter by:</p>
+        <select multiple="multiple"
+          name="pu_name"
+          ic-post-to="{% url 'search-ajax-submit' %}"
+          ic-trigger-on="change changed"
+          ic-trigger-delay="300ms"
+          ic-target="#tabledata">
+          {% for name in view.pu_namelist %}
+            <option>{{ name }}</option>
+          {% endfor %}
+        </select>
     </form>
+
+    <br>
 
       <table class="responsive-table highlight centered">
         <thead class="grey darken-3">
@@ -61,7 +68,6 @@
           {% block table-data %}
           {% endblock %}
         </tbody>
-
       </table>
 
     </div>
@@ -78,5 +84,6 @@
   <script type ="text/javascript" src="{% static 'mainpage/helper.js' %}">
   </script>
   <script src="https://intercoolerreleases-leaddynocom.netdna-ssl.com/intercooler-1.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 {% endblock %} 
