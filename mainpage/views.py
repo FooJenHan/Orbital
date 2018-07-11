@@ -20,7 +20,7 @@ class IndexView(TemplateView):
         query_name = request.POST.get('pu_name', '')
         query_general = request.POST.get('general', '')
 
-        if query_name == "" and query_general == "":
+        if len(query_name) < 2 and len(query_general) < 2:
             return HttpResponse(template.render({}, request), \
                 content_type='text/html')
 
