@@ -83,6 +83,15 @@ function selectAll() {
 
 $(document).ready(function() {
 
-  $('select').select2();
+  $('select[name="pu_prefix"]').select2({
+    placeholder: 'Select module prefixes here.',
+    allowClear: true
+  });
+  $('select[name="pu_name"]').select2({
+    placeholder: 'Select Partner Universities here.',
+    allowClear: true
+  });
+
+  $($('.select2-selection')[0]).attr('id', 'prefix-pillbox')
 
 });

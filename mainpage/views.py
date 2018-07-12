@@ -4,12 +4,14 @@ from django.http import HttpResponse
 from .models import Mapping
 from .forms import QueryForm
 
-from django.db.models import CharField, Value as V
+from django.db.models import CharField, Value as V, Q
 from django.db.models.functions import Concat
 
 from django.views.generic.base import View
 from django.views.generic import TemplateView
 from django.template import loader
+
+import re
 # Create your views here.
 
 class IndexView(TemplateView):
@@ -21,12 +23,21 @@ class IndexView(TemplateView):
         pu_names.sort()
         return pu_names
 
+    def nus_prefixes(self):
+        data = Mapping.objects.values_list('nus_code')
+        prefixes = list(set(map(
+            lambda x: re.split("[^a-zA-Z]*" ,x[0])[0], data)
+        ))
+        prefixes.sort()
+        return prefixes
+
     def post(self, request):
         template = loader.get_template(self.template_name)
         query_general = request.POST.get('general', '')
         pu_name = request.POST.getlist('pu_name')
+        pu_prefix = request.POST.getlist('pu_prefix')
 
-        if len(query_general) < 2 and pu_name == []:
+        if len(query_general) < 2 and pu_name == [] and pu_prefix == []:
             return HttpResponse(template.render({}, request), \
                 content_type='text/html')
 
@@ -39,8 +50,13 @@ class IndexView(TemplateView):
         mappings = mappings.filter(combined__icontains = query_general.upper())
         if pu_name != []:
             mappings = mappings.filter(pu_name__in = pu_name)
-        context = {'mappings': mappings}
+        if pu_prefix != []:
+            q_objects = Q()
+            for pref in pu_prefix:
+                q_objects |= Q(nus_code__contains = pref)
+            mappings = mappings.filter(q_objects)
 
+        context = {'mappings': mappings}
         rendered_template = template.render(context, request)
         return HttpResponse(rendered_template, content_type='text/html')
 

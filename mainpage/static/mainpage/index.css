@@ -2,8 +2,12 @@
   background-color: #9fa8da;
 }
 
-::placeholder {
-  color: black;
+#general-box {
+  margin-top: 20px;
+}
+
+#general-box::placeholder {
+  color: #757575;
 }
 
 #toast-container {
@@ -17,4 +21,12 @@
 
 .select2 {
   width: 100% !important;
+}
+
+#prefix-pillbox {
+  height: 50px;
+}
+
+::placeholder {
+  color: #757575;
 }
