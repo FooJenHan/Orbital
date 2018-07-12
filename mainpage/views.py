@@ -31,3 +31,6 @@ def mod_list(request):
 
 def grad_plan(request):
     return render(request, 'mainpage/grad_plan.html')
+
+def modules(request):
+    return render(request, 'mainpage/modules.html')

@@ -46,7 +46,8 @@ function saveModule(){
     var to_save = JSON.stringify(saved_sorted);
     localStorage.setItem('stored_modules', to_save);
   }
-
+  // sanity check
+  alert(localStorage.getItem('stored_modules'));
 }
 
 
@@ -66,19 +67,20 @@ function createBox(modules, year_sem){
 
   $(container).append('<br>');
 
+  container.appendChild(table);
   pos_rel.appendChild(container);
   $(pos_rel).attr('id', year_sem);
 
   document.body.appendChild(pos_rel);
 
-  $(table).append('<thead class="grey darken-3"></thead>');
+  $(table).append('<caption></caption>');
 
-  thead = table.firstChild;
+  caption = table.firstChild;
 
   var th = document.createElement('th');
   var node = document.createTextNode(year_sem);
   th.appendChild(node);
-  thead.appendChild(th);
+  caption.appendChild(th);
 
   for (i = 0; i<modules.length; i++){
     var row = table.insertRow(-1)
@@ -112,8 +114,11 @@ function showModules(){
       unique_sem.push(curr);
     }
   }
-  for (j = 0; j<unique_sem.length; j++){
-    var curr_sem = unique_sem[j];
+
+  unique_sem.sort();
+
+  for (count = 0; count<unique_sem.length; count++){
+    var curr_sem = unique_sem[count];
     var sem_mods = [];
     for (k = 0; k<modules.length; k++){
       if (modules[k][0]==curr_sem){
@@ -122,8 +127,8 @@ function showModules(){
         temp.push(modules[k][2]);
         temp.push(modules[k][3]);
         temp.push(modules[k][4]);
+        sem_mods.push(temp);
       }
-      sem_mods.push(temp);
     }
     createBox(sem_mods, curr_sem);
   }
@@ -131,14 +136,42 @@ function showModules(){
 }
 
 
+// Make sure all form fields are filled, submit disabled otherwise
+function validate() {
+  var inputsWithValues = 0;
+  
+  // get all input fields except for type='submit'
+  var myInputs = $("input:not([type='submit'])");
+
+  myInputs.each(function(e) {
+    // if it has a value, increment the counter
+    if ($(this).val()) {
+      inputsWithValues += 1;
+    }
+  });
+
+  if (inputsWithValues == myInputs.length) {
+    $("input[type=submit]").prop("disabled", false);
+  } else {
+    $("input[type=submit]").prop("disabled", true);
+  }
+}
+
 
 $(document).ready(function(){
-    $('select').formSelect();
+  $('select').formSelect();
 
-    $("select[required]").css({
-      display: "inline",
-      height: 0,
-      padding: 0,
-      width: 0
-    });
+  $('.tabs').tabs();
+
+  $("select[required]").css({
+    display: "inline",
+    height: 0,
+    padding: 0,
+    width: 0
+  });
+
+  validate();
+  $('input').on('keyup', validate);
+
 });
+

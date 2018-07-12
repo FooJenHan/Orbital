@@ -1,0 +1,29 @@
+<head>
+  <title>Graduation Module Tracker</title>
+
+  {% extends 'base.html' %}
+</head>
+
+{% block body %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'mainpage/grad_plan.css' %}" type="text/css">
+
+<body onload="showModules()">
+  <br>
+  <div class="position-relative">
+    <div class="container">
+
+    </div>
+  </div>
+</body>
+
+{% endblock %}
+
+{% block scripts %}
+
+  {% load static %} 
+  <script type ="text/javascript" src="{% static 'mainpage/grad_plan.js' %}"> 
+  </script>
+
+{% endblock %} 
