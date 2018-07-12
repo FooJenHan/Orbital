@@ -1,0 +1,41 @@
+{% block search-boxes %}
+
+<form id="form" role="form" action="." method="post">
+  {% csrf_token %}
+
+    <select multiple="multiple"
+      name="pu_name"
+      ic-post-to="{% url 'search-ajax-submit' %}"
+      ic-trigger-on="change changed"
+      ic-trigger-delay="300ms"
+      ic-target="#tabledata">
+      {% for name in view.pu_namelist %}
+        <option>{{ name }}</option>
+      {% endfor %}
+    </select>
+
+    <select multiple="multiple"
+      name="pu_prefix"
+      ic-post-to="{% url 'search-ajax-submit' %}"
+      ic-trigger-on="change changed"
+      ic-trigger-delay="300ms"
+      ic-target="#tabledata">
+      {% for pref in view.nus_prefixes %}
+        <option>{{ pref }}</option>
+      {% endfor %}
+    </select>
+
+    <div id="general-box-container" class="input-field col s12">
+      <input name="general"
+        type="search"
+        placeholder="Search NUS module codes, Partner University module codes or module titles. Eg. LSM1301, Concordia"
+        id="general-box"
+        ic-post-to="{% url 'search-ajax-submit' %}"
+        ic-trigger-on="keyup changed"
+        ic-trigger-delay="300ms"
+        ic-target="#tabledata"/>
+    </div>
+
+</form>
+
+{% endblock %}

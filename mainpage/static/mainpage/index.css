@@ -2,12 +2,15 @@
   background-color: #9fa8da;
 }
 
-#general-box {
-  margin-top: 20px;
+#general-box-container {
+  background-color: #FFFFFF;
+  border-radius: 4px;
 }
 
-#general-box::placeholder {
-  color: #757575;
+#general-box {
+  margin-top: 20px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
 }
 
 #toast-container {
@@ -24,6 +27,7 @@
 }
 
 #prefix-pillbox {
+  margin-top: 20px;
   height: 50px;
 }
 

@@ -53,7 +53,7 @@ class IndexView(TemplateView):
         if pu_prefix != []:
             q_objects = Q()
             for pref in pu_prefix:
-                q_objects |= Q(nus_code__contains = pref)
+                q_objects |= Q(nus_code__startswith = pref)
             mappings = mappings.filter(q_objects)
 
         context = {'mappings': mappings}
