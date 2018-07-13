@@ -93,10 +93,7 @@ function createBox(modules, year_sem){
 }
 
 
-
-
-
-function showModules(){
+function showModSem(){
   var str_modules = localStorage.getItem('stored_modules');
   if (str_modules == null || str_modules == 'undefined' || str_modules == "[]"){
     return;
@@ -136,6 +133,66 @@ function showModules(){
 }
 
 
+
+function showModPrefix(){
+  var str_modules = localStorage.getItem('stored_modules');
+  if (str_modules == null || str_modules == 'undefined' || str_modules == "[]"){
+    return;
+  }
+  else{
+    var modules = JSON.parse(str_modules);
+  }
+
+  var prefixes = [];
+
+  for (i = 0; i<modules.length; i++){
+    var mod_code = modules[i][1];
+    mod_code = mod_code.split(/[^A-Za-z]/);
+    mod_code = mod_code[0];
+    prefixes.push(mod_code);
+  }
+
+  var un_pre = [];
+
+  for (j = 0; j<prefixes.length; j++){
+    var curr = prefixes[j];
+    if (un_pre.includes(curr)){
+      continue;
+    }else{
+      un_pre.push(curr)
+    }
+  }
+
+  un_pre.sort();
+
+  for (count = 0; count<un_pre.length; count++){
+    var curr_pre = un_pre[count];
+    var pre_mods = [];
+    for(k = 0; k<modules.length; k++){
+      var pre_now = modules[k][1];
+      pre_now = pre_now.split(/[^A-Za-z]/);
+      pre_now = pre_now[0];
+      if(curr_pre == pre_now){
+        var temp = [];
+        temp.push(modules[k][0]);
+        temp.push(modules[k][1]);
+        temp.push(modules[k][2]);
+        temp.push(modules[k][3]);
+        temp.push(modules[k][4]);
+        pre_mods.push(temp);
+      }
+    }
+    createBox(pre_mods, curr_pre);
+  }
+
+}
+
+
+
+
+
+
+
 // Make sure all form fields are filled, submit disabled otherwise
 function validate() {
   var inputsWithValues = 0;
@@ -158,7 +215,11 @@ function validate() {
 }
 
 
+
+
+//jQuery
 $(document).ready(function(){
+
   $('select').formSelect();
 
   $('.tabs').tabs();
@@ -175,3 +236,12 @@ $(document).ready(function(){
 
 });
 
+/*
+$("#one").click(function() {
+    $("#bysem").show(showModSem());
+  });
+
+  $("#two").click(function() {
+    $("#byprefix").show(showModPrefix());
+  });
+*/
