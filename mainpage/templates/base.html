@@ -23,23 +23,15 @@
 					<a href="#" data-target="mobile-demo" class="sidenav-trigger">
 						<i class="material-icons">menu</i>
 					</a>
-					<ul class="right hide-on-med-and-down">
-						<li><a href="/mod_list/">Selected Modules</a></li>
-						<li><a href="https://goo.gl/forms/Y5glUw9WYpWhBctX2">Feedback</a></li>
-						<li><a class="modal-trigger" href="#modal1">About</a></li>
-					</ul>
-					<ul class="left hide-on-med-and-down">
-						<li><a href="{% url 'admin:index' %}">Admin</a></li>
-						<li><a href="https://github.com/EnzioKam/Orbital">GitHub</a></li>
-					</ul>
 				</div>
 			</nav>
 		</div>
 
 <!-- shrinks nav for mobile !-->
 		<ul class="sidenav" id="mobile-demo">
-			<li><a href="/">Search Modules</a></li>
-			<li><a href="/mod_list/">Selected Modules</a></li>
+			<li><a href="/">Search</a></li>
+			<li><a href="/mod_list/">Selected	</a></li>
+			<li><a href="https://goo.gl/forms/Y5glUw9WYpWhBctX2">Feedback</a></li>
 		</ul>
 
 <!-- Modal -->
@@ -56,12 +48,14 @@
 	    </div>
 	  </div>
 
-<!--
+
 		<ul class="blue-grey lighten-3 side-nav fixed">
-			<li><a href="#">Icon 1</a></li>
-			<li><a href="#">Icon 2</a></li>
+			<li><a href="/">Search</a></li>
+			<li><a href="/mod_list/">Selected	</a></li>
+			<li><a href="https://goo.gl/forms/Y5glUw9WYpWhBctX2">Feedback</a></li>
+			<li><a class="modal-trigger" href="#modal1">About</a></li>
 		</ul> 
-!-->
+
 
 		{% block body %}
 		{% endblock %}

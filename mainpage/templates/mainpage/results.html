@@ -2,16 +2,16 @@
 
   {% for item in mappings %}
     <tr class="mainpage-row">
-      <td>
+      <td class="Select-col">
         <input id="{{ forloop.counter }}" type="checkbox" class="filled-in"/>
         <label for="{{ forloop.counter }}"></label>
       </td>
-      <td>{{ item.nus_code }}</td>
-      <td>{{ item.nus_credits }}</td>
-      <td class="pu-name">{{ item.pu_name }}</td>
-      <td>{{ item.pu_code }}</td>
-      <td>{{ item.pu_title }}</td>
-      <td>{{ item.pu_credits }}</td>
+      <td class="NUS-Code-col">{{ item.nus_code }}</td>
+      <td class="NUS-Credits-col">{{ item.nus_credits }}</td>
+      <td class="pu-name PU-Name-col">{{ item.pu_name }}</td>
+      <td class="PU-Code-col">{{ item.pu_code }}</td>
+      <td class="PU-Title-col">{{ item.pu_title }}</td>
+      <td class="PU-Credits-col">{{ item.pu_credits }}</td>
     </tr>
     {% endfor %}
 

@@ -54,8 +54,11 @@ function createContainer(pu_name, data){
 
   var arr = ['Select', 'NUS Code', 'NUS Credits', 'PU Name', 'PU Code',
     'PU Title',  'PU Credits'];
+  var classes = ['Select-col', 'NUS-Code-col', 'NUS-Credits-col', 'PU-Name-col',
+   'PU-Code-col',  'PU-Title-col',  'PU-Credits-col'];
   for (var i = 0; i < arr.length; i++) {
     var th = document.createElement('th');
+    th.className = classes[i]
     var node = document.createTextNode(arr[i]);
     th.appendChild(node);
     thead.appendChild(th);
@@ -68,7 +71,7 @@ function createContainer(pu_name, data){
     td = document.createElement('td')
     var checkbox = document.createElement('input');
     checkbox.type = "checkbox";
-    checkbox.className = "filled-in";
+    checkbox.className = "filled-in " + classes[0];
     var box_id = pu_name + String(i);
     checkbox.setAttribute('id', box_id)
     td.appendChild(checkbox);
@@ -81,13 +84,14 @@ function createContainer(pu_name, data){
 
     var cell = row.insertCell(-1);
     cell.textContent = data[i][0];
-    cell.className = "modal-trigger";
+    cell.className = "modal-trigger " + classes[1];
     var link = '#modal' + pu_name + data[i][3];
     cell.setAttribute("href", link);
     createModal(link, data[i][0]);
 
     for (var j=1; j<data[i].length; j++){
       var cell = row.insertCell(-1);
+      cell.className = classes[j+1];
       cell.textContent = data[i][j];
     }
   }
@@ -100,7 +104,7 @@ function createModal(link, mod_code){
   modal.className = "modal mod-modal";
   $(modal).append(
     '<div class="modal-content">' +
-      '<h4>' +
+      '<h4 class="modal-header">' +
       '<button class="waves-effect waves-light btn-large btn-flat">' +
       '<a href="https://nusmods.com/modules/' + mod_code +
       '" target="_blank">' + mod_code + '</button>' + '</a>' + '</h4>' +

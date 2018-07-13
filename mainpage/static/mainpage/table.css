@@ -11,12 +11,9 @@ thead, tbody tr {
   table-layout:fixed;
 }
 
-thead {
-  width: calc( 100% - 1em );
-}
-
 th {
   color: white;
+  text-align: center;
 }
 
 table {
@@ -24,6 +21,7 @@ table {
 }
 
 td {
+  text-align: center;
   overflow: auto;
 }
 
@@ -34,4 +32,32 @@ td {
 
 .alert {
   background-color: #37474f;
+}
+
+.Select-col {
+  width: 5%;
+}
+
+.NUS-code-col {
+  width: 10%;
+}
+
+.NUS-credits-col {
+  width: 5%;
+}
+
+.PU-name-col {
+  width: 30%;
+}
+
+.PU-code-col {
+  width: 10%;
+}
+
+.PU-title-col {
+  width: 30%;
+}
+
+.PU-credits-col {
+  width: 10%;
 }

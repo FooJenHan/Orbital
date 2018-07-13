@@ -1,3 +1,7 @@
+.position-relative {
+  transform: translate(45px, 0);
+}
+
 .mainpage-row {
   background-color: #9fa8da;
 }
