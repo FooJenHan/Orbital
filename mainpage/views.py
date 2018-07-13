@@ -56,6 +56,7 @@ class IndexView(TemplateView):
                 q_objects |= Q(nus_code__startswith = pref)
             mappings = mappings.filter(q_objects)
 
+        mappings = mappings.order_by('pu_name', 'nus_code')
         context = {'mappings': mappings}
         rendered_template = template.render(context, request)
         return HttpResponse(rendered_template, content_type='text/html')
