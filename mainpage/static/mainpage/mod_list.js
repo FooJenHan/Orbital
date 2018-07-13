@@ -54,8 +54,11 @@ function createContainer(pu_name, data){
 
   var arr = ['Select', 'NUS Code', 'NUS Credits', 'PU Name', 'PU Code',
     'PU Title',  'PU Credits'];
+  var classes = ['Select-col', 'NUS-Code-col', 'NUS-Credits-col', 'PU-Name-col',
+   'PU-Code-col',  'PU-Title-col',  'PU-Credits-col'];
   for (var i = 0; i < arr.length; i++) {
     var th = document.createElement('th');
+    th.className = classes[i]
     var node = document.createTextNode(arr[i]);
     th.appendChild(node);
     thead.appendChild(th);
@@ -68,7 +71,7 @@ function createContainer(pu_name, data){
     td = document.createElement('td')
     var checkbox = document.createElement('input');
     checkbox.type = "checkbox";
-    checkbox.className = "filled-in";
+    checkbox.className = "filled-in " + classes[0];
     var box_id = pu_name + String(i);
     checkbox.setAttribute('id', box_id)
     td.appendChild(checkbox);
@@ -81,13 +84,14 @@ function createContainer(pu_name, data){
 
     var cell = row.insertCell(-1);
     cell.textContent = data[i][0];
-    cell.className = "modal-trigger";
+    cell.className = "modal-trigger " + classes[1];
     var link = '#modal' + pu_name + data[i][3];
     cell.setAttribute("href", link);
     createModal(link, data[i][0]);
 
     for (var j=1; j<data[i].length; j++){
       var cell = row.insertCell(-1);
+      cell.className = classes[j+1];
       cell.textContent = data[i][j];
     }
   }
@@ -100,7 +104,7 @@ function createModal(link, mod_code){
   modal.className = "modal mod-modal";
   $(modal).append(
     '<div class="modal-content">' +
-      '<h4>' +
+      '<h4 class="modal-header">' +
       '<button class="waves-effect waves-light btn-large btn-flat">' +
       '<a href="https://nusmods.com/modules/' + mod_code +
       '" target="_blank">' + mod_code + '</button>' + '</a>' + '</h4>' +
@@ -228,67 +232,67 @@ $(document).ready(function(){
 
   });
 
+  var link = 'https://api.nusmods.com/2017-2018/reqTree.json';
+  var json_data = "";
+  var request = $.getJSON(link, function(data) {
+    json_data = data;
 
-  $('.mod-modal > .modal-content').each(function(){
-    var div = $(this);
-    var mod_code = $(div.children()[0]).text();
-    var link = 'https://api.nusmods.com/2017-2018/reqTree.json';
+    $('.mod-modal > .modal-content').each(function(){
+      var div = $(this);
+      var mod_code = $(div.children()[0]).text();
 
-    var json_data = "";
-    var request = $.getJSON(link, function(data) {
-      json_data = data;
-      var mod_data = json_data[mod_code];
-      var prereq, postreq;
-      if (mod_data){
-        prereq = mod_data['ModmavenTree'];
-        postreq = mod_data['LockedModules'];
-      }
-      else{
-        prereq = [];
-        postreq = [];
-      }
-
-      var postreq_items = ['<ul align="center">'];
-      $.each(postreq, function(i, item) {
-        postreq_items.push('<li class="tree-entry">' +
-          '<button class="waves-effect waves-light btn-small postreq-node">' +
-          '<a href="https://nusmods.com/modules/' + postreq[i] + '" target="_blank">'
-          + postreq[i] + '</a>' + '</button>' + '</li>');
-      });
-      postreq_items.push('</ul>');
-      $(div).append('<div class="tree-left">' + '<h5 class="flow-text">Unlocks:</h5>'
-        + postreq_items.join("") + '</div>');
-
-
-      var prereq_items = ['<ul align="center">'];
-      var converted = convertTree(prereq);
-      $.each(converted, function(i, item) {
-        prereq_items.push('<li class="tree-entry">');
-
-        var temp = ['<ul align="center">'];
-        $.each(converted[i], function(j, item) {
-          temp.push('<li class="tree-entry">' +
-            '<button class="waves-effect waves-light btn-small prereq-node">' +
-            '<a href="https://nusmods.com/modules/' + converted[i][j] + '" target="_blank">'
-            + converted[i][j] + '</a>'+ '</button>' + '</li>');
-
-        });
-        temp.push('</ul>');
-        temp.push('<br>');
-        if (converted && i != 0){
-          prereq_items.push('<h6>One of</h6>');
+        var mod_data = json_data[mod_code];
+        var prereq, postreq;
+        if (mod_data){
+          prereq = mod_data['ModmavenTree'];
+          postreq = mod_data['LockedModules'];
         }
-        prereq_items.push(temp.join(""));
+        else{
+          prereq = [];
+          postreq = [];
+        }
 
-        prereq_items.push('</li>');
+        var postreq_items = ['<ul align="center">'];
+        $.each(postreq, function(i, item) {
+          postreq_items.push('<li class="tree-entry">' +
+            '<button class="waves-effect waves-light btn-small postreq-node">' +
+            '<a href="https://nusmods.com/modules/' + postreq[i] + '" target="_blank">'
+            + postreq[i] + '</a>' + '</button>' + '</li>');
+        });
+        postreq_items.push('</ul>');
+        $(div).append('<div class="tree-left">' + '<h5 class="flow-text">Unlocks:</h5>'
+          + postreq_items.join("") + '</div>');
+
+
+        var prereq_items = ['<ul align="center">'];
+        var converted = convertTree(prereq);
+        $.each(converted, function(i, item) {
+          prereq_items.push('<li class="tree-entry">');
+
+          var temp = ['<ul align="center">'];
+          $.each(converted[i], function(j, item) {
+            temp.push('<li class="tree-entry">' +
+              '<button class="waves-effect waves-light btn-small prereq-node">' +
+              '<a href="https://nusmods.com/modules/' + converted[i][j] + '" target="_blank">'
+              + converted[i][j] + '</a>'+ '</button>' + '</li>');
+
+          });
+          temp.push('</ul>');
+          temp.push('<br>');
+          if (converted && i != 0){
+            prereq_items.push('<h6>One of</h6>');
+          }
+          prereq_items.push(temp.join(""));
+
+          prereq_items.push('</li>');
+        });
+        prereq_items.push('</ul>');
+
+        $(div).append('<div class="tree-right">' + '<h5 class="flow-text">Requires:</h5>' +
+          prereq_items.join("") + '</div>');
+
       });
-      prereq_items.push('</ul>');
-
-      $(div).append('<div class="tree-right">' + '<h5 class="flow-text">Requires:</h5>' +
-        prereq_items.join("") + '</div>');
 
     });
-
-  });
 
 });

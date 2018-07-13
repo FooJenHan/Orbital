@@ -1,3 +1,7 @@
+#mod-list-header {
+  padding-left: 25px;
+}
+
 .sumcredit-row{
   background-color: #80cbc4;
 }
@@ -69,20 +73,20 @@
   background-color: #43a047;
 }
 
-h4 {
+.modal-header {
   text-align: center;
   transform: translate(0, 50px);
 }
 
-h4 button a {
+.modal-header button a {
   font-size: 50px;
 }
 
-h4 .btn-flat {
+.modal-header .btn-flat {
   background-color: #eeeeee;
 }
 
-h4 .btn-flat:hover {
+.modal-header .btn-flat:hover {
   background-color: #bdbdbd;
 }
 

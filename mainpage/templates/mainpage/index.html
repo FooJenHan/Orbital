@@ -1,12 +1,15 @@
+<head>
+  <title>NUS Module Mappings</title>
 
-{% extends 'base.html' %}
+  {% extends 'base.html' %}
 
-
+</head>
 {% block body %}
 
 {% load static %}
 <link rel="stylesheet" href="{% static 'mainpage/index.css' %}" type="text/css">
 <link rel="stylesheet" href="{% static 'mainpage/table.css' %}" type="text/css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
 <body>
   <br>
@@ -14,54 +17,40 @@
     <div class="container">
       <header>
       </header>
-      
 
-    <form action="." method="GET" autocomplete="off">
-      {% csrf_token %}
-      {{ form }}
-    </form>
-    
-    <table class="responsive-table highlight centered">
-      <thead class="grey darken-3">
-        <tr>
-          <th scope="col">Select</th>
-          <th scope="col">NUS Code</th>
-          <th scope="col">NUS Credits</th>
-          <th scope="col">PU Name</th>
-          <th scope="col">PU Code</th>
-          <th scope="col">PU Title</th>
-          <th scope="col">PU Credits</th>
-        </tr>
-      </thead>
+      {% include 'mainpage/form.html' %}
+      {% block search-boxes %}
+      {% endblock %}
 
-        <button class="btn wave-effect wave-light" type="button" 
+      <table class="responsive-table highlight centered">
+        <thead class="grey darken-3">
+          <tr>
+            <th scope="col" class="Select-col">Select</th>
+            <th scope="col" class="NUS-Code-col">NUS Code</th>
+            <th scope="col" class="NUS-Credits-col">NUS Credits</th>
+            <th scope="col" class="PU-Name-col">PU Name</th>
+            <th scope="col" class="PU-Code-col">PU Code</th>
+            <th scope="col" class="PU-Title-col">PU Title</th>
+            <th scope="col" class="PU-Credits-col">PU Credits</th>
+          </tr>
+        </thead>
+
+        <button class="btn wave-effect wave-light" type="button"
           onclick="selectAll()" id="select-all">
           Select all<i class="material-icons right">select_all</i>
         </button>
-
-        <button class="btn wave-effect wave-light" type="button" 
+        <button class="btn wave-effect wave-light" type="button"
           onclick="saveSelected()" id="save-selected">
           Save selected<i class="material-icons right">save</i>
         </button>
 
         <tbody id="tabledata">
-        {% for item in mappings %}
-          <tr class="hidden mainpage-row"> 
-            <td>
-              <input id="{{ forloop.counter }}" type="checkbox" class="filled-in"/>
-              <label for="{{ forloop.counter }}"></label>
-            </td>
-            <td>{{ item.nus_code }}</td>
-            <td>{{ item.nus_credits }}</td>
-            <td class="pu-name">{{ item.pu_name }}</td>
-            <td>{{ item.pu_code }}</td>
-            <td>{{ item.pu_title }}</td>
-            <td>{{ item.pu_credits }}</td>
-          </tr>
-          {% endfor %}
+          {% include 'mainpage/results.html' %}
+          {% block table-data %}
+          {% endblock %}
         </tbody>
-
       </table>
+
     </div>
   </div>
 </body>
@@ -71,9 +60,11 @@
 {% block scripts %}
 
   {% load static %} 
-  <script type ="text/javascript" src="{% static 'mainpage/index.js' %}"> 
+  <script type ="text/javascript" src="{% static 'mainpage/index.js' %}">
   </script>
-  <script type ="text/javascript" src="{% static 'mainpage/helper.js' %}"> 
+  <script type ="text/javascript" src="{% static 'mainpage/helper.js' %}">
   </script>
+  <script src="https://intercoolerreleases-leaddynocom.netdna-ssl.com/intercooler-1.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 {% endblock %} 
