@@ -38,3 +38,7 @@
 ::placeholder {
   color: #757575;
 }
+
+input {
+  text-indent: 10px;
+}

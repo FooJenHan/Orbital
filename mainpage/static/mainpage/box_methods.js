@@ -67,7 +67,7 @@ function boxDeleteSelected(id){
     var comb_data = JSON.stringify(removed);
     localStorage.setItem('selected_mappings', comb_data);
     if (arr.length == 0){
-      M.toast({html: "You have not selected any modules from " + id, 
+      M.toast({html: "You have not selected any modules from " + id + " to delete.", 
         classes: 'alert-modlist'});      
     }        
     else{
