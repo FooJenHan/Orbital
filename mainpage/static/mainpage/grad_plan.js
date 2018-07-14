@@ -47,19 +47,20 @@ function saveModule(){
     localStorage.setItem('stored_modules', to_save);
   }
   // sanity check
-  //alert(localStorage.getItem('stored_modules'));
+  alert(localStorage.getItem('stored_modules'));
 }
 
 
 
-// Create box methods for sorting by AY SEM
-function createBox(modules, year_sem){
+// Create box methods 
+function createBox_Sem(modules, year_sem){
   var table = document.createElement('table');
   $(table).addClass('responsive-table striped round');
 
   var pos_rel = document.createElement('div');
   $(pos_rel).addClass('position-relative');
   $(pos_rel).addClass('table-container');
+  $(pos_rel).addClass('target-sem');
 
   var container = document.createElement('div');
   $(container).addClass('container');
@@ -79,6 +80,47 @@ function createBox(modules, year_sem){
 
   var th = document.createElement('th');
   var node = document.createTextNode(year_sem);
+  th.appendChild(node);
+  caption.appendChild(th);
+
+  for (i = 0; i<modules.length; i++){
+    var row = table.insertRow(-1)
+    for (j = 0; j<modules[i].length; j++){
+      var cell = row.insertCell(-1);
+      cell.textContent = modules[i][j];
+    }
+  }
+  
+}
+
+
+function createBox_Prefix(modules, prefix){
+  var table = document.createElement('table');
+  $(table).addClass('responsive-table striped round');
+
+  var pos_rel = document.createElement('div');
+  $(pos_rel).addClass('position-relative');
+  $(pos_rel).addClass('table-container');
+  $(pos_rel).addClass('target-prefix');
+
+  var container = document.createElement('div');
+  $(container).addClass('container');
+  $(container).addClass('position-relative');
+
+  $(container).append('<br>');
+
+  container.appendChild(table);
+  pos_rel.appendChild(container);
+  $(pos_rel).attr('id', prefix);
+
+  document.body.appendChild(pos_rel);
+
+  $(table).append('<caption></caption>');
+
+  caption = table.firstChild;
+
+  var th = document.createElement('th');
+  var node = document.createTextNode(prefix);
   th.appendChild(node);
   caption.appendChild(th);
 
@@ -127,7 +169,7 @@ function showModSem(){
         sem_mods.push(temp);
       }
     }
-    createBox(sem_mods, curr_sem);
+    createBox_Sem(sem_mods, curr_sem);
   }
 
 }
@@ -182,7 +224,7 @@ function showModPrefix(){
         pre_mods.push(temp);
       }
     }
-    createBox(pre_mods, curr_pre);
+    createBox_Prefix(pre_mods, curr_pre);
   }
 
 }
@@ -215,6 +257,30 @@ function validate() {
 }
 
 
+// Function to control view by AYSem or Prefix
+function showOnlySem(){
+  var x = document.getElementsByClassName("target-sem");
+  var y = document.getElementsByClassName("target-prefix");
+  for (i = 0; i<x.length; i++){
+    x[i].style.display = 'inline';
+  }
+  for (j = 0; j<y.length; j++){
+    y[j].style.display = 'none';
+  }
+}
+
+
+function showOnlyPrefix(){
+  var x = document.getElementsByClassName("target-sem");
+  var y = document.getElementsByClassName("target-prefix");
+  for (i = 0; i<x.length; i++){
+    x[i].style.display = 'none';
+  }
+  for (j = 0; j<y.length; j++){
+    y[j].style.display = 'inline';
+  }
+}
+
 
 
 //jQuery
@@ -235,13 +301,3 @@ $(document).ready(function(){
   $('input').on('keyup', validate);
 
 });
-
-/*
-$("#one").click(function() {
-    $("#bysem").show(showModSem());
-  });
-
-  $("#two").click(function() {
-    $("#byprefix").show(showModPrefix());
-  });
-*/
