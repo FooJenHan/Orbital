@@ -95,4 +95,6 @@ $(document).ready(function() {
 
   $($('.select2-selection')[1]).attr('id', 'prefix-pillbox')
 
+  new Tablesort(document.getElementsByClassName('responsive-table')[0]);
+
 });

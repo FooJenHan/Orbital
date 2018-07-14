@@ -48,32 +48,33 @@ function createContainer(pu_name, data){
 
   document.body.appendChild(pos_rel);
 
-  $(table).append('<thead class="grey darken-3"></thead>');
+  $(table).append('<thead class="grey darken-3"><tr></tr></thead>');
 
-  thead = table.firstChild;
+  thead_tr = table.firstChild.firstChild;
 
   var arr = ['Select', 'NUS Code', 'NUS Credits', 'PU Name', 'PU Code',
     'PU Title',  'PU Credits'];
   var classes = ['Select-col', 'NUS-Code-col', 'NUS-Credits-col', 'PU-Name-col',
    'PU-Code-col',  'PU-Title-col',  'PU-Credits-col'];
+   
   for (var i = 0; i < arr.length; i++) {
-    var th = document.createElement('th');
-    th.className = classes[i]
-    var node = document.createTextNode(arr[i]);
-    th.appendChild(node);
-    thead.appendChild(th);
+    $(thead_tr).append('<th scope="col" class="' + classes[i] + '">' + arr[i] + '</th>');
   }
 
+  $(table).append('<tbody></tbody>')
+  var tbody = table.children[1];
+
   for (var i=0; i<data.length; i++){
-    var row = table.insertRow(-1)
+    var row = tbody.insertRow(-1)
     row.className = "modlist-row"
 
     td = document.createElement('td')
     var checkbox = document.createElement('input');
     checkbox.type = "checkbox";
-    checkbox.className = "filled-in " + classes[0];
+    checkbox.className = "filled-in";
     var box_id = pu_name + String(i);
     checkbox.setAttribute('id', box_id)
+    td.className = classes[0];
     td.appendChild(checkbox);
 
     label = document.createElement('label');
@@ -294,5 +295,10 @@ $(document).ready(function(){
       });
 
     });
+
+  var tables = document.getElementsByClassName('responsive-table');
+  for (var i=0; i<tables.length; i++){
+    new Tablesort(tables[i]);
+  }
 
 });
