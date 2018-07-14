@@ -47,7 +47,7 @@ function saveModule(){
     localStorage.setItem('stored_modules', to_save);
   }
   // sanity check
-  alert(localStorage.getItem('stored_modules'));
+  //alert(localStorage.getItem('stored_modules'));
 }
 
 
