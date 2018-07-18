@@ -31,8 +31,11 @@ function boxSelectAll(id){
 
 function boxDeleteSelected(id){
   var elements = document.getElementById(id).firstChild.childNodes;
+  alert(elements.innerHTML);
   var button = elements[3];
+  alert(button.innerHTML);
   var table = elements[4];
+  alert(table.innerHTML);
   var arr = new Array;
 
   for (var i=0; i<table.rows.length; i++){

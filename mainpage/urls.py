@@ -7,4 +7,5 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('search/', views.SearchAjaxSubmitView.as_view(), name='search-ajax-submit'),
     path('mod_list/', views.mod_list, name='mod_list'),
+    path('grad_plan/', views.grad_plan, name='grad_plan'),
 ]
