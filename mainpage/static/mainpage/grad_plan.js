@@ -46,8 +46,7 @@ function saveModule(){
     var to_save = JSON.stringify(saved_sorted);
     localStorage.setItem('stored_modules', to_save);
   }
-  // sanity check
-  alert(localStorage.getItem('stored_modules'));
+  
 }
 
 
@@ -86,12 +85,13 @@ function createBox_Sem(modules, year_sem){
 
   for (i = 0; i<modules.length; i++){
     var row = table.insertRow(-1)
-
-    $(row).append(
+    var firstcell = row.insertCell(-1);
+    firstcell.className = "btn-cell";
+    $(firstcell).append(
     '<button class="btn wave-effect wave-light deletor" type="button"><i class="material-icons">delete_forever</i> </button>');
-
     for (j = 0; j<modules[i].length; j++){
       var cell = row.insertCell(-1);
+      cell.className = "cell-sem" + String(j);
       cell.textContent = modules[i][j];
     }
   }
@@ -132,12 +132,13 @@ function createBox_Prefix(modules, prefix){
 
   for (i = 0; i<modules.length; i++){
     var row = table.insertRow(-1)
-
-    $(row).append(
+    var firstcell = row.insertCell(-1);
+    firstcell.className = "btn-cell";
+    $(firstcell).append(
     '<button class="btn wave-effect wave-light deletor" type="button"><i class="material-icons">delete_forever</i> </button>');
-    
     for (j = 0; j<modules[i].length; j++){
       var cell = row.insertCell(-1);
+      cell.className = "cell-pre" + String(j);
       cell.textContent = modules[i][j];
     }
   }

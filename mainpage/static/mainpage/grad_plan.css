@@ -2,18 +2,34 @@
   width: 90%;
 }
 
-
-/* KIV, later style table and make it rounded (nicer) */
-/*
-.round{
-  border-radius: 25px;
-  border: 2px solid #73AD21;
-  padding: 20px; 
-  width: 200px;
-  height: 150px; 
+.btn-cell{
+  width: 15%;
 }
-*/
 
+.cell-sem0{
+  width: 15%;
+}
 
+.cell-sem2{
+  width: 7%;
+}
 
+.cell-sem3{
+  width: 7%;
+}
 
+.cell-pre0{
+  width: 15%;
+}
+
+.cell-pre1{
+  width: 15%;
+}
+
+.cell-pre3{
+  width: 7%;
+}
+
+.cell-pre4{
+  width: 7%;
+}
