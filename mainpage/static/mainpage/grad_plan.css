@@ -1,5 +1,9 @@
 .row{
-  width: 90%;
+  width: 100%;
+}
+
+.translate{
+  margin-left: 3.5%;
 }
 
 .btn-cell{
@@ -32,4 +36,9 @@
 
 .cell-pre4{
   width: 7%;
+}
+
+.round{
+  width: 94.5%;
+  margin-left: 4%
 }

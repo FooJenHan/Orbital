@@ -2,6 +2,9 @@
   padding-left: 25px;
 }
 
+.shift{
+  margin-left: 1%;
+}
 .sumcredit-row{
   background-color: #80cbc4;
 }
@@ -20,7 +23,7 @@
 
 .pu-header {
   color: #000000;
-  font-size: 23px;
+  font-size: 24px;
 }
 
 .filled-in {
@@ -92,4 +95,13 @@
 
 a {
   color: black;
+}
+
+.line{
+  display: inline-block;
+  vertical-align: top;
+}
+
+.space{
+  margin-left: 5em;
 }
