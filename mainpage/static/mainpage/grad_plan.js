@@ -61,18 +61,19 @@ function createBox_Sem(modules, year_sem){
   $(pos_rel).addClass('position-relative');
   $(pos_rel).addClass('table-container');
   $(pos_rel).addClass('target-sem');
+  $(pos_rel).append('<br>');
 
   var container = document.createElement('div');
   $(container).addClass('container');
   $(container).addClass('position-relative');
-
-  $(container).append('<br>');
 
   container.appendChild(table);
   pos_rel.appendChild(container);
   $(pos_rel).attr('id', year_sem);
 
   document.body.appendChild(pos_rel);
+
+  $(container).append('<br>');
 
   $(table).append('<caption></caption>');
 
@@ -85,6 +86,10 @@ function createBox_Sem(modules, year_sem){
 
   for (i = 0; i<modules.length; i++){
     var row = table.insertRow(-1)
+
+    $(row).append(
+    '<button class="btn wave-effect wave-light deletor" type="button"><i class="material-icons">delete_forever</i> </button>');
+
     for (j = 0; j<modules[i].length; j++){
       var cell = row.insertCell(-1);
       cell.textContent = modules[i][j];
@@ -102,18 +107,19 @@ function createBox_Prefix(modules, prefix){
   $(pos_rel).addClass('position-relative');
   $(pos_rel).addClass('table-container');
   $(pos_rel).addClass('target-prefix');
+  $(pos_rel).append('<br>');
 
   var container = document.createElement('div');
   $(container).addClass('container');
   $(container).addClass('position-relative');
-
-  $(container).append('<br>');
 
   container.appendChild(table);
   pos_rel.appendChild(container);
   $(pos_rel).attr('id', prefix);
 
   document.body.appendChild(pos_rel);
+
+  $(container).append('<br>');
 
   $(table).append('<caption></caption>');
 
@@ -126,6 +132,10 @@ function createBox_Prefix(modules, prefix){
 
   for (i = 0; i<modules.length; i++){
     var row = table.insertRow(-1)
+
+    $(row).append(
+    '<button class="btn wave-effect wave-light deletor" type="button"><i class="material-icons">delete_forever</i> </button>');
+    
     for (j = 0; j<modules[i].length; j++){
       var cell = row.insertCell(-1);
       cell.textContent = modules[i][j];
@@ -231,10 +241,6 @@ function showModPrefix(){
 
 
 
-
-
-
-
 // Make sure all form fields are filled, submit disabled otherwise
 function validate() {
   var inputsWithValues = 0;
@@ -281,7 +287,36 @@ function showOnlyPrefix(){
   }
 }
 
-
+function deleteMod(id){
+  var row = id.parentNode;
+  var to_remove = [];
+  var caption = id.parentNode.parentNode.parentNode.caption.textContent;
+  var indicator = /\d/.test(caption);
+  if (indicator == true){
+    to_remove.push(caption);
+  }
+  for (var i=0; i<row.cells.length; i++){
+    var target = row.cells[i].textContent;
+    to_remove.push(target);
+  }
+  var str_modules = localStorage.getItem('stored_modules');
+  var modules = JSON.parse(str_modules);
+  var update = [];
+  for (j=0; j<modules.length; j++){
+    var curr = modules[j];
+    for (k=0; k<curr.length; k++){
+      if (curr[k] == to_remove[k]){
+        continue;
+      }else{
+        update.push(curr);
+        break;
+      }
+    }
+  }
+  var to_save = JSON.stringify(update);
+  localStorage.setItem('stored_modules', to_save);
+  window.location.reload();
+}
 
 //jQuery
 $(document).ready(function(){
@@ -299,5 +334,10 @@ $(document).ready(function(){
 
   validate();
   $('input').on('keyup', validate);
+
+  $('.deletor').click(function(){
+    deleteMod(this);
+  });
+
 
 });
