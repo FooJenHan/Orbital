@@ -23,14 +23,36 @@
         </div>
       </header>
 
-      <p id="describe"> 
-        This is a list of module mappings that you have chosen.
-      </p>
-      
-      <a id="download-button" class="waves-effect waves-light btn">
-        <i class="material-icons right">file_download</i> Download CSV
-      </a>
+      <div id="text-container">
+        <p class="describe">
+          This is a list of module mappings that you have chosen.
+        </p>
+        <p class="describe">
+          Go back to search to add more, or delete unwanted modules here.
+        </p>
+        <p class="describe">
+          Happy planning!
+        </p>
+      </div>
 
+      <br><hr>
+
+      <div>
+        <p class="button-pretext"> To download your saved mappings: </p>
+        <a id="download-button" class="waves-effect waves-light btn">
+          <i class="material-icons">file_download</i>
+        </a>
+      </div>
+
+      <div>
+        <p class="button-pretext"> To upload your previously saved csv file: </p>
+        <input id="upload-field" type="file" name="csv-upload">
+        <a id="upload-button" class="waves-effect waves-light btn">
+          <i class="material-icons">file_upload</i>
+        </a>
+      </div>
+
+      <hr><br>
     </div>
   </div>
 
@@ -49,5 +71,6 @@
   </script>
   <script type ="text/javascript" src="{% static 'mainpage/box_methods.js' %}"> 
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.9/jquery.csv.min.js"></script>
 
 {% endblock %} 

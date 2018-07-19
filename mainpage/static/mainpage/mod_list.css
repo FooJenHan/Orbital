@@ -11,8 +11,9 @@
   background-color: #80cbc4;
 }
 
-#describe {
+.describe {
   font-size: 18px;
+  font-color: #212121;
 }
 
 .table-container {
@@ -102,4 +103,25 @@ a {
 
 .space{
   margin-left: 5em;
+}
+
+.button-pretext {
+  font-size: 20px;
+  font-color: #212121;
+  display: inline-block;
+}
+
+#download-button {
+  transform: translate(56px, 0);
+}
+
+#upload-button {
+  transform: translate(10px, 0);
+}
+
+#upload-field {
+  display: inline-block;
+  visibility: hidden;
+  height: 0;
+  width: 0;
 }

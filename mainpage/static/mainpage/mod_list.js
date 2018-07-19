@@ -200,6 +200,79 @@ function convertTree(prereq){
   return final;
 }
 
+function csvUpload(){
+
+  document.getElementById('upload-field').addEventListener('change', upload, false);
+
+  function browserSupportFileUpload() {
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+      return true;
+    }
+    return false;
+  }
+
+  function upload(evt) {
+    if (!browserSupportFileUpload()) {
+      alert('We do not support file uploads for your browser.');
+      return;
+    }
+
+    var data = null;
+    var file = evt.target.files[0];
+    var reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function(event) {
+      var csvData = event.target.result;
+      try {
+        data = $.csv.toArrays(csvData);
+      }
+      catch(err) {
+        M.toast({html: "Unable to read the file. Are you sure this is a .csv file?",
+          classes: 'alert-modlist'});
+        return;
+      }
+      if (!data || data.length == 0){
+        M.toast({html: "There is no data to import!", classes: 'alert-modlist'});
+        return;
+      }
+      var to_add = [];
+      for (var i=0; i<data.length; i++){
+        if (data[i].length > 6){
+          to_add.push(data[i].slice(0, 6));
+        }
+      }
+      var stored = localStorage.getItem('selected_mappings');
+      if (stored == "undefined" || stored == null){
+        var csv_only = JSON.stringify(to_add);
+        localStorage.setItem('selected_mappings', csv_only);
+      }
+      else{
+        var stored_arr = JSON.parse(stored);
+        var len = to_add.length
+
+        for (var k=0; k<len; k++){
+          if (checkContains(stored_arr, to_add[k]) == false){
+            stored_arr.push(to_add[k]);
+          }
+        }
+
+        stored_arr.sort(function(a,b){
+          if (a[2] <= b[2]){
+            return -1;
+          }
+          else{
+            return 1;
+          }
+        })
+
+        var comb_data = JSON.stringify(stored_arr);
+        localStorage.setItem('selected_mappings', comb_data);
+      }
+      window.location.reload();
+    };
+  }
+
+}
 
 $(document).ready(function(){
 
@@ -208,7 +281,8 @@ $(document).ready(function(){
     var arr = JSON.parse(data);
     if (!arr || arr.length == 0){
        M.toast({html: 
-        "You have no modules selected. Go back to the previous page to Select some modules.", 
+        "You have no modules selected. Go to search to " +
+        "select some modules, or upload from a previously saved file.",
         classes: 'alert'});
        return;
     }
@@ -233,6 +307,12 @@ $(document).ready(function(){
     $(this).attr("href", content).attr("download", filename);
 
   });
+
+  $('#upload-button').click(function(){
+    $('#upload-field').click();
+  });
+
+  csvUpload();
 
   var link = 'https://api.nusmods.com/2017-2018/reqTree.json';
   var json_data = "";
