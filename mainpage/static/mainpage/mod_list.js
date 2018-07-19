@@ -262,7 +262,8 @@ $(document).ready(function(){
             + postreq[i] + '</a>' + '</button>' + '</li>');
         });
         postreq_items.push('</ul>');
-        $(div).append('<div class="tree-left">' + '<h5 class="flow-text">Unlocks:</h5>'
+        $(div).append('<div class="tree-left">' + 
+          '<h5 class="unlocks-requires">Unlocks:</h5>'
           + postreq_items.join("") + '</div>');
 
 
@@ -290,7 +291,8 @@ $(document).ready(function(){
         });
         prereq_items.push('</ul>');
 
-        $(div).append('<div class="tree-right">' + '<h5 class="flow-text">Requires:</h5>' +
+        $(div).append('<div class="tree-right">' 
+          + '<h5 class="unlocks-requires">Requires:</h5>' +
           prereq_items.join("") + '</div>');
 
       });
