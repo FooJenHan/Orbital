@@ -3,11 +3,16 @@ body {
 }
 
 .side-nav {
-  top: 64px;
+  top: 52px;
   width: 130px;
 }
 
 .modal {
   width: 90%;
   height: 90%;
+}
+
+nav {
+  height: 50px;
+  line-height: 50px;
 }

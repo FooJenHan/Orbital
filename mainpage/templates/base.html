@@ -35,6 +35,8 @@
 		<ul class="sidenav" id="mobile-demo">
 			<li><a href="/">Search</a></li>
 			<li><a href="/mod_list/">Selected	</a></li>
+			<li><a href="/grad_plan/">Planner	</a></li>
+			<li><a class="modal-trigger" href="#modal1">About</a></li>
 			<li><a href="https://goo.gl/forms/Y5glUw9WYpWhBctX2">Feedback</a></li>
 		</ul>
 
@@ -58,26 +60,27 @@
 
 
 		<ul class="blue-grey lighten-3 side-nav fixed">
-			<li><a href="/">Search</a></li>
-			<li><a href="/mod_list/">Selected	</a></li>
-			<li><a href="/grad_plan/">Planner	</a></li>
-			<li><a href="https://goo.gl/forms/Y5glUw9WYpWhBctX2">Feedback</a></li>
-			<li><a class="modal-trigger" href="#modal1">About</a></li>
-		</ul> 
+			<li><a href="/">Search</a></li><hr>
+			<li><a href="/mod_list/">Selected	</a></li><hr>
+			<li><a href="/grad_plan/">Planner	</a></li><hr>
+			<li><a class="modal-trigger" href="#modal1">About</a></li><hr>
+			<li><a href="https://goo.gl/forms/Y5glUw9WYpWhBctX2">Feedback</a></li><hr>
+		</ul>
 
 
 		{% block body %}
 		{% endblock %}
 
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	  <script type ="text/javascript" src="{% static 'mainpage/base.js' %}"> 
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	  </script>
+	  <script type ="text/javascript" src="{% static 'mainpage/base.js' %}">
   	</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.0.2/tablesort.min.js">
-  	</script>  
+    </script>
 		{% block scripts %}
-		{% endblock %} 
+		{% endblock %}
 
 	</body>
 		
