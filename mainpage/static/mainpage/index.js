@@ -29,14 +29,14 @@ function saveSelected(){
       }
     }
     
-  stored_arr.sort(function(a,b){
-    if (a[2] <= b[2]){
-      return -1;
-    }
-    else{
-      return 1;
-    }
-  })
+    stored_arr.sort(function(a,b){
+      if (a[2] <= b[2]){
+        return -1;
+      }
+      else{
+        return 1;
+      }
+    })
 
     var comb_data = JSON.stringify(stored_arr);
     localStorage.setItem('selected_mappings', comb_data);

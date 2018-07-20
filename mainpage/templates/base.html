@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<!-- bootstrap !-->
 		<!-- Materalise CSS !-->
 		<!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
@@ -12,7 +11,11 @@
 		{% load static %}
   	<link rel="stylesheet" href="{% static 'mainpage/base.css' %}" type="text/css">
   	<link rel="stylesheet" href="{% static 'mainpage/tablesort.css' %}" type="text/css">
-  		<!-- end of base colour scheme code !-->
+  	<!-- end of base colour scheme code !-->
+
+		{% block hotjar %}
+		{% endblock %}
+
 	</head>
 
 <!-- navigation bar !-->
@@ -32,6 +35,8 @@
 		<ul class="sidenav" id="mobile-demo">
 			<li><a href="/">Search</a></li>
 			<li><a href="/mod_list/">Selected	</a></li>
+			<li><a href="/grad_plan/">Planner	</a></li>
+			<li><a class="modal-trigger" href="#modal1">About</a></li>
 			<li><a href="https://goo.gl/forms/Y5glUw9WYpWhBctX2">Feedback</a></li>
 		</ul>
 
@@ -40,37 +45,42 @@
 	    <div class="modal-content">
 	      <h4>About NUS Module Mappings</h4>
 	      <p>
-	      	Every year, many NUS students apply for the Student Exchange Programme. However, the process of application is complicated and the information is presented in a PDF file making it is extremely tedious and takes a long time to search for the relevant modules that students want to take at their partner universities. 
+	      	Every year, many NUS students apply for the Student Exchange Programme. However, the process of application is complicated and the information is presented in a PDF file. This makes it extremely tedious, taking a long time to search for the relevant modules that students want to take at their partner universities.
 	      </p>
 	      <br>
 	      <p>
-	      	We aim to create a web application with a database of module mappings to make the searching process for possible module mappings faster and easier via different filtering criteria, and to be able to track and store a list of modules (with their mappings) that the student intends to take on exchange. 
+	      	Created as part of our project for Orbital, under NUS School of Computing, NUS Module Mappings is a web application with a database of module mappings to make the searching process for possible module mappings faster and easier via different filtering criteria, and to be able to track and store a list of modules (with their mappings) that the student intends to take on exchange.
+	      </p>
+	      <br>
+	      <p>
+	      	Try searching for some module mappings, then save them and view it in the Selected page!
 	      </p>
 	    </div>
 	  </div>
 
 
 		<ul class="blue-grey lighten-3 side-nav fixed">
-			<li><a href="/">Search</a></li>
-			<li><a href="/mod_list/">Selected	</a></li>
-			<li><a href="/grad_plan/">Planner	</a></li>
-			<li><a href="https://goo.gl/forms/Y5glUw9WYpWhBctX2">Feedback</a></li>
-			<li><a class="modal-trigger" href="#modal1">About</a></li>
-		</ul> 
+			<li><a href="/">Search</a></li><hr>
+			<li><a href="/mod_list/">Selected	</a></li><hr>
+			<li><a href="/grad_plan/">Planner	</a></li><hr>
+			<li><a class="modal-trigger" href="#modal1">About</a></li><hr>
+			<li><a href="https://goo.gl/forms/Y5glUw9WYpWhBctX2">Feedback</a></li><hr>
+		</ul>
 
 
 		{% block body %}
 		{% endblock %}
 
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	  <script type ="text/javascript" src="{% static 'mainpage/base.js' %}"> 
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	  </script>
+	  <script type ="text/javascript" src="{% static 'mainpage/base.js' %}">
   	</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.0.2/tablesort.min.js">
-  	</script>  
+    </script>
 		{% block scripts %}
-		{% endblock %} 
+		{% endblock %}
 
 	</body>
 		

@@ -35,7 +35,7 @@ function boxDeleteSelected(id){
   var table = elements[4];
   var arr = new Array;
 
-  for (var i=0; i<table.rows.length; i++){
+  for (var i=1; i<table.rows.length; i++){
     if (table.rows[i].cells[0].firstChild.checked == false){
       continue;
     }
