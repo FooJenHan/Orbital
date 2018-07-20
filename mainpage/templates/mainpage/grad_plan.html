@@ -14,7 +14,7 @@
 <body onload="showModSem(); showModPrefix(); showOnlySem();">
   <br>
 
-  <div class="position-relative translate">
+  <div class="position-relative translate nus-form">
     <div class="container">
 
       <form id="modnus" class="col s12" onsubmit="saveModuleNus()">
@@ -59,23 +59,25 @@
             </select>
           </div>
 
-          <div class="input-field col s3">
+          <div class="input-field col s4">
             <input placeholder="Category of module (core, minor, UEM etc)" id="category_nus" type="text">
             <label for="category_nus">Category</label>
           </div>
 
         </div>
         
-        <button class="btn wave-effect wave-light submission" 
-        type="submit">Submit<i class="material-icons right">send</i></button>
+        <button class="btn wave-effect wave-light submission"
+        type="submit">Add Module<i class="material-icons right">library_add</i></button>
       </form>
+
+      <button class="btn wave-effect wave-light submission" onclick="showCustomForm()" type="submit">Custom Module Form<i class="material-icons right">assignment_ind</i></button>
 
     </div>
   </div>
 
 
 
-  <div class="position-relative translate">
+  <div class="position-relative translate custom-form">
     <div class="container">
 
         <form id="modcustom" class="col s12" onsubmit="saveModuleCustom()">
@@ -124,8 +126,11 @@
           </div>
 
           <button class="btn wave-effect wave-light submission" 
-          type="submit">Submit<i class="material-icons right">send</i></button>
+          type="submit">Add Module<i class="material-icons right">library_add</i></button>
         </form>
+
+        <button class="btn wave-effect wave-light submission" onclick="showNusForm()"
+        type="submit">NUS Module Form<i class="material-icons right">school</i></button>
 
     </div>
   </div>
@@ -136,6 +141,7 @@
     <div class="container">
       <div class="row">
         <div class="col s12">
+          <br>
           <ul class="tabs">
             <li class="tab col s6" id="one" onclick="showOnlySem()"><a href="#bysem">By Semester</a></li>
             <li class="tab col s6" id="two" onclick="showOnlyPrefix()"><a href="#byprefix">By Module Prefix</a></li>

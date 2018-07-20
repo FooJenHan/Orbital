@@ -354,7 +354,6 @@ function deleteMod_Sem(id){
       }
     }
   }
-  
 
   var to_save = JSON.stringify(update);
   localStorage.setItem('stored_modules', to_save);
@@ -418,7 +417,6 @@ function deleteMod_Prefix(id){
     }
   }
 
-
   var to_save = JSON.stringify(update);
   localStorage.setItem('stored_modules', to_save);
   if (row_num == 1){
@@ -428,6 +426,29 @@ function deleteMod_Prefix(id){
     row.parentNode.removeChild(row);
   }
 
+}
+
+
+function showNusForm(){
+  var x = document.getElementsByClassName("nus-form");
+  var y = document.getElementsByClassName("custom-form");
+  for (i = 0; i<x.length; i++){
+    x[i].style.display = 'inline';
+  }
+  for (j = 0; j<y.length; j++){
+    y[j].style.display = 'none';
+  }
+}
+
+function showCustomForm(){
+  var x = document.getElementsByClassName("nus-form");
+  var y = document.getElementsByClassName("custom-form");
+  for (i = 0; i<x.length; i++){
+    x[i].style.display = 'none';
+  }
+  for (j = 0; j<y.length; j++){
+    y[j].style.display = 'inline';
+  }
 }
 
 //jQuery
