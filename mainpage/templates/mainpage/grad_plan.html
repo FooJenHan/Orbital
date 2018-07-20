@@ -8,42 +8,105 @@
 
 {% load static %}
 <link rel="stylesheet" href="{% static 'mainpage/grad_plan.css' %}" type="text/css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
 
 <body onload="showModSem(); showModPrefix(); showOnlySem();">
   <br>
+
   <div class="position-relative translate">
     <div class="container">
 
-        <form id="modform" class="col s12" onsubmit="saveModule()">
+      <form id="modnus" class="col s12" onsubmit="saveModuleNus()">
+
+        <div class="row">
+
+          <div class="input-field col s12">
+            <input placeholder="Search NUS modules by module code or title" id="nus_all" type="text" class="validate" required="" aria-required="true">
+            <label for="nus_all">NUS Module Code</label>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="input-field col s4">
+            <select id="grade_nus" required="" aria-required="true">
+              <option value="" disabled selected>Grade</option>
+              <option value="A+">A+</option>
+              <option value="A">A</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B">B</option>
+              <option value="B-">B-</option>
+              <option value="C+">C+</option>
+              <option value="C">C</option>
+              <option value="D+">D+</option>
+              <option value="D">D</option>
+              <option value="F">F</option>
+              <option value="S">S</option>
+              <option value="U">U</option>
+            </select>
+          </div>
+
+          <div class="input-field col s4">
+            <select id="sem_taken_nus" required="" aria-required="true">
+              <option value="" disabled selected>Taken in Semester</option>
+              <option value="AY16/17 Semester 1">AY16/17 Semester 1</option>
+              <option value="AY16/17 Semester 2">AY16/17 Semester 2</option>
+              <option value="AY17/18 Semester 1">AY17/18 Semester 1</option>
+              <option value="AY17/18 Semester 2">AY17/18 Semester 2</option>
+            </select>
+          </div>
+
+          <div class="input-field col s3">
+            <input placeholder="Category of module (core, minor, UEM etc)" id="category_nus" type="text">
+            <label for="category_nus">Category</label>
+          </div>
+
+        </div>
+        
+        <button class="btn wave-effect wave-light submission" 
+        type="submit">Submit<i class="material-icons right">send</i></button>
+      </form>
+
+    </div>
+  </div>
+
+
+
+  <div class="position-relative translate">
+    <div class="container">
+
+        <form id="modcustom" class="col s12" onsubmit="saveModuleCustom()">
 
           <div class="row">
 
             <div class="input-field col s6">
-              <input placeholder="NUS Module Code" id="mod_code" type="text" class="validate" required="" aria-required="true">
-              <label for="mod_code">NUS Module Code</label>
+              <input placeholder="Custom Module Code" id="mod_code" type="text" class="validate" required="" aria-required="true">
+              <label for="mod_code">Custom Module Code</label>
             </div>
 
             <div class="input-field col s6">
-              <input placeholder="NUS Module Title" id="mod_title" type="text" class="validate" required="" aria-required="true">
-              <label for="mod_title">NUS Module Title</label>
+              <input placeholder="Custom Module Title" id="mod_title" type="text" class="validate" required="" aria-required="true">
+              <label for="mod_title">Custom Module Title</label>
             </div>
 
           </div>
 
           <div class="row">
 
-            <div class="input-field col s4">
-              <input placeholder="NUS Modular Credits" id="mod_mc" type="text" class="validate" required="" aria-required="true">
-              <label for="mod_mc">NUS Modular Credits</label>
+            <div class="input-field col s3">
+              <input placeholder="Custom Modular Credits" id="mod_mc" type="text" class="validate" required="" aria-required="true">
+              <label for="mod_mc">Custom Modular Credits</label>
             </div>
 
-            <div class="input-field col s4">
+            <div class="input-field col s3">
               <input placeholder="Grade of module" id="mod_grade" type="text" class="validate" required="" aria-required="true">
-              <label for="mod_grade">NUS Module Grade</label>
+              <label for="mod_grade">Custom Module Grade</label>
             </div>
 
-            <div class="input-field col s4">
+            <div class="input-field col s3">
               <select id="sem_taken" required="" aria-required="true">
                 <option value="" disabled selected>Taken in Semester</option>
                 <option value="AY16/17 Semester 1">AY16/17 Semester 1</option>
@@ -51,6 +114,11 @@
                 <option value="AY17/18 Semester 1">AY17/18 Semester 1</option>
                 <option value="AY17/18 Semester 2">AY17/18 Semester 2</option>
               </select>
+            </div>
+
+            <div class="input-field col s3">
+              <input placeholder="Category of module (core, minor, UEM etc)" id="category_custom" type="text">
+              <label for="category_custom">Category</label>
             </div>
 
           </div>
@@ -61,6 +129,7 @@
 
     </div>
   </div>
+
   <br>
 
   <div class="position-relative translate">
@@ -94,5 +163,6 @@
   </script>
   <script type ="text/javascript" src="{% static 'mainpage/helper.js' %}"> 
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.full.min.js"></script>
 
 {% endblock %} 
