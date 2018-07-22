@@ -88,7 +88,7 @@ function saveModuleCustom(){
 // Create box methods 
 function createBox_Sem(modules, year_sem){
   var table = document.createElement('table');
-  $(table).addClass('responsive-table striped round');
+  $(table).addClass('responsive-table tblclr round');
   $(table).attr('id', year_sem + 'tbl');
 
   var pos_rel = document.createElement('div');
@@ -123,7 +123,7 @@ function createBox_Sem(modules, year_sem){
     var firstcell = row.insertCell(-1);
     firstcell.className = "btn-cell";
     $(firstcell).append(
-    '<button class="btn wave-effect wave-light deletor_sem" type="button"><i class="material-icons">delete_forever</i> </button>');
+    '<button class="btn wave-effect wave-light deletor_sem grad-btn" type="button"><i class="material-icons">delete_forever</i> </button>');
     for (j = 0; j<modules[i].length; j++){
       var cell = row.insertCell(-1);
       cell.className = "cell-sem" + String(j);
@@ -136,7 +136,7 @@ function createBox_Sem(modules, year_sem){
 
 function createBox_Prefix(modules, prefix){
   var table = document.createElement('table');
-  $(table).addClass('responsive-table striped round');
+  $(table).addClass('responsive-table tblclr round');
   $(table).attr('id', prefix + 'tbl');
 
   var pos_rel = document.createElement('div');
@@ -171,7 +171,7 @@ function createBox_Prefix(modules, prefix){
     var firstcell = row.insertCell(-1);
     firstcell.className = "btn-cell";
     $(firstcell).append(
-    '<button class="btn wave-effect wave-light deletor_prefix" type="button"><i class="material-icons">delete_forever</i> </button>');
+    '<button class="btn wave-effect wave-light deletor_prefix grad-btn" type="button"><i class="material-icons">delete_forever</i> </button>');
     for (j = 0; j<modules[i].length; j++){
       var cell = row.insertCell(-1);
       cell.className = "cell-pre" + String(j);
@@ -433,12 +433,13 @@ function showNusForm(){
   var x = document.getElementsByClassName("nus-form");
   var y = document.getElementsByClassName("custom-form");
   for (i = 0; i<x.length; i++){
-    x[i].style.display = 'inline';
+    x[i].style.display = 'block';
   }
   for (j = 0; j<y.length; j++){
     y[j].style.display = 'none';
   }
 }
+
 
 function showCustomForm(){
   var x = document.getElementsByClassName("nus-form");
@@ -447,23 +448,24 @@ function showCustomForm(){
     x[i].style.display = 'none';
   }
   for (j = 0; j<y.length; j++){
-    y[j].style.display = 'inline';
+    y[j].style.display = 'block';
   }
 }
 
 //jQuery
 $(document).ready(function(){
 
-  $('select').formSelect();
-
   $('.tabs').tabs();
 
+  $('select').formSelect();
+
   $("select[required]").css({
-    display: "inline",
+    display: "inline-block",
     height: 0,
     padding: 0,
     width: 0
   });
+  
 
   validate();
   $('input').on('keyup', validate);
@@ -495,6 +497,7 @@ $(document).ready(function(){
     }
 
     $('#nus_all').select2({
+      placeholder: "Search NUS modules by module code or module title",
       data: ct_only
     })
 

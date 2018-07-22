@@ -6,6 +6,10 @@
   margin-left: 3.5%;
 }
 
+.tblclr{
+  background-color: white;
+}
+
 .btn-cell{
   width: 15%;
 }
@@ -46,3 +50,44 @@
 .custom-form{
   display: none;
 }
+
+.form-box{
+  border-radius: 5px;
+  background-color: white;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 0px;
+  padding-left: 15px;
+  margin-right: 20px;
+}
+
+.grad-btn{
+  background-color: rgb(238, 110, 115);
+}
+
+.grad-btn:hover{
+  background-color: rgb(238, 132, 132);
+}
+
+::placeholder {
+  color: #757575;
+}
+
+.grad-m{
+  margin-right: 15px;
+}
+
+.select2-selection{
+  height: 40px !important;
+}
+
+input[type=text] {
+    width: 100% !important;
+    padding: 12px 20px !important;
+    margin: 8px 0 !important;
+    display: inline-block !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    box-sizing: border-box !important;
+}
+

@@ -14,16 +14,16 @@
 <body onload="showModSem(); showModPrefix(); showOnlySem();">
   <br>
 
-  <div class="position-relative translate nus-form">
+  <div class="position-relative translate">
     <div class="container">
 
-      <form id="modnus" class="col s12" onsubmit="saveModuleNus()">
+      <form id="modnus" class="col s12 nus-form form-box" onsubmit="saveModuleNus()">
 
         <div class="row">
 
           <div class="input-field col s12">
-            <input placeholder="Search NUS modules by module code or title" id="nus_all" type="text" class="validate" required="" aria-required="true">
-            <label for="nus_all">NUS Module Code</label>
+            <input id="nus_all" type="search" class="validate" required="" aria-required="true">
+            <label for="nus_all"></label>
           </div>
 
         </div>
@@ -60,82 +60,104 @@
           </div>
 
           <div class="input-field col s4">
-            <input placeholder="Category of module (core, minor, UEM etc)" id="category_nus" type="text">
+            <input placeholder="Type in your own categories" id="category_nus" type="text">
             <label for="category_nus">Category</label>
           </div>
 
         </div>
         
-        <button class="btn wave-effect wave-light submission"
+        <button class="btn wave-effect wave-light submission grad-btn"
         type="submit">Add Module<i class="material-icons right">library_add</i></button>
+        <button class="btn wave-effect wave-light submission brown lighten-2 right grad-m" onclick="showCustomForm()">Custom Module Form<i class="material-icons right">assignment_ind</i></button>
       </form>
-
-      <button class="btn wave-effect wave-light submission" onclick="showCustomForm()" type="submit">Custom Module Form<i class="material-icons right">assignment_ind</i></button>
 
     </div>
   </div>
 
 
 
-  <div class="position-relative translate custom-form">
+  <div class="position-relative translate">
     <div class="container">
 
-        <form id="modcustom" class="col s12" onsubmit="saveModuleCustom()">
+      <form id="modcustom" class="col s10 custom-form form-box" onsubmit="saveModuleCustom()">
 
-          <div class="row">
+        <div class="row">
 
-            <div class="input-field col s6">
-              <input placeholder="Custom Module Code" id="mod_code" type="text" class="validate" required="" aria-required="true">
-              <label for="mod_code">Custom Module Code</label>
-            </div>
-
-            <div class="input-field col s6">
-              <input placeholder="Custom Module Title" id="mod_title" type="text" class="validate" required="" aria-required="true">
-              <label for="mod_title">Custom Module Title</label>
-            </div>
-
+          <div class="input-field col s6">
+            <input placeholder="Custom Module Code" id="mod_code" type="text" class="validate" required="" aria-required="true">
+            <label for="mod_code">Custom Module Code</label>
           </div>
 
-          <div class="row">
-
-            <div class="input-field col s3">
-              <input placeholder="Custom Modular Credits" id="mod_mc" type="text" class="validate" required="" aria-required="true">
-              <label for="mod_mc">Custom Modular Credits</label>
-            </div>
-
-            <div class="input-field col s3">
-              <input placeholder="Grade of module" id="mod_grade" type="text" class="validate" required="" aria-required="true">
-              <label for="mod_grade">Custom Module Grade</label>
-            </div>
-
-            <div class="input-field col s3">
-              <select id="sem_taken" required="" aria-required="true">
-                <option value="" disabled selected>Taken in Semester</option>
-                <option value="AY16/17 Semester 1">AY16/17 Semester 1</option>
-                <option value="AY16/17 Semester 2">AY16/17 Semester 2</option>
-                <option value="AY17/18 Semester 1">AY17/18 Semester 1</option>
-                <option value="AY17/18 Semester 2">AY17/18 Semester 2</option>
-              </select>
-            </div>
-
-            <div class="input-field col s3">
-              <input placeholder="Category of module (core, minor, UEM etc)" id="category_custom" type="text">
-              <label for="category_custom">Category</label>
-            </div>
-
+          <div class="input-field col s6">
+            <input placeholder="Custom Module Title" id="mod_title" type="text" class="validate" required="" aria-required="true">
+            <label for="mod_title">Custom Module Title</label>
           </div>
 
-          <button class="btn wave-effect wave-light submission" 
-          type="submit">Add Module<i class="material-icons right">library_add</i></button>
-        </form>
+        </div>
 
-        <button class="btn wave-effect wave-light submission" onclick="showNusForm()"
-        type="submit">NUS Module Form<i class="material-icons right">school</i></button>
+        <div class="row">
+
+          <div class="input-field col s3">
+            <select id="mod_grade" required="" aria-required="true">
+              <option value="" disabled selected>Grade</option>
+              <option value="A+">A+</option>
+              <option value="A">A</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B">B</option>
+              <option value="B-">B-</option>
+              <option value="C+">C+</option>
+              <option value="C">C</option>
+              <option value="D+">D+</option>
+              <option value="D">D</option>
+              <option value="F">F</option>
+              <option value="S">S</option>
+              <option value="U">U</option>
+            </select>
+          </div>
+
+          <div class="input-field col s3">
+            <select id="sem_taken" required="" aria-required="true">
+              <option value="" disabled selected>Taken in Semester</option>
+              <option value="AY16/17 Semester 1">AY16/17 Semester 1</option>
+              <option value="AY16/17 Semester 2">AY16/17 Semester 2</option>
+              <option value="AY17/18 Semester 1">AY17/18 Semester 1</option>
+              <option value="AY17/18 Semester 2">AY17/18 Semester 2</option>
+            </select>
+          </div>
+
+          <div class="input-field col s3">
+            <input placeholder="Custom Modular Credits" id="mod_mc" type="text" class="validate" required="" aria-required="true">
+            <label for="mod_mc">Custom Modular Credits</label>
+          </div>
+
+          <div class="input-field col s3">
+            <input placeholder="Type in your own categories" id="category_custom" type="text">
+            <label for="category_custom">Category</label>
+          </div>
+
+        </div>
+
+        <button class="btn wave-effect wave-light submission grad-btn" 
+        type="submit">Add Module<i class="material-icons right">library_add</i></button>
+        <button class="btn wave-effect wave-light submission brown lighten-2 right grad-m" onclick="showNusForm()">NUS Module Form<i class="material-icons right">school</i></button>
+      </form>
 
     </div>
   </div>
 
   <br>
+
+  <div class="position-relative translate">
+    <div class="container">
+      <button id="download-planner" class="waves-effect waves-light btn">
+        <i class="material-icons right">file_download</i> Download Planner
+      </button>
+      <button id="download-planner" class="waves-effect waves-light btn">
+        <i class="material-icons right">file_upload</i> Upload Planner
+      </button>
+    </div>
+  </div>
 
   <div class="position-relative translate">
     <div class="container">
