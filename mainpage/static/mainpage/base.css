@@ -1,5 +1,13 @@
+.brand-logo, ul li a {
+  color: #616161 !important;
+}
+
 body {
-  background-color: rgb(220,220,220);
+  background-color: rgba(15, 82, 186, 0.75);
+}
+
+.nav-wrapper, .sidenav {
+  background-color: #ffffff;
 }
 
 .sidenav {

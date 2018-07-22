@@ -15,6 +15,7 @@ th {
   color: white;
   text-align: center;
   vertical-align: top;
+  background-color: #676565;
 }
 
 table {
@@ -24,6 +25,10 @@ table {
 td {
   text-align: center;
   overflow: auto;
+}
+
+.mainpage-row, .modlist-row {
+  background-color: #ffffff;
 }
 
 #toast-container {

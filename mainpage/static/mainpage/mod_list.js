@@ -1,7 +1,7 @@
 function createContainer(pu_name, data){
 
   var table = document.createElement('table');
-  $(table).addClass('responsive-table striped');
+  $(table).addClass('responsive-table');
 
 
   var pos_rel = document.createElement('div');
@@ -25,7 +25,7 @@ function createContainer(pu_name, data){
 
   $(container).append(
     '<div class="pu-header" style="font-weight:bold">' + 
-      '<div class="card horizontal teal lighten-2">' +
+      '<div class="card horizontal deep-orange lighten-2">' +
         '<div class="card-stacked">' + 
           '<div class="card-content">' + 
           '<p>'+ pu_name + '</p>' +
@@ -39,9 +39,9 @@ function createContainer(pu_name, data){
 
   $(container).append('<br>');
   $(container).append(
-    '<button class="btn wave-effect wave-light selector" type="button">Select all<i class="material-icons right">select_all</i> </button>');
+    '<button class="btn wave-effect wave-light selector deep-orange lighten-2" type="button">Select all<i class="material-icons right">select_all</i> </button>');
   $(container).append(
-    '<button class="btn wave-effect wave-light deletor" type="button">Delete selected<i class="material-icons right">delete_forever</i> </button>');
+    '<button class="btn wave-effect wave-light deletor deep-orange lighten-2" type="button">Delete selected<i class="material-icons right">delete_forever</i> </button>');
 
   container.appendChild(table);
   pos_rel.appendChild(container);
