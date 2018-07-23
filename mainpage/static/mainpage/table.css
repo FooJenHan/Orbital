@@ -25,6 +25,7 @@ table {
 td {
   text-align: center;
   overflow: auto;
+  cursor: default;
 }
 
 .mainpage-row, .modlist-row {

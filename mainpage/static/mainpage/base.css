@@ -28,3 +28,9 @@ nav {
 .select2-container {
   width: inherit !important;
 }
+
+.hidden {
+  display: none;
+  height: 0;
+  width: 0;
+}

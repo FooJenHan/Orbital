@@ -44,7 +44,7 @@
             <th scope="col" class="NUS-Code-col">NUS Code</th>
             <th scope="col" class="NUS-Credits-col">NUS Credits</th>
             <th scope="col" class="PU-Name-col">PU Name</th>
-            <th scope="col" class="PU-Code-col">PU Code</th>
+            <th scope="col" class="PU-Code-col hidden">PU Code</th>
             <th scope="col" class="PU-Title-col">PU Title</th>
             <th scope="col" class="PU-Credits-col">PU Credits</th>
           </tr>
@@ -54,8 +54,9 @@
           onclick="selectAll()" id="select-all">
           Select all<i class="material-icons right">select_all</i>
         </button>
-        <button class="btn wave-effect wave-light deep-orange lighten-2" type="button"
-          onclick="saveSelected()" id="save-selected">
+        <button class="btn wave-effect wave-light deep-orange lighten-2 tooltipped"
+          data-position="right" data-tooltip="Saves selected mappings to Selected page"
+          type="button" onclick="saveSelected()" id="save-selected">
           Save selected<i class="material-icons right">save</i>
         </button>
 

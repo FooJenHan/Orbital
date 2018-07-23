@@ -40,7 +40,7 @@ function boxDeleteSelected(id){
       continue;
     }
     var temp = new Array;
-    for (var j=1; j<table.rows[i].cells.length; j++){
+    for (var j=1; j<table.rows[i].cells.length-1; j++){
       temp.push(table.rows[i].cells[j].textContent)
     }
 
@@ -76,6 +76,16 @@ function boxDeleteSelected(id){
   }
 }
 
+function copyPUCode(element){
+  var pu_code = element.parentNode.parentNode.childNodes[4].textContent;
+  var textArea = document.createElement("textarea");
+  textArea.value = pu_code;
+  document.body.appendChild(textArea);
+  textArea.select();
+  document.execCommand('copy');
+  document.body.removeChild(textArea);
+  M.toast({html: "Copied!", classes: 'alert-copy'});
+}
 
 $(document).ready(function(){
 
@@ -87,6 +97,10 @@ $(document).ready(function(){
   $('.deletor').click(function(){
     var id = $(this).parent().parent().attr('id');
     boxDeleteSelected(id);
+  });
+
+  $('.pu-code-btn').click(function(){
+    copyPUCode($(this).get(0));
   });
 
 });

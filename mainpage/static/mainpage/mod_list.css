@@ -55,11 +55,15 @@
   width: 545px;
 }
 
-.alert-modlist{
+.alert-modlist, .alert-copy {
   background-color: #37474f;
 }
 
-td[class="modal-trigger NUS-Code-col"] {
+.alert-copy {
+  transform: translate(0, 150px);
+}
+
+td[class="tooltipped modal-trigger NUS-Code-col"] {
   text-decoration: underline;
   color: rgba(15, 82, 186, 0.75);
   cursor: pointer;
@@ -127,18 +131,18 @@ a {
   margin-left: 5em;
 }
 
-.button-pretext {
+.download-pretext, .upload-pretext {
   font-size: 18px;
   color: #212121;
   display: inline-block;
 }
 
-#download-button {
-  transform: translate(56px, 0);
+.upload-pretext {
+  margin-left: 50px;
 }
 
-#upload-button {
-  transform: translate(14px, 0);
+#download-button, #upload-button  {
+  transform: translate(16px, 0);
 }
 
 #upload-field {
@@ -146,4 +150,17 @@ a {
   visibility: hidden;
   height: 0;
   width: 0;
+}
+
+.material-tooltip span {
+  color: #ffffff;
+}
+
+.material-tooltip .backdrop {
+  background-color: #212121;
+}
+
+.pu-code-btn {
+  padding-left: 10px;
+  padding-right: 10px;
 }

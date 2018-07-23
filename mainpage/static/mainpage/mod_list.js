@@ -56,11 +56,12 @@ function createContainer(pu_name, data){
   var arr = ['Select', 'NUS Code', 'NUS Credits', 'PU Name', 'PU Code',
     'PU Title',  'PU Credits'];
   var classes = ['Select-col', 'NUS-Code-col', 'NUS-Credits-col', 'PU-Name-col',
-   'PU-Code-col',  'PU-Title-col',  'PU-Credits-col'];
+   'PU-Code-col hidden',  'PU-Title-col',  'PU-Credits-col'];
    
   for (var i = 0; i < arr.length; i++) {
     $(thead_tr).append('<th scope="col" class="' + classes[i] + '">' + arr[i] + '</th>');
   }
+  $(thead_tr).append('<th scope="col" class="PU-code-col">' + arr[4] + '</th>');
 
   $(table).append('<tbody></tbody>')
   var tbody = table.children[1];
@@ -86,7 +87,9 @@ function createContainer(pu_name, data){
 
     var cell = row.insertCell(-1);
     cell.textContent = data[i][0];
-    cell.className = "modal-trigger " + classes[1];
+    cell.className = "tooltipped modal-trigger " + classes[1];
+    cell.setAttribute("data-position", "right");
+    cell.setAttribute("data-tooltip", "More info about " + data[i][0]);
     var link = '#modal' + pu_name + data[i][3];
     cell.setAttribute("href", link);
     createModal(link, data[i][0]);
@@ -96,6 +99,16 @@ function createContainer(pu_name, data){
       cell.className = classes[j+1];
       cell.textContent = data[i][j];
     }
+
+    var last = row.insertCell(-1);
+    last.className = 'PU-Code-col';
+    var btn = document.createElement('a');
+    btn.className = "btn pu-code-btn wave-effect wave-light deep-orange lighten-2"
+      + " tooltipped";
+    btn.setAttribute('data-position', 'right');
+    btn.setAttribute("data-tooltip", "Copy " + data[i][3] + " to Clipboard");
+    btn.textContent = "Copy";
+    last.appendChild(btn);
   }
 
 }
@@ -283,7 +296,7 @@ $(document).ready(function(){
        M.toast({html: 
         "You have no modules selected. Go to search to " +
         "select some modules, or upload from a previously saved file.",
-        classes: 'alert'});
+        classes: 'alert-modlist'});
        return;
     }
 
