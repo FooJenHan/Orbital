@@ -13,7 +13,7 @@
 
 .describe {
   font-size: 18px;
-  font-color: #212121;
+  color: #212121;
 }
 
 .table-container {
@@ -109,7 +109,7 @@ a {
 
 .button-pretext {
   font-size: 20px;
-  font-color: #212121;
+  color: #212121;
   display: inline-block;
 }
 

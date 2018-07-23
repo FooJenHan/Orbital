@@ -1,36 +1,69 @@
-//helper function: grade --> CAP point for module
-function gradeValue(letter){
-  if (letter=='A+' || letter=='A'){
-    return '5'
-  }else if (letter=='A-'){
-    return '4.5'
-  }else if (letter=='B+'){
-    return '4'
-  }else if (letter=='B'){
-    return '3.5'
-  }else if (letter=='B-'){
-    return '3'
-  }else if (letter=='C+'){
-    return '2.5'
-  }else if (letter=='C'){
-    return '2'
-  }else if (letter=='D+'){
-    return '1.5'
-  }else if (letter=='D'){
-    return '1'
-  }else if (letter=='F'){
-    return '0'
-  }else{
-    return 'NA'
+// Make sure all form fields are filled, submit disabled otherwise
+function validate() {
+  var inputsWithValues = 0;
+  
+  // get all input fields except for type='submit'
+  var myInputs = $("input:not([type='submit'])");
+
+  myInputs.each(function(e) {
+    // if it has a value, increment the counter
+    if ($(this).val()) {
+      inputsWithValues += 1;
+    }
+  });
+
+  if (inputsWithValues == myInputs.length) {
+    $("input[type=submit]").prop("disabled", false);
+  } else {
+    $("input[type=submit]").prop("disabled", true);
   }
 }
 
-function saveModule(){
+
+function saveModuleNus(){
+  var ay_sem = document.getElementById("sem_taken_nus").value;
+  var grade = document.getElementById("grade_nus").value;
+  var category = document.getElementById("category_nus").value;
+  var tgt = document.getElementById("nus_all").value;
+  var info_array = tgt.split(" ");
+  var code = info_array.shift();
+  var cred = info_array.pop();
+  var credits = cred.charAt(0);
+
+  if (info_array.length == 1){
+    var title = info_array[0];
+  }else{
+    var title = '';
+    for (var i=0; i<info_array.length; i++){
+      title = title + ' ' + info_array[i];
+    }
+  }
+
+  var temp = [ay_sem, code, title, credits, grade];
+  var stored = localStorage.getItem('stored_modules')
+
+  if (stored == "undefined" || stored == null){
+    var holder = [];
+    holder.push(temp); 
+    var saved = JSON.stringify(holder);
+    localStorage.setItem('stored_modules', saved);
+  }else{
+    var saved_sorted = JSON.parse(stored);
+    saved_sorted.push(temp);
+    var to_save = JSON.stringify(saved_sorted);
+    localStorage.setItem('stored_modules', to_save);
+  }
+  
+}
+
+
+function saveModuleCustom(){
   var ay_sem = document.getElementById("sem_taken").value;
   var code = document.getElementById("mod_code").value;
   var title = document.getElementById("mod_title").value;
   var credits = document.getElementById("mod_mc").value;
   var grade = document.getElementById("mod_grade").value;
+  var category = document.getElementById("category_custom").value;
 
   var temp = [ay_sem, code, title, credits, grade];
   var stored = localStorage.getItem('stored_modules')
@@ -51,10 +84,12 @@ function saveModule(){
 
 
 
+
 // Create box methods 
 function createBox_Sem(modules, year_sem){
   var table = document.createElement('table');
-  $(table).addClass('responsive-table striped round');
+  $(table).addClass('responsive-table tblclr round');
+  $(table).attr('id', year_sem + 'tbl');
 
   var pos_rel = document.createElement('div');
   $(pos_rel).addClass('position-relative');
@@ -88,7 +123,7 @@ function createBox_Sem(modules, year_sem){
     var firstcell = row.insertCell(-1);
     firstcell.className = "btn-cell";
     $(firstcell).append(
-    '<button class="btn wave-effect wave-light deletor" type="button"><i class="material-icons">delete_forever</i> </button>');
+    '<button class="btn wave-effect wave-light deletor_sem grad-btn" type="button"><i class="material-icons">delete_forever</i> </button>');
     for (j = 0; j<modules[i].length; j++){
       var cell = row.insertCell(-1);
       cell.className = "cell-sem" + String(j);
@@ -101,7 +136,8 @@ function createBox_Sem(modules, year_sem){
 
 function createBox_Prefix(modules, prefix){
   var table = document.createElement('table');
-  $(table).addClass('responsive-table striped round');
+  $(table).addClass('responsive-table tblclr round');
+  $(table).attr('id', prefix + 'tbl');
 
   var pos_rel = document.createElement('div');
   $(pos_rel).addClass('position-relative');
@@ -135,7 +171,7 @@ function createBox_Prefix(modules, prefix){
     var firstcell = row.insertCell(-1);
     firstcell.className = "btn-cell";
     $(firstcell).append(
-    '<button class="btn wave-effect wave-light deletor" type="button"><i class="material-icons">delete_forever</i> </button>');
+    '<button class="btn wave-effect wave-light deletor_prefix grad-btn" type="button"><i class="material-icons">delete_forever</i> </button>');
     for (j = 0; j<modules[i].length; j++){
       var cell = row.insertCell(-1);
       cell.className = "cell-pre" + String(j);
@@ -241,29 +277,6 @@ function showModPrefix(){
 }
 
 
-
-// Make sure all form fields are filled, submit disabled otherwise
-function validate() {
-  var inputsWithValues = 0;
-  
-  // get all input fields except for type='submit'
-  var myInputs = $("input:not([type='submit'])");
-
-  myInputs.each(function(e) {
-    // if it has a value, increment the counter
-    if ($(this).val()) {
-      inputsWithValues += 1;
-    }
-  });
-
-  if (inputsWithValues == myInputs.length) {
-    $("input[type=submit]").prop("disabled", false);
-  } else {
-    $("input[type=submit]").prop("disabled", true);
-  }
-}
-
-
 // Function to control view by AYSem or Prefix
 function showOnlySem(){
   var x = document.getElementsByClassName("target-sem");
@@ -288,15 +301,16 @@ function showOnlyPrefix(){
   }
 }
 
-function deleteMod(id){
-  var row = id.parentNode;
+
+function deleteMod_Sem(id){
+  var row = id.parentNode.parentNode;
+  var row_num = id.parentNode.parentNode.parentNode.rows.length;
   var to_remove = [];
-  var caption = id.parentNode.parentNode.parentNode.caption.textContent;
-  var indicator = /\d/.test(caption);
-  if (indicator == true){
-    to_remove.push(caption);
-  }
-  for (var i=0; i<row.cells.length; i++){
+  var caption = id.parentNode.parentNode.parentNode.parentNode.caption.textContent;
+
+  to_remove.push(caption);
+
+  for (var i=1; i<row.cells.length; i++){
     var target = row.cells[i].textContent;
     to_remove.push(target);
   }
@@ -314,30 +328,179 @@ function deleteMod(id){
       }
     }
   }
+  
+  // deletes the prefix table element
+  var prefix = to_remove[1];
+  prefix = prefix.split(/[^A-Za-z]/);
+  var prefix_id = prefix[0] + 'tbl';
+  var pre_tbl = document.getElementById(prefix_id).childNodes[1];
+  var pre_rows = pre_tbl.childNodes;
+  for (var n=0; n<pre_rows.length; n++){
+    var curr_row = pre_rows[n];
+    var flag = true;
+    for (var m=1; m<curr_row.cells.length; m++){
+      if (curr_row.cells[m].textContent == to_remove[m-1]){
+        continue;
+      }else{
+        flag = false;
+      }
+    }
+    if (flag == true){
+      if (pre_rows.length == 1){
+        var del_div = curr_row.parentNode.parentNode.parentNode.parentNode;
+        del_div.parentNode.removeChild(del_div);
+      }else{
+        curr_row.parentNode.removeChild(curr_row);
+      }
+    }
+  }
+
   var to_save = JSON.stringify(update);
   localStorage.setItem('stored_modules', to_save);
-  window.location.reload();
+  if (row_num == 1){
+    var table_div = row.parentNode.parentNode.parentNode.parentNode;
+    table_div.parentNode.removeChild(table_div);
+  }else{
+    row.parentNode.removeChild(row);
+  }
+
+}
+
+
+function deleteMod_Prefix(id){
+  var row = id.parentNode.parentNode;
+  var row_num = id.parentNode.parentNode.parentNode.rows.length;
+  var to_remove = [];
+  var caption = id.parentNode.parentNode.parentNode.parentNode.caption.textContent;
+
+  for (var i=1; i<row.cells.length; i++){
+    var target = row.cells[i].textContent;
+    to_remove.push(target);
+  }
+  var str_modules = localStorage.getItem('stored_modules');
+  var modules = JSON.parse(str_modules);
+  var update = [];
+  for (j=0; j<modules.length; j++){
+    var curr = modules[j];
+    for (k=0; k<curr.length; k++){
+      if (curr[k] == to_remove[k]){
+        continue;
+      }else{
+        update.push(curr);
+        break;
+      }
+    }
+  }
+
+  // deletes the semester table element
+  var sem = to_remove[0];
+  var sem_id = sem + 'tbl';
+  var sem_tbl = document.getElementById(sem_id).childNodes[1];
+  var sem_rows = sem_tbl.childNodes;
+  for (var n=0; n<sem_rows.length; n++){
+    var curr_row = sem_rows[n];
+    var flag = true;
+    for (var m=1; m<curr_row.cells.length; m++){
+      if (curr_row.cells[m].textContent == to_remove[m]){
+        continue;
+      }else{
+        flag = false;
+      }
+    }
+    if (flag == true){
+      if (sem_rows.length == 1){
+        var del_div = curr_row.parentNode.parentNode.parentNode.parentNode;
+        del_div.parentNode.removeChild(del_div);
+      }else{
+        curr_row.parentNode.removeChild(curr_row);
+      }
+    }
+  }
+
+  var to_save = JSON.stringify(update);
+  localStorage.setItem('stored_modules', to_save);
+  if (row_num == 1){
+    var table_div = row.parentNode.parentNode.parentNode.parentNode;
+    table_div.parentNode.removeChild(table_div);
+  }else{
+    row.parentNode.removeChild(row);
+  }
+
+}
+
+
+function showNusForm(){
+  var x = document.getElementsByClassName("nus-form");
+  var y = document.getElementsByClassName("custom-form");
+  for (i = 0; i<x.length; i++){
+    x[i].style.display = 'block';
+  }
+  for (j = 0; j<y.length; j++){
+    y[j].style.display = 'none';
+  }
+}
+
+
+function showCustomForm(){
+  var x = document.getElementsByClassName("nus-form");
+  var y = document.getElementsByClassName("custom-form");
+  for (i = 0; i<x.length; i++){
+    x[i].style.display = 'none';
+  }
+  for (j = 0; j<y.length; j++){
+    y[j].style.display = 'block';
+  }
 }
 
 //jQuery
 $(document).ready(function(){
 
-  $('select').formSelect();
-
   $('.tabs').tabs();
 
+  $('select').formSelect();
+
   $("select[required]").css({
-    display: "inline",
+    display: "inline-block",
     height: 0,
     padding: 0,
     width: 0
   });
+  
 
   validate();
   $('input').on('keyup', validate);
 
-  $('.deletor').click(function(){
-    deleteMod(this);
+  $('.deletor_sem').click(function(){
+    deleteMod_Sem(this);
+  });
+
+  $('.deletor_prefix').click(function(){
+    deleteMod_Prefix(this);
+  });
+
+
+  $.getJSON('https://api.nusmods.com/2018-2019/moduleInformation.json', function(nusmods){
+    var info = [];
+    for (i=0; i<nusmods.length; i++){
+      var temp = [];
+      var curr = nusmods[i];
+      var ct_combined = curr["ModuleCode"] + ' ' + curr["ModuleTitle"] + ' ' + curr["ModuleCredit"] + 'MCs';
+      var mc = curr["ModuleCredit"];
+      temp.push(ct_combined);
+      temp.push(mc);
+      info.push(temp);
+    }
+    var ct_only = [];
+    for (j=0; j<info.length; j++){
+      var ct = info[j][0];
+      ct_only.push(ct);
+    }
+
+    $('#nus_all').select2({
+      placeholder: "Search NUS modules by module code or module title",
+      data: ct_only
+    })
+
   });
 
 
