@@ -4,7 +4,21 @@
 
 .shift{
   margin-left: 2%;
+}
 
+.header-box{
+  border-radius: 5px;
+  background-color: white;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 0px;
+  padding-left: 15px;
+  margin-right: 20px;
+}
+
+#divider {
+  width: inherit;
+  transform: translate(-10px,0);
 }
 
 .modlist-row {
@@ -43,6 +57,11 @@
 
 .alert-modlist{
   background-color: #37474f;
+}
+
+td[class="modal-trigger NUS-Code-col"] {
+  text-decoration: underline;
+  color: rgba(15, 82, 186, 0.75);
 }
 
 .tree-entry {
@@ -108,7 +127,7 @@ a {
 }
 
 .button-pretext {
-  font-size: 20px;
+  font-size: 18px;
   color: #212121;
   display: inline-block;
 }
@@ -118,7 +137,7 @@ a {
 }
 
 #upload-button {
-  transform: translate(10px, 0);
+  transform: translate(14px, 0);
 }
 
 #upload-field {
