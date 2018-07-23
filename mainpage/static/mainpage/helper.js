@@ -20,3 +20,21 @@ function checkContains(matrix, arr){
   }
   return false;
 }
+
+// Function to help sort the nested 2D Arrays
+function schoolNUSCodeSort(a,b){
+  if (a[2] < b[2]){
+    return -1;
+  }
+  else if (a[2] == b[2]){
+    if (a[0] <= b[0]){
+      return -1;
+    }
+    else{
+      return 1;
+    }
+  }
+  else{
+    return 1;
+  }
+}

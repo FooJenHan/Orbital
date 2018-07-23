@@ -138,22 +138,7 @@ function getData(){
     data = JSON.parse(strData);
   }
 
-  data.sort(function(a,b){
-    if (a[2] < b[2]){
-      return -1;
-    }
-    else if (a[2] == b[2]){
-      if (a[0] <= b[0]){
-        return -1;
-      }
-      else{
-        return 1;
-      }
-    }
-    else{
-      return 1;
-    }
-  });
+  data.sort(schoolNUSCodeSort);
 
   var id = data[0][2];
   var curr = [];
@@ -292,6 +277,7 @@ $(document).ready(function(){
   $('#download-button').click(function(){
     var data = localStorage.getItem('selected_mappings');
     var arr = JSON.parse(data);
+    arr.sort(schoolNUSCodeSort);
     if (!arr || arr.length == 0){
        M.toast({html: 
         "You have no modules selected. Go to search to " +
