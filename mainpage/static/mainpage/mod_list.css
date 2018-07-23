@@ -62,6 +62,7 @@
 td[class="modal-trigger NUS-Code-col"] {
   text-decoration: underline;
   color: rgba(15, 82, 186, 0.75);
+  cursor: pointer;
 }
 
 .tree-entry {
