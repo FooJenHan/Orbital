@@ -23,7 +23,7 @@
         <div class="row">
 
           <div class="input-field col s12">
-            <input id="nus_all" type="search" class="validate" required="" aria-required="true">
+            <input id="nus_all" class="validate" required="" aria-required="true">
             <label for="nus_all"></label>
           </div>
 
@@ -151,12 +151,13 @@
 
   <div class="position-relative translate">
     <div class="container">
-      <button id="download-planner" class="waves-effect waves-light btn">
+      <a id="download-planner" class="waves-effect waves-light btn">
         <i class="material-icons right">file_download</i> Download Planner
-      </button>
-      <button id="download-planner" class="waves-effect waves-light btn">
+      </a>
+      <input id="upload-target" type="file" name="csvplanner-upload">
+      <a id="upload-planner" class="waves-effect waves-light btn">
         <i class="material-icons right">file_upload</i> Upload Planner
-      </button>
+      </a>
     </div>
   </div>
 
@@ -193,5 +194,6 @@
   <script type ="text/javascript" src="{% static 'mainpage/helper.js' %}"> 
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.9/jquery.csv.min.js"></script>
 
 {% endblock %} 

@@ -19,6 +19,19 @@ function validate() {
   }
 }
 
+//helper function to sort localstorage
+ function CompareSem(a, b) {
+   if (a[0] < b[0]) return -1;
+   if (a[0] > b[0]) return 1;
+   return 0;
+ }
+
+function CompareModCode(a, b) {
+   if (a[1] < b[1]) return -1;
+   if (a[1] > b[1]) return 1;
+   return 0;
+ }
+// end of helper function
 
 function saveModuleNus(){
   var ay_sem = document.getElementById("sem_taken_nus").value;
@@ -50,6 +63,8 @@ function saveModuleNus(){
   }else{
     var saved_sorted = JSON.parse(stored);
     saved_sorted.push(temp);
+    saved_sorted = saved_sorted.sort(CompareModCode);
+    saved_sorted = saved_sorted.sort(CompareSem);
     var to_save = JSON.stringify(saved_sorted);
     localStorage.setItem('stored_modules', to_save);
   }
@@ -452,6 +467,84 @@ function showCustomForm(){
   }
 }
 
+
+function csvUpload(){
+
+  document.getElementById('upload-target').addEventListener('change', upload, false);
+
+  function browserSupportFileUpload() {
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+      return true;
+    }
+    return false;
+  }
+
+  function upload(evt) {
+    if (!browserSupportFileUpload()) {
+      alert('We do not support file uploads for your browser.');
+      return;
+    }
+
+    var data = null;
+    var file = evt.target.files[0];
+    var reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function(event) {
+      var csvData = event.target.result;
+      try {
+        data = $.csv.toArrays(csvData);
+      }
+      catch(err) {
+        alert('Is not a CSV file');
+        return;
+      }
+      if (!data || data.length == 0){
+        M.toast({html: "There is no data to import!", classes: 'alert-modlist'});
+        return;
+      }
+      data.shift();
+      var to_add = [];
+      var sem;
+      for (i=0; i<data.length; i++){
+        var curr = data[i];
+        if (curr[0].includes('Semester') == true){
+          sem = curr[0];
+          continue;
+        }
+        if (curr[0] == ''){
+          continue;
+        }
+        var temp = [];
+        temp.push(sem);
+        for (j=0; j<curr.length; j++){
+          if (curr[j] == ''){
+            continue;
+          }
+          temp.push(curr[j]);
+        }
+        to_add.push(temp);
+      }
+      var stored = localStorage.getItem('stored_modules');
+      if (stored == "undefined" || stored == null){
+        var csv_only = JSON.stringify(to_add);
+        localStorage.setItem('stored_modules', csv_only);
+      }
+      else{
+        var stored_arr = JSON.parse(stored);
+        for (var k=0; k<to_add.length; k++){
+          if (checkContains(stored_arr, to_add[k]) == false){
+            stored_arr.push(to_add[k]);
+          }
+        }
+        var comb_data = JSON.stringify(stored_arr);
+        localStorage.setItem('stored_modules', comb_data);
+      }
+      window.location.reload();
+    };
+  }
+
+}
+
 //jQuery
 $(document).ready(function(){
 
@@ -465,8 +558,11 @@ $(document).ready(function(){
     padding: 0,
     width: 0
   });
-  
 
+  $('#nus_all').on("select2:open", function () {
+    $(".select2-search__field").attr("type","text")
+  });
+  
   validate();
   $('input').on('keyup', validate);
 
@@ -498,10 +594,53 @@ $(document).ready(function(){
 
     $('#nus_all').select2({
       placeholder: "Search NUS modules by module code or module title",
-      data: ct_only
+      data: ct_only,
     })
 
   });
+ 
 
+  $('#download-planner').click(function(){
+    var data = localStorage.getItem('stored_modules');
+    var arr = JSON.parse(data);
+    if (!arr || arr.length == 0){
+       alert("no modules");
+    }else{
+      var csvPlanner = "Module Code,Module Title,MCs,Grade";
+      csvPlanner += "\n\n";
+      var aysem = [];
+      for (i=0; i<arr.length; i++){
+        var curr = arr[i][0];
+        if (aysem.includes(curr)){
+          continue;
+        }else{
+          aysem.push(curr);
+        }
+      }
+      for (j=0; j<aysem.length; j++){
+        csvPlanner += aysem[j] + '\n';
+        for (k=0; k<arr.length; k++){
+          if (arr[k][0] == aysem[j]){
+            for (n=1; n<arr[k].length; n++){
+              csvPlanner += arr[k][n] + ',';
+            }
+            csvPlanner += '\n';
+          }
+        }
+        csvPlanner += '\n';
+      }
+      var content = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvPlanner);
+      $(this).attr("href", content).attr("download", "planner.csv"); 
+    }
+
+  });
+
+  $('#upload-planner').click();
+
+  $('#upload-planner').click(function(){
+    $('#upload-target').click();
+  });
+
+  csvUpload();
 
 });
