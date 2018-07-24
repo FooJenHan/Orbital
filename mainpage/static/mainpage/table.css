@@ -5,6 +5,11 @@ tbody {
   position: relative;
 }
 
+#tabledata {
+  overflow: none !important;
+  height: 100% !important;
+}
+
 thead, tbody tr {
   display: table;
   width: 100%;

@@ -59,14 +59,16 @@ function selectAll() {
   var selected = false;
 
   for (i = 0; i < checkboxes.length; i++){
-    if (cond && table.rows[i+1].classList.contains('hidden') == ""){
+    if (cond && (table.rows[i+1].style['display'] == '' ||
+      table.rows[i+1].style['display'] == 'table')){
       checkboxes[i].checked = true;
       selected = true;
     }
-    else if (!cond && table.rows[i+1].classList.contains('hidden') == ""){
+    else if (!cond && (table.rows[i+1].style['display'] == '' ||
+      table.rows[i+1].style['display'] == 'table')){
       checkboxes[i].checked = false;
     }
-    else{
+    else {
       continue;
     }
   }
@@ -78,7 +80,40 @@ function selectAll() {
     document.getElementById('select-all').innerHTML 
       = 'Select all<i class="material-icons right">select_all</i>';
   }
+}
 
+function pagination(){
+  $('#nav').remove();
+  $('#maintable').after('<div id="nav"><ul class="pagination"></div>');
+  var rowsShown = 6;
+  var rowsTotal = $('#maintable tbody tr').length;
+  var numPages = rowsTotal/rowsShown;
+
+  $('#nav ul').append(
+    '<li><a id="left-arrow" href="#!"><i class="material-icons">chevron_left</i></a></li>');
+  for(i = 0;i < numPages;i++) {
+      var pageNum = i + 1;
+      $('#nav ul').append(
+        '<li><a class="pages" href="#" rel="'+ i +'">' + pageNum +  '</a></li>');
+  }
+  $('#nav ul').append(
+    '<li><a id="right-arrow"  href="#!"><i class="material-icons">chevron_right</i></a></li>');
+
+  $('#maintable tbody tr').hide();
+  $('#maintable tbody tr').slice(0, rowsShown).show();
+  if (rowsTotal != 0) {
+    $('#nav li:nth-child(2) a').addClass('active');
+  }
+
+  $('#nav li .pages').bind('click', function(){
+    $('#nav li .pages').removeClass('active');
+    $(this).addClass('active');
+    var currPage = $(this).attr('rel');
+    var startItem = currPage * rowsShown;
+    var endItem = startItem + rowsShown;
+    $('#maintable tbody tr').css('opacity','0.0').hide().slice(startItem, endItem).
+    css('display','table').animate({opacity:1}, 300);
+  });
 }
 
 $(document).ready(function() {
@@ -96,5 +131,26 @@ $(document).ready(function() {
   $($('.select2-selection')[1]).attr('id', 'prefix-pillbox')
 
   new Tablesort(document.getElementsByClassName('responsive-table')[0]);
+
+  Intercooler.ready(function(elt){
+    pagination();
+
+    $('#right-arrow').click(function(){
+      var curr = $('#nav li .active');
+      if (curr.parent().next().children(':first-child').attr('id')
+        != "right-arrow"){
+        curr.parent().next().children(':first-child').click();
+      }
+    });
+
+    $('#left-arrow').click(function(){
+      var curr = $('#nav li .active');
+      if (curr.parent().prev().children(':first-child').attr('id')
+        != "left-arrow"){
+        curr.parent().prev().children(':first-child').click();
+      }
+    });
+
+  });
 
 });

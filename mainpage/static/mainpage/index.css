@@ -38,3 +38,23 @@
 input {
   text-indent: 10px;
 }
+
+#nav, .pagination li a {
+  background-color: #ffffff;
+}
+
+.pagination {
+  text-align: center;
+}
+
+.pagination li .active {
+  background-color: #ff8a65;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #cfd8dc;
+}
+
+#right-arrow, #left-arrow {
+  color: #212121;
+}
