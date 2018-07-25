@@ -164,3 +164,11 @@ a {
   padding-left: 10px;
   padding-right: 10px;
 }
+
+.PU-name-col {
+  width: 25% !important;
+}
+
+.PU-code-col {
+  width: 10% !important;
+}

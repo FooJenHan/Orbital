@@ -24,7 +24,6 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'mainpage/index.css' %}" type="text/css">
 <link rel="stylesheet" href="{% static 'mainpage/table.css' %}" type="text/css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
 <body>
   <br>
@@ -44,7 +43,7 @@
             <th scope="col" class="NUS-Code-col">NUS Code</th>
             <th scope="col" class="NUS-Credits-col">NUS Credits</th>
             <th scope="col" class="PU-Name-col">PU Name</th>
-            <th scope="col" class="PU-Code-col hidden">PU Code</th>
+            <th scope="col" class="PU-Code-col">PU Code</th>
             <th scope="col" class="PU-Title-col">PU Title</th>
             <th scope="col" class="PU-Credits-col">PU Credits</th>
           </tr>
@@ -55,7 +54,8 @@
           Select all<i class="material-icons right">select_all</i>
         </button>
         <button class="btn wave-effect wave-light deep-orange lighten-2 tooltipped"
-          data-position="right" data-tooltip="Saves selected mappings to Selected page"
+          data-position="right" 
+          data-tooltip="Saves selected mappings to <i>Selected</i>"
           type="button" onclick="saveSelected()" id="save-selected">
           Save selected<i class="material-icons right">save</i>
         </button>
@@ -81,6 +81,5 @@
   <script type ="text/javascript" src="{% static 'mainpage/helper.js' %}">
   </script>
   <script src="https://intercoolerreleases-leaddynocom.netdna-ssl.com/intercooler-1.1.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 {% endblock %} 

@@ -277,7 +277,6 @@ $(document).ready(function(){
   $('#download-button').click(function(){
     var data = localStorage.getItem('selected_mappings');
     var arr = JSON.parse(data);
-    arr.sort(schoolNUSCodeSort);
     if (!arr || arr.length == 0){
        M.toast({html: 
         "You have no modules selected. Go to search to " +
@@ -285,7 +284,7 @@ $(document).ready(function(){
         classes: 'alert-modlist'});
        return;
     }
-
+    arr.sort(schoolNUSCodeSort);
     var compositeCSV = "NUS Code,NUS Credits,PU Name,PU Code,PU Title,PU Credits";
     var pu_name;
     for (var i = 0; i < arr.length; i++) {

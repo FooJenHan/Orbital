@@ -132,6 +132,10 @@ $(document).ready(function() {
 
   new Tablesort(document.getElementsByClassName('responsive-table')[0]);
 
+  $('.tooltipped').tooltip({
+   html: "Saves selected mappings to <i>Selected</i>"
+  });
+
   Intercooler.ready(function(elt){
     pagination();
 
