@@ -1,8 +1,11 @@
 # NUS Module Mappings
 
 #### TeamFAC
-*Enzio Kam Hai Hong*
-*Foo Jen Han*
+##### Team members:
+
+1) *Enzio Kam Hai Hong*
+
+2) *Foo Jen Han*
 
 *Proposed Level of Achievement: **Apollo 11***
 
@@ -29,9 +32,9 @@ On top of *HTML*, *CSS*,  and *JavaScript* (including *JQuery*), other dependenc
 
 Python dependencies can be found in the repository's [Pipfile](https://github.com/EnzioKam/Orbital/blob/master/Pipfile).
 
-## Core Features
+# Core Features
 
-Project can be found [here](https://nusmm.herokuapp.com/).
+*Project can be found [here](https://nusmm.herokuapp.com/)*.
 
 #### 1) Search function to get a list of modules that can be mapped to NUS
 
@@ -55,7 +58,7 @@ For the Admin Panel, we make use of *Django*’s default Admin Panel provided, a
 
 We further extended this by implementing Comma Separated Values (CSV) file importing to import the data. This will allow for easier mass updating of new mapping entries by admin and staff users before the start of each SEP application period. This was done by implementing the import_csv method in the custom ModelAdmin for our data model in *Django*.
 
-## Additional (edge) Features
+# Additional Features
 
 #### 1) Graduation Planner
  
@@ -69,7 +72,7 @@ A tab allows users to choose how added modules are displayed; by grouping under 
  
 On the *Selected* page that stores module mappings that have been selected on the mainpage, we included buttons to download selected mappings as CSV files and upload previously downloaded CSV files. Upon upload, all mappings will be rendered on screen, similar to CSV features of graduation planner as mentioned previously.
 
-For each row in the tables displayed, a click on the NUS module code opens up a CSS Materialise Modal, showing the module code, the module codes of it's pre-requisites on the right, and the module codes of the modules it unlocks on the left. The data is obtained from *NUSMods API*.
+For each row in the tables displayed, a click on the NUS module code opens up a *Materialise.css* Modal, showing the module code, the module codes of it's pre-requisites on the right, and the module codes of the modules it unlocks on the left. Clicking on any module code in the modal will direct the user to that module's corresponding *NUSMods* webpage, if it is available. The module data is obtained from *NUSMods API*.
 
 #### 3)  UI
 
@@ -79,7 +82,7 @@ For the main page, the original two search boxes have been replaced with only on
 
 For the *Selected* page, we include a description of what the page is used for and what users can do in that page. The card containing the PU name for each table now also includes the sum of module credits for both NUS modules and PU modules for the modules selected for that particular PU. To reduce clutter for the tables in Selected, PU codes in the table and now replaced by a button for each row, that when clicked on will copy the relevant PU code into the clipboard.
 
-## Problems encountered
+# Problems encountered
 
 #### 1) Data format
 
