@@ -91,3 +91,13 @@ input[type=text] {
     box-sizing: border-box !important;
 }
 
+#upload-target{
+  display: inline-block;
+  visibility: hidden;
+  height: 0;
+  width: 0;
+}
+
+.select2-search__field{
+  outline: none;
+}
