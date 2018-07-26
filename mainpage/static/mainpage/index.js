@@ -90,6 +90,10 @@ function pagination(){
   var numPages = rowsTotal/rowsShown;
 
   $('#nav ul').append(
+    '<li><a id="first-btn" href="#!"><i class="material-icons">first_page</i></a></li>');
+  $('#nav ul').append(
+    '<li><a id="skip-prev" href="#!"><i class="material-icons">skip_previous</i></a></li>');
+  $('#nav ul').append(
     '<li><a id="left-arrow" href="#!"><i class="material-icons">chevron_left</i></a></li>');
   for(i = 0;i < numPages;i++) {
       var pageNum = i + 1;
@@ -98,16 +102,32 @@ function pagination(){
   }
   $('#nav ul').append(
     '<li><a id="right-arrow"  href="#!"><i class="material-icons">chevron_right</i></a></li>');
+  $('#nav ul').append(
+    '<li><a id="skip-next" href="#!"><i class="material-icons">skip_next</i></a></li>');
+  $('#nav ul').append(
+    '<li><a id="last-btn" href="#!"><i class="material-icons">last_page</i></a></li>');
 
   $('#maintable tbody tr').hide();
   $('#maintable tbody tr').slice(0, rowsShown).show();
   if (rowsTotal != 0) {
-    $('#nav li:nth-child(2) a').addClass('active');
+    $('#nav li:nth-child(4) a').addClass('active');
+    $('#nav li:nth-child(4) a').addClass('visible');
   }
+  $('#nav li:nth-child(5) a').addClass('visible');
+  $('#nav li:nth-child(6) a').addClass('visible');
+  $('#nav li:nth-child(7) a').addClass('visible');
 
   $('#nav li .pages').bind('click', function(){
     $('#nav li .pages').removeClass('active');
+    $('#nav li .pages').removeClass('visible');
+
     $(this).addClass('active');
+
+    var curr = $(this).parent().index();
+    for (var i=curr-2; i<=curr+4; i++) {
+      $('#nav li:nth-child(' + i + ') a').addClass('visible');
+    }
+
     var currPage = $(this).attr('rel');
     var startItem = currPage * rowsShown;
     var endItem = startItem + rowsShown;
@@ -152,6 +172,40 @@ $(document).ready(function() {
       if (curr.parent().prev().children(':first-child').attr('id')
         != "left-arrow"){
         curr.parent().prev().children(':first-child').click();
+      }
+    });
+
+    $('#first-btn').click(function(){
+      $('#nav li .pages').first().click();
+    });
+
+    $('#last-btn').click(function(){
+      $('#nav li .pages').last().click();
+    });
+
+    $('#skip-prev').click(function(){
+      var curr = $('#nav li .active').parent().index();
+      var next = curr - 9;
+
+      var page = $('#nav li:nth-child(' + next + ') a')
+      if (page.length && page.hasClass('pages')){
+        page.click();
+      }
+      else{
+        $('#first-btn').click();
+      }
+    });
+
+    $('#skip-next').click(function(){
+      var curr = $('#nav li .active').parent().index();
+      var next = curr + 11;
+
+      var page = $('#nav li:nth-child(' + next + ') a')
+      if (page.length && page.hasClass('pages')){
+        page.click();
+      }
+      else{
+        $('#last-btn').click();
       }
     });
 

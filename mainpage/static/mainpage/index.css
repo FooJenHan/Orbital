@@ -58,3 +58,15 @@ input {
 #right-arrow, #left-arrow {
   color: #212121;
 }
+
+#nav li .pages {
+  display: none;
+}
+
+#nav li .visible {
+  display: inline-block;
+}
+
+.pagescount {
+  display: inline;
+}
