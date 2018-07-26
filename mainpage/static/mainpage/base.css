@@ -15,6 +15,15 @@ body {
   width: 130px;
 }
 
+.sidenav li a {
+  padding: 5px;
+}
+
+.sidenav li a i[class="small material-icons"] {
+  margin-left: 10px !important;
+  margin-right: 11px !important;
+}
+
 .modal {
   width: 90%;
   height: 90%;
@@ -23,6 +32,10 @@ body {
 nav {
   height: 50px;
   line-height: 50px;
+}
+
+nav a.sidenav-trigger {
+  color: #212121;
 }
 
 .select2-container {
