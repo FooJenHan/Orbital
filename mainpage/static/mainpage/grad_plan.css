@@ -11,7 +11,7 @@
 }
 
 .btn-cell{
-  width: 15%;
+  width: 10%;
 }
 
 .cell-sem0{
@@ -23,6 +23,10 @@
 }
 
 .cell-sem3{
+  width: 7%;
+}
+
+.cell-sem4{
   width: 7%;
 }
 
@@ -39,6 +43,10 @@
 }
 
 .cell-pre4{
+  width: 7%;
+}
+
+.cell-pre5{
   width: 7%;
 }
 
@@ -61,12 +69,20 @@
   margin-right: 20px;
 }
 
-.grad-btn{
+.grad-btn, .del-btn, .grad-btn:focus{
   background-color: rgb(238, 110, 115);
 }
 
-.grad-btn:hover{
+.grad-btn:hover, .del-btn:hover{
   background-color: rgb(238, 132, 132);
+}
+
+.del-btn{
+  width: 58px;
+}
+
+.dustbin{
+  transform: translate(-10px);
 }
 
 ::placeholder {
@@ -100,4 +116,16 @@ input[type=text] {
 
 .select2-search__field{
   outline: none;
+}
+
+.alert-planner, .alert-download {
+  background-color: #37474f;
+}
+
+.alert-planner {
+  transform: translate(-450px, 200px);
+}
+
+.alert-download{
+  transform: translate(-400px, 80px);
 }

@@ -36,13 +36,17 @@ function CompareModCode(a, b) {
 function saveModuleNus(){
   var ay_sem = document.getElementById("sem_taken_nus").value;
   var grade = document.getElementById("grade_nus").value;
-  var category = document.getElementById("category_nus").value;
+  var cat = document.getElementById("category_nus").value;
   var tgt = document.getElementById("nus_all").value;
   var info_array = tgt.split(" ");
   var code = info_array.shift();
   var cred = info_array.pop();
   var credits = cred.charAt(0);
-
+  if (cat == ''){
+    var category = "NIL";
+  }else{
+    var category = cat;
+  }
   if (info_array.length == 1){
     var title = info_array[0];
   }else{
@@ -52,7 +56,7 @@ function saveModuleNus(){
     }
   }
 
-  var temp = [ay_sem, code, title, credits, grade];
+  var temp = [ay_sem, code, title, credits, grade, category];
   var stored = localStorage.getItem('stored_modules')
 
   if (stored == "undefined" || stored == null){
@@ -78,9 +82,13 @@ function saveModuleCustom(){
   var title = document.getElementById("mod_title").value;
   var credits = document.getElementById("mod_mc").value;
   var grade = document.getElementById("mod_grade").value;
-  var category = document.getElementById("category_custom").value;
-
-  var temp = [ay_sem, code, title, credits, grade];
+  var cat = document.getElementById("category_custom").value;
+  if (cat == ''){
+    var category = "NIL";
+  }else{
+    var category = cat;
+  }
+  var temp = [ay_sem, code, title, credits, grade, category];
   var stored = localStorage.getItem('stored_modules')
 
   if (stored == "undefined" || stored == null){
@@ -138,7 +146,7 @@ function createBox_Sem(modules, year_sem){
     var firstcell = row.insertCell(-1);
     firstcell.className = "btn-cell";
     $(firstcell).append(
-    '<button class="btn wave-effect wave-light deletor_sem grad-btn" type="button"><i class="material-icons">delete_forever</i> </button>');
+    '<button class="btn wave-effect wave-light deletor_sem del-btn" type="button"><i class="dustbin material-icons">delete_forever</i> </button>');
     for (j = 0; j<modules[i].length; j++){
       var cell = row.insertCell(-1);
       cell.className = "cell-sem" + String(j);
@@ -186,7 +194,7 @@ function createBox_Prefix(modules, prefix){
     var firstcell = row.insertCell(-1);
     firstcell.className = "btn-cell";
     $(firstcell).append(
-    '<button class="btn wave-effect wave-light deletor_prefix grad-btn" type="button"><i class="material-icons">delete_forever</i> </button>');
+    '<button class="btn wave-effect wave-light deletor_prefix del-btn" type="button"><i class="dustbin material-icons">delete_forever</i> </button>');
     for (j = 0; j<modules[i].length; j++){
       var cell = row.insertCell(-1);
       cell.className = "cell-pre" + String(j);
@@ -228,6 +236,7 @@ function showModSem(){
         temp.push(modules[k][2]);
         temp.push(modules[k][3]);
         temp.push(modules[k][4]);
+        temp.push(modules[k][5]);
         sem_mods.push(temp);
       }
     }
@@ -283,6 +292,7 @@ function showModPrefix(){
         temp.push(modules[k][2]);
         temp.push(modules[k][3]);
         temp.push(modules[k][4]);
+        temp.push(modules[k][5]);
         pre_mods.push(temp);
       }
     }
@@ -495,11 +505,13 @@ function csvUpload(){
         data = $.csv.toArrays(csvData);
       }
       catch(err) {
-        alert('Is not a CSV file');
+        M.toast({html: 
+        "Are you sure it is a csv file? Please choose a csv file.",
+        classes: 'alert-planner'});
         return;
       }
       if (!data || data.length == 0){
-        M.toast({html: "There is no data to import!", classes: 'alert-modlist'});
+        M.toast({html: "There is no data to import!", classes: 'alert-planner'});
         return;
       }
       data.shift();
@@ -574,6 +586,8 @@ $(document).ready(function(){
     deleteMod_Prefix(this);
   });
 
+  var initialise_s2;
+  var ct_only = [];
 
   $.getJSON('https://api.nusmods.com/2018-2019/moduleInformation.json', function(nusmods){
     var info = [];
@@ -586,16 +600,16 @@ $(document).ready(function(){
       temp.push(mc);
       info.push(temp);
     }
-    var ct_only = [];
     for (j=0; j<info.length; j++){
       var ct = info[j][0];
       ct_only.push(ct);
     }
 
-    $('#nus_all').select2({
-      placeholder: "Search NUS modules by module code or module title",
-      data: ct_only,
-    })
+    initialise_s2 = $('#nus_all').select2({
+                      placeholder: "Search NUS modules by module code or module title",
+                      data: ct_only,
+                      allowClear: true,
+                      });
 
   });
  
@@ -604,9 +618,12 @@ $(document).ready(function(){
     var data = localStorage.getItem('stored_modules');
     var arr = JSON.parse(data);
     if (!arr || arr.length == 0){
-       alert("no modules");
+       M.toast({html: 
+        "No modules added. Add some modules and try again.",
+        classes: 'alert-download'});
+        return;
     }else{
-      var csvPlanner = "Module Code,Module Title,MCs,Grade";
+      var csvPlanner = "Module Code,Module Title,MCs,Grade,Category";
       csvPlanner += "\n\n";
       var aysem = [];
       for (i=0; i<arr.length; i++){
@@ -642,5 +659,15 @@ $(document).ready(function(){
   });
 
   csvUpload();
+
+  $('#modnus').submit(function () {
+    saveModuleNus();
+    var stored = localStorage.getItem('stored_modules');
+    var test = JSON.parse(stored);
+    alert(test);
+    document.getElementById("modnus").reset();
+    // reset select2 here - find method to do so later
+    return false;
+  });
 
 });
