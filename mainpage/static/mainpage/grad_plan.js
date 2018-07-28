@@ -32,8 +32,7 @@ function CompareModCode(a, b) {
    return 0;
  }
 // end of helper function
-
-function saveModuleNus(){
+function formToListNus(){
   var ay_sem = document.getElementById("sem_taken_nus").value;
   var grade = document.getElementById("grade_nus").value;
   var cat = document.getElementById("category_nus").value;
@@ -57,6 +56,12 @@ function saveModuleNus(){
   }
 
   var temp = [ay_sem, code, title, credits, grade, category];
+  return temp;
+}
+
+
+function saveModuleNus(){
+  var temp = formToListNus();
   var stored = localStorage.getItem('stored_modules')
 
   if (stored == "undefined" || stored == null){
@@ -118,6 +123,7 @@ function createBox_Sem(modules, year_sem){
   $(pos_rel).addClass('position-relative');
   $(pos_rel).addClass('table-container');
   $(pos_rel).addClass('target-sem');
+  $(pos_rel).addClass('sem-div');
   $(pos_rel).append('<br>');
 
   var container = document.createElement('div');
@@ -127,6 +133,7 @@ function createBox_Sem(modules, year_sem){
   container.appendChild(table);
   pos_rel.appendChild(container);
   $(pos_rel).attr('id', year_sem);
+  $(pos_rel).attr('data-sort', year_sem);
 
   document.body.appendChild(pos_rel);
 
@@ -166,6 +173,7 @@ function createBox_Prefix(modules, prefix){
   $(pos_rel).addClass('position-relative');
   $(pos_rel).addClass('table-container');
   $(pos_rel).addClass('target-prefix');
+  $(pos_rel).addClass('pre-div');
   $(pos_rel).append('<br>');
 
   var container = document.createElement('div');
@@ -175,6 +183,7 @@ function createBox_Prefix(modules, prefix){
   container.appendChild(table);
   pos_rel.appendChild(container);
   $(pos_rel).attr('id', prefix);
+  $(pos_rel).attr('data-sort', prefix);
 
   document.body.appendChild(pos_rel);
 
@@ -454,6 +463,54 @@ function deleteMod_Prefix(id){
 }
 
 
+function insertNusRow(mod){
+  var aysem_id = mod[0] + "tbl";
+  var aysem = mod[0];
+  try{
+    var tbl = document.getElementById(aysem_id);
+    var tblrows = tbl.childNodes[1].childNodes;
+    alert(tblrows);
+    alert(tblrows.length);
+    for (i=0; i<tblrows.length; i++){
+      var curr = tblrows[i];
+      alert(curr.cells[1].textContent < aysem);
+      if(curr.cells[1].textContent < aysem){
+        var row = tbl.insertRow(i);
+        alert(tblrows.length);
+        var firstcell = row.insertCell(-1);
+        firstcell.className = "btn-cell";
+        $(firstcell).append(
+        '<button class="btn wave-effect wave-light deletor_sem del-btn" type="button"><i class="dustbin material-icons">delete_forever</i> </button>');
+        for (j = 1; j<mod.length; j++){
+          var cell = row.insertCell(-1);
+          cell.className = "cell-sem" + String(j-1);
+          cell.textContent = mod[j];
+        }
+        break;
+      } 
+    }
+  }
+  catch(err) {
+    var pre_1 = mod[1];
+    pre_1 = pre_1.split(/[^A-Za-z]/);
+    var pre = pre_1[0]; 
+    var modules_sem = [];
+    var modules_pre = [];
+    modules_pre.push(mod);
+    var sem_mod = mod.slice(1,5);
+    modules_sem.push(sem_mod);
+    createBox_Sem(modules_sem, aysem);
+    createBox_Prefix(modules_pre, pre);
+    var x = document.getElementsByClassName("target-sem");
+    if(x[0].style.display == 'none'){
+      showOnlyPrefix();
+    }
+    else{
+      showOnlySem();
+    }
+  }
+}
+
 function showNusForm(){
   var x = document.getElementsByClassName("nus-form");
   var y = document.getElementsByClassName("custom-form");
@@ -557,6 +614,7 @@ function csvUpload(){
 
 }
 
+
 //jQuery
 $(document).ready(function(){
 
@@ -578,11 +636,11 @@ $(document).ready(function(){
   validate();
   $('input').on('keyup', validate);
 
-  $('.deletor_sem').click(function(){
+  $("body").on("click", ".deletor_sem", function(){
     deleteMod_Sem(this);
   });
 
-  $('.deletor_prefix').click(function(){
+  $("body").on("click", ".deletor_prefix", function(){
     deleteMod_Prefix(this);
   });
 
@@ -660,14 +718,18 @@ $(document).ready(function(){
 
   csvUpload();
 
-  $('#modnus').submit(function () {
+  $('#modnus').submit(function(e){
+    e.preventDefault();
     saveModuleNus();
+    var modlst = formToListNus();
     var stored = localStorage.getItem('stored_modules');
     var test = JSON.parse(stored);
     alert(test);
+    // function to delete dynamically here
+    insertNusRow(modlst);
     document.getElementById("modnus").reset();
     // reset select2 here - find method to do so later
-    return false;
+    // insert materialise toast for mod added
   });
 
 });
