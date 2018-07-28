@@ -33,7 +33,7 @@ On top of *HTML*, *CSS*,  and *JavaScript* (including *JQuery*), other dependenc
 Python dependencies can be found in the repository's [Pipfile](https://github.com/EnzioKam/Orbital/blob/master/Pipfile).
 
 # Core Features
-
+![mainpage](https://imgur.com/HqFNfMM.png)
 *Project can be found [here](https://nusmm.herokuapp.com/)*.
 
 #### 1) Search function to get a list of modules that can be mapped to NUS
@@ -64,7 +64,7 @@ We further extended this by implementing Comma Separated Values (CSV) file impor
  
 To allow NUS students to track modules taken throughout their candidature, we created a graduation planner to allow students to key in modules which they have taken. Users can access it from any of the site’s pages through the *Planner* sidebar link. 
 
-There are 2 forms that students can use to key in their modules. The first is a form that supports NUS modules, where students can search from a dropdown list of all NUS modules. Autocomplete helps to narrow the search as students type. This was implemented using *select2*, and module data is obtained from *NUSMods API* AY18/19 module information. The second form allows users to key in custom modules, such as exchange modules or depreciated modules no longer in *NUSMods API* AY18/19 module information. Both forms are validated and require users to fill in the mandatory fields before submission.
+There are 2 forms that students can use to key in their modules. The first is a form that supports NUS modules, where students can search from a dropdown list of all NUS modules. Autocomplete helps to narrow the search as students type. This was implemented using *select2*, and module data is obtained from *NUSMods API* AY18/19 module information. The second form allows users to key in custom modules, such as exchange modules or depreciated modules no longer in *NUSMods API* AY18/19 module information. Both forms also allow for an optional category input, where students may have their own ways of categorising their modules, such as specialisation requirements for their own majors. Both forms are validated and require users to fill in the mandatory fields before submission.
 
 A tab allows users to choose how added modules are displayed; by grouping under academic year and semesters, or by module prefix. Delete buttons in each row allow users to remove entries. Users can download the graduation planner modules as CSV and by Download Planner button and upload previously downloaded CSV files by Upload Planner button. On upload, module data from the CSV file will be rendered on screen.
 
@@ -95,6 +95,13 @@ Originally, all the module mapping data from the database in the back-end was se
 To improve load times for searching, we refactored the searching process. The combined search queries are sent to the back-end whenever there are changes detected in any of the search boxes. All the querying of data and filtering is done in the back-end before the data is sent back to the front-end, and the table entries are updated.
 
 However, we realised that some queries will still result in large amounts of data being sent over to the front-end, which can still cause long loading times. We thus improved this by adding pagination to the main page’s table, so that not all the table entries need to be rendered at once. This also helped improve the UX, as the user will only have to click on the pagination arrows or page numbers to maneuver between different sections of the data, instead of scrolling through a large amount of entries
+
+
+#### 3) Page reloading for addition & deletion
+
+For the graduation planner’s webpage, any addition or deletion of modules would result in a page reload so that the page with the newly updated information will be re-rendered. However, when viewing the planner and it’s modules in the By Module Prefix tab, adding or deleting modules will result in a page reload, and thus switch to the default tab By Semester. This is not ideal for the user’s experience as the user is unable to easily make multiple changes to the planner while still viewing modules by any non-default tab, such as deleting multiple modules in a semester.
+
+To replace the page reloading on changes, we used *JavaScript* and *JQuery* to implement our own functions to handle the updating of the page information when adding or deleting modules. Separate functions were defined for addition and deletion for each of the tabs used to view the modules by adding or removing the relevant html elements in the webpage, considering edge cases such as removing the last element from a semester.
 
 ## Testing
 
