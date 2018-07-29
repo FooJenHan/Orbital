@@ -19,20 +19,8 @@ function validate() {
   }
 }
 
-//helper function to sort localstorage
- function CompareSem(a, b) {
-   if (a[0] < b[0]) return -1;
-   if (a[0] > b[0]) return 1;
-   return 0;
- }
 
-function CompareModCode(a, b) {
-   if (a[1] < b[1]) return -1;
-   if (a[1] > b[1]) return 1;
-   return 0;
- }
-// end of helper function
-function formToListNus(){
+function NusFormToList(){
   var ay_sem = document.getElementById("sem_taken_nus").value;
   var grade = document.getElementById("grade_nus").value;
   var cat = document.getElementById("category_nus").value;
@@ -61,7 +49,7 @@ function formToListNus(){
 
 
 function saveModuleNus(){
-  var temp = formToListNus();
+  var temp = NusFormToList();
   var stored = localStorage.getItem('stored_modules')
 
   if (stored == "undefined" || stored == null){
@@ -80,8 +68,7 @@ function saveModuleNus(){
   
 }
 
-
-function saveModuleCustom(){
+function customFormToList(){
   var ay_sem = document.getElementById("sem_taken").value;
   var code = document.getElementById("mod_code").value;
   var title = document.getElementById("mod_title").value;
@@ -94,6 +81,11 @@ function saveModuleCustom(){
     var category = cat;
   }
   var temp = [ay_sem, code, title, credits, grade, category];
+  return temp;
+}
+
+function saveModuleCustom(){
+  var temp = customFormToList();
   var stored = localStorage.getItem('stored_modules')
 
   if (stored == "undefined" || stored == null){
@@ -112,108 +104,7 @@ function saveModuleCustom(){
 
 
 
-
-// Create box methods 
-function createBox_Sem(modules, year_sem){
-  var table = document.createElement('table');
-  $(table).addClass('responsive-table tblclr round');
-  $(table).attr('id', year_sem + 'tbl');
-
-  var pos_rel = document.createElement('div');
-  $(pos_rel).addClass('position-relative');
-  $(pos_rel).addClass('table-container');
-  $(pos_rel).addClass('target-sem');
-  $(pos_rel).addClass('sem-div');
-  $(pos_rel).append('<br>');
-
-  var container = document.createElement('div');
-  $(container).addClass('container');
-  $(container).addClass('position-relative');
-
-  container.appendChild(table);
-  pos_rel.appendChild(container);
-  $(pos_rel).attr('id', year_sem);
-  $(pos_rel).attr('data-sort', year_sem);
-
-  document.body.appendChild(pos_rel);
-
-  $(container).append('<br>');
-
-  $(table).append('<caption></caption>');
-
-  caption = table.firstChild;
-
-  var th = document.createElement('th');
-  var node = document.createTextNode(year_sem);
-  th.appendChild(node);
-  caption.appendChild(th);
-
-  for (i = 0; i<modules.length; i++){
-    var row = table.insertRow(-1)
-    var firstcell = row.insertCell(-1);
-    firstcell.className = "btn-cell";
-    $(firstcell).append(
-    '<button class="btn wave-effect wave-light deletor_sem del-btn" type="button"><i class="dustbin material-icons">delete_forever</i> </button>');
-    for (j = 0; j<modules[i].length; j++){
-      var cell = row.insertCell(-1);
-      cell.className = "cell-sem" + String(j);
-      cell.textContent = modules[i][j];
-    }
-  }
-  
-}
-
-
-function createBox_Prefix(modules, prefix){
-  var table = document.createElement('table');
-  $(table).addClass('responsive-table tblclr round');
-  $(table).attr('id', prefix + 'tbl');
-
-  var pos_rel = document.createElement('div');
-  $(pos_rel).addClass('position-relative');
-  $(pos_rel).addClass('table-container');
-  $(pos_rel).addClass('target-prefix');
-  $(pos_rel).addClass('pre-div');
-  $(pos_rel).append('<br>');
-
-  var container = document.createElement('div');
-  $(container).addClass('container');
-  $(container).addClass('position-relative');
-
-  container.appendChild(table);
-  pos_rel.appendChild(container);
-  $(pos_rel).attr('id', prefix);
-  $(pos_rel).attr('data-sort', prefix);
-
-  document.body.appendChild(pos_rel);
-
-  $(container).append('<br>');
-
-  $(table).append('<caption></caption>');
-
-  caption = table.firstChild;
-
-  var th = document.createElement('th');
-  var node = document.createTextNode(prefix);
-  th.appendChild(node);
-  caption.appendChild(th);
-
-  for (i = 0; i<modules.length; i++){
-    var row = table.insertRow(-1)
-    var firstcell = row.insertCell(-1);
-    firstcell.className = "btn-cell";
-    $(firstcell).append(
-    '<button class="btn wave-effect wave-light deletor_prefix del-btn" type="button"><i class="dustbin material-icons">delete_forever</i> </button>');
-    for (j = 0; j<modules[i].length; j++){
-      var cell = row.insertCell(-1);
-      cell.className = "cell-pre" + String(j);
-      cell.textContent = modules[i][j];
-    }
-  }
-  
-}
-
-
+// initialise all saved modules when loading planner page
 function showModSem(){
   var str_modules = localStorage.getItem('stored_modules');
   if (str_modules == null || str_modules == 'undefined' || str_modules == "[]"){
@@ -253,7 +144,6 @@ function showModSem(){
   }
 
 }
-
 
 
 function showModPrefix(){
@@ -309,12 +199,14 @@ function showModPrefix(){
   }
 
 }
+// end of initialising functions
+
 
 
 // Function to control view by AYSem or Prefix
 function showOnlySem(){
-  var x = document.getElementsByClassName("target-sem");
-  var y = document.getElementsByClassName("target-prefix");
+  var x = document.getElementById("bysem");
+  var y = document.getElementById("byprefix");
   for (i = 0; i<x.length; i++){
     x[i].style.display = 'inline';
   }
@@ -325,8 +217,8 @@ function showOnlySem(){
 
 
 function showOnlyPrefix(){
-  var x = document.getElementsByClassName("target-sem");
-  var y = document.getElementsByClassName("target-prefix");
+  var x = document.getElementById("bysem");
+  var y = document.getElementById("byprefix");
   for (i = 0; i<x.length; i++){
     x[i].style.display = 'none';
   }
@@ -334,8 +226,34 @@ function showOnlyPrefix(){
     y[j].style.display = 'inline';
   }
 }
+// end of control view
+
+// function to control form view
+function showNusForm(){
+  var x = document.getElementsByClassName("nus-form");
+  var y = document.getElementsByClassName("custom-form");
+  for (i = 0; i<x.length; i++){
+    x[i].style.display = 'block';
+  }
+  for (j = 0; j<y.length; j++){
+    y[j].style.display = 'none';
+  }
+}
 
 
+function showCustomForm(){
+  var x = document.getElementsByClassName("nus-form");
+  var y = document.getElementsByClassName("custom-form");
+  for (i = 0; i<x.length; i++){
+    x[i].style.display = 'none';
+  }
+  for (j = 0; j<y.length; j++){
+    y[j].style.display = 'block';
+  }
+}
+// end of form control view functions
+
+// functions to dynamically delete modules
 function deleteMod_Sem(id){
   var row = id.parentNode.parentNode;
   var row_num = id.parentNode.parentNode.parentNode.rows.length;
@@ -461,80 +379,83 @@ function deleteMod_Prefix(id){
   }
 
 }
+// end of dynamic deletion functions
 
 
-function insertNusRow(mod){
+// functions to insert modules dynamically
+function formToRowSem(mod){
   var aysem_id = mod[0] + "tbl";
   var aysem = mod[0];
+  var code = mod[1];
+  var counter = 0;
   try{
     var tbl = document.getElementById(aysem_id);
     var tblrows = tbl.childNodes[1].childNodes;
-    alert(tblrows);
-    alert(tblrows.length);
     for (i=0; i<tblrows.length; i++){
       var curr = tblrows[i];
-      alert(curr.cells[1].textContent < aysem);
-      if(curr.cells[1].textContent < aysem){
-        var row = tbl.insertRow(i);
-        alert(tblrows.length);
-        var firstcell = row.insertCell(-1);
-        firstcell.className = "btn-cell";
-        $(firstcell).append(
-        '<button class="btn wave-effect wave-light deletor_sem del-btn" type="button"><i class="dustbin material-icons">delete_forever</i> </button>');
-        for (j = 1; j<mod.length; j++){
-          var cell = row.insertCell(-1);
-          cell.className = "cell-sem" + String(j-1);
-          cell.textContent = mod[j];
-        }
-        break;
-      } 
+      if(code > curr.cells[1].textContent){
+        counter = counter + 1;
+        continue;
+      }
     }
+    var row = tbl.insertRow(counter);
+    var firstcell = row.insertCell(-1);
+    firstcell.className = "btn-cell";
+    $(firstcell).append(
+    '<button class="btn wave-effect wave-light deletor_sem del-btn" type="button"><i class="dustbin material-icons">delete_forever</i> </button>');
+    for (j=1; j<mod.length; j++){
+      var cell = row.insertCell(-1);
+      cell.className = "cell-sem" + String(j-1);
+      cell.textContent = mod[j];
+    } 
   }
   catch(err) {
-    var pre_1 = mod[1];
-    pre_1 = pre_1.split(/[^A-Za-z]/);
-    var pre = pre_1[0]; 
     var modules_sem = [];
-    var modules_pre = [];
-    modules_pre.push(mod);
-    var sem_mod = mod.slice(1,5);
+    var sem_mod = mod.slice(1,6);
     modules_sem.push(sem_mod);
     createBox_Sem(modules_sem, aysem);
-    createBox_Prefix(modules_pre, pre);
-    var x = document.getElementsByClassName("target-sem");
-    if(x[0].style.display == 'none'){
-      showOnlyPrefix();
+  }
+}
+
+function formToRowPre(mod){
+  var aysem = mod[0];
+  var code = mod[1];
+  var pro_pre = code.split(/[^A-Za-z]/);
+  var prefix_id = pro_pre[0] + 'tbl';
+  var prefix = pro_pre[0];
+  var counter = 0;
+  try{
+    var tbl = document.getElementById(prefix_id);
+    var tblrows = tbl.childNodes[1].childNodes;
+    for (i=0; i<tblrows.length; i++){
+      var curr = tblrows[i];
+      if(aysem > curr.cells[1].textContent){
+        counter = counter + 1;
+        continue;
+      }
     }
-    else{
-      showOnlySem();
-    }
+    var row = tbl.insertRow(counter);
+    var firstcell = row.insertCell(-1);
+    firstcell.className = "btn-cell";
+    $(firstcell).append(
+    '<button class="btn wave-effect wave-light deletor_prefix del-btn" type="button"><i class="dustbin material-icons">delete_forever</i> </button>');
+    for (j=0; j<mod.length; j++){
+      var cell = row.insertCell(-1);
+      cell.className = "cell-pre" + String(j);
+      cell.textContent = mod[j];
+    } 
   }
-}
-
-function showNusForm(){
-  var x = document.getElementsByClassName("nus-form");
-  var y = document.getElementsByClassName("custom-form");
-  for (i = 0; i<x.length; i++){
-    x[i].style.display = 'block';
-  }
-  for (j = 0; j<y.length; j++){
-    y[j].style.display = 'none';
-  }
-}
-
-
-function showCustomForm(){
-  var x = document.getElementsByClassName("nus-form");
-  var y = document.getElementsByClassName("custom-form");
-  for (i = 0; i<x.length; i++){
-    x[i].style.display = 'none';
-  }
-  for (j = 0; j<y.length; j++){
-    y[j].style.display = 'block';
+  catch(err) {
+    var modules_pre = [];
+    modules_pre.push(mod);
+    createBox_Prefix(modules_pre, prefix);
   }
 }
 
 
+
+
+// csv function upload
 function csvUpload(){
 
   document.getElementById('upload-target').addEventListener('change', upload, false);
@@ -615,6 +536,7 @@ function csvUpload(){
 }
 
 
+
 //jQuery
 $(document).ready(function(){
 
@@ -644,6 +566,7 @@ $(document).ready(function(){
     deleteMod_Prefix(this);
   });
 
+  // initialisation of select2 with nusmods data
   var initialise_s2;
   var ct_only = [];
 
@@ -670,8 +593,9 @@ $(document).ready(function(){
                       });
 
   });
- 
+  //end of select2 initialisation
 
+  // csv download function
   $('#download-planner').click(function(){
     var data = localStorage.getItem('stored_modules');
     var arr = JSON.parse(data);
@@ -718,16 +642,30 @@ $(document).ready(function(){
 
   csvUpload();
 
+
+  // NUS form submission control
   $('#modnus').submit(function(e){
     e.preventDefault();
     saveModuleNus();
-    var modlst = formToListNus();
-    var stored = localStorage.getItem('stored_modules');
-    var test = JSON.parse(stored);
-    alert(test);
-    // function to delete dynamically here
-    insertNusRow(modlst);
+    var modlst = NusFormToList();
+    formToRowSem(modlst);
+    formToRowPre(modlst);
     document.getElementById("modnus").reset();
+    Materialize.updateTextFields();
+    // reset select2 here - find method to do so later
+    // insert materialise toast for mod added
+  });
+
+
+  // Custom form submission control
+  $('#modcustom').submit(function(e){
+    e.preventDefault();
+    saveModuleCustom();
+    var modlst = customFormToList();
+    formToRowSem(modlst);
+    formToRowPre(modlst);
+    document.getElementById("modcustom").reset();
+    Materialize.updateTextFields();
     // reset select2 here - find method to do so later
     // insert materialise toast for mod added
   });
