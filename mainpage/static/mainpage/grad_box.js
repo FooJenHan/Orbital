@@ -20,7 +20,25 @@ function createBox_Sem(modules, year_sem){
   $(pos_rel).attr('id', year_sem);
   $(pos_rel).attr('data-sort', year_sem);
 
-  document.getElementById("bysem").appendChild(pos_rel);
+  var inserted = false;
+  var boxlst = document.getElementsByClassName("target-sem");
+  for (k=0; k<boxlst.length; k++){
+    var currbox = boxlst[k];
+    var currbox_aysem = $(currbox).attr('data-sort');
+    if (year_sem > currbox_aysem){
+      continue;
+    }
+    else{
+      var wrap = document.getElementById("bysem")
+      wrap.insertBefore(pos_rel, currbox);
+      inserted = true;
+      break;
+    }
+  }
+
+  if (inserted == false){
+    document.getElementById("bysem").appendChild(pos_rel);
+  }
 
   $(container).append('<br>');
 
@@ -70,7 +88,25 @@ function createBox_Prefix(modules, prefix){
   $(pos_rel).attr('id', prefix);
   $(pos_rel).attr('data-sort', prefix);
 
-  document.getElementById("byprefix").appendChild(pos_rel);
+  var inserted = false;
+  var boxlst = document.getElementsByClassName("target-prefix");
+  for (k=0; k<boxlst.length; k++){
+    var currbox = boxlst[k];
+    var currbox_prefix = $(currbox).attr('data-sort');
+    if (prefix > currbox_prefix){
+      continue;
+    }
+    else{
+      var wrap = document.getElementById("byprefix")
+      wrap.insertBefore(pos_rel, currbox);
+      inserted = true;
+      break;
+    }
+  }
+
+  if (inserted == false){
+    document.getElementById("byprefix").appendChild(pos_rel);
+  }
 
   $(container).append('<br>');
 
