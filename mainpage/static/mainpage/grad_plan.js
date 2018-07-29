@@ -27,8 +27,7 @@ function NusFormToList(){
   var tgt = document.getElementById("nus_all").value;
   var info_array = tgt.split(" ");
   var code = info_array.shift();
-  var cred = info_array.pop();
-  var credits = cred.charAt(0);
+  var credits = info_array.pop();
   if (cat == ''){
     var category = "NIL";
   }else{
@@ -142,7 +141,10 @@ function showModSem(){
     }
     createBox_Sem(sem_mods, curr_sem);
   }
-
+  var newcap = calCap();
+  var newmc = totalMc();
+  $('.captext').text("CAP: " + newcap);
+  $('.mctext').text("Total MCs: " + newmc);
 }
 
 
@@ -197,7 +199,10 @@ function showModPrefix(){
     }
     createBox_Prefix(pre_mods, curr_pre);
   }
-
+  var newcap = calCap();
+  var newmc = totalMc();
+  $('.captext').text("CAP: " + newcap);
+  $('.mctext').text("Total MCs: " + newmc);
 }
 // end of initialising functions
 
@@ -453,8 +458,6 @@ function formToRowPre(mod){
 }
 
 
-
-
 // csv function upload
 function csvUpload(){
 
@@ -560,10 +563,18 @@ $(document).ready(function(){
 
   $("body").on("click", ".deletor_sem", function(){
     deleteMod_Sem(this);
+    var newcap = calCap();
+    var newmc = totalMc();
+    $('.captext').text("CAP: " + newcap);
+    $('.mctext').text("Total MCs: " + newmc);
   });
 
   $("body").on("click", ".deletor_prefix", function(){
     deleteMod_Prefix(this);
+    var newcap = calCap();
+    var newmc = totalMc();
+    $('.captext').text("CAP: " + newcap);
+    $('.mctext').text("Total MCs: " + newmc);
   });
 
   // initialisation of select2 with nusmods data
@@ -654,6 +665,17 @@ $(document).ready(function(){
     Materialize.updateTextFields();
     // reset select2 here - find method to do so later
     // insert materialise toast for mod added
+    var code = modlst[1];
+    M.toast({html: 
+      code + " module added!",
+      classes: 'alert-module rounded'
+    });
+
+    var newcap = calCap();
+    var newmc = totalMc();
+    $('.captext').text("CAP: " + newcap);
+    $('.mctext').text("Total MCs: " + newmc);
+
   });
 
 
@@ -668,6 +690,17 @@ $(document).ready(function(){
     Materialize.updateTextFields();
     // reset select2 here - find method to do so later
     // insert materialise toast for mod added
+    var code = modlst[1];
+    M.toast({html: 
+      code + " module added!",
+      classes: 'alert-module rounded',
+    });
+
+    var newcap = calCap();
+    var newmc = totalMc();
+    $('.captext').text("CAP: " + newcap);
+    $('.mctext').text("Total MCs: " + newmc);
+
   });
 
 });

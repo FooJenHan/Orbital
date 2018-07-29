@@ -20,11 +20,11 @@
 }
 
 .cell-sem2{
-  width: 7%;
+  width: 9%;
 }
 
 .cell-sem3{
-  width: 7%;
+  width: 4%;
 }
 
 .cell-sem4{
@@ -40,11 +40,11 @@
 }
 
 .cell-pre3{
-  width: 7%;
+  width: 9%;
 }
 
 .cell-pre4{
-  width: 7%;
+  width: 4%;
 }
 
 .cell-pre5{
@@ -119,7 +119,7 @@ input[type=text] {
   outline: none;
 }
 
-.alert-planner, .alert-download {
+.alert-planner, .alert-download, .alert-module {
   background-color: #37474f;
 }
 
@@ -129,4 +129,28 @@ input[type=text] {
 
 .alert-download{
   transform: translate(-400px, 80px);
+}
+
+.alert-module {
+  transform: translate(-420px, 100px);
+}
+
+.captext{
+  float: left;
+  color: #585858;
+  font-weight: bold;
+}
+
+.mctext{
+  float: right;
+  color: #585858;
+  font-weight: bold;
+}
+
+.card{
+  width: 97%;
+}
+
+.card-content{
+  padding: 0px;
 }
