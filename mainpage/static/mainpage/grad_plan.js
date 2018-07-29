@@ -19,30 +19,21 @@ function validate() {
   }
 }
 
-//helper function to sort localstorage
- function CompareSem(a, b) {
-   if (a[0] < b[0]) return -1;
-   if (a[0] > b[0]) return 1;
-   return 0;
- }
 
-function CompareModCode(a, b) {
-   if (a[1] < b[1]) return -1;
-   if (a[1] > b[1]) return 1;
-   return 0;
- }
-// end of helper function
-
-function saveModuleNus(){
+function NusFormToList(){
   var ay_sem = document.getElementById("sem_taken_nus").value;
   var grade = document.getElementById("grade_nus").value;
-  var category = document.getElementById("category_nus").value;
+  var cat = document.getElementById("category_nus").value;
   var tgt = document.getElementById("nus_all").value;
   var info_array = tgt.split(" ");
   var code = info_array.shift();
   var cred = info_array.pop();
   var credits = cred.charAt(0);
-
+  if (cat == ''){
+    var category = "NIL";
+  }else{
+    var category = cat;
+  }
   if (info_array.length == 1){
     var title = info_array[0];
   }else{
@@ -52,7 +43,13 @@ function saveModuleNus(){
     }
   }
 
-  var temp = [ay_sem, code, title, credits, grade];
+  var temp = [ay_sem, code, title, credits, grade, category];
+  return temp;
+}
+
+
+function saveModuleNus(){
+  var temp = NusFormToList();
   var stored = localStorage.getItem('stored_modules')
 
   if (stored == "undefined" || stored == null){
@@ -71,16 +68,24 @@ function saveModuleNus(){
   
 }
 
-
-function saveModuleCustom(){
+function customFormToList(){
   var ay_sem = document.getElementById("sem_taken").value;
   var code = document.getElementById("mod_code").value;
   var title = document.getElementById("mod_title").value;
   var credits = document.getElementById("mod_mc").value;
   var grade = document.getElementById("mod_grade").value;
-  var category = document.getElementById("category_custom").value;
+  var cat = document.getElementById("category_custom").value;
+  if (cat == ''){
+    var category = "NIL";
+  }else{
+    var category = cat;
+  }
+  var temp = [ay_sem, code, title, credits, grade, category];
+  return temp;
+}
 
-  var temp = [ay_sem, code, title, credits, grade];
+function saveModuleCustom(){
+  var temp = customFormToList();
   var stored = localStorage.getItem('stored_modules')
 
   if (stored == "undefined" || stored == null){
@@ -99,104 +104,7 @@ function saveModuleCustom(){
 
 
 
-
-// Create box methods 
-function createBox_Sem(modules, year_sem){
-  var table = document.createElement('table');
-  $(table).addClass('responsive-table tblclr round');
-  $(table).attr('id', year_sem + 'tbl');
-
-  var pos_rel = document.createElement('div');
-  $(pos_rel).addClass('position-relative');
-  $(pos_rel).addClass('table-container');
-  $(pos_rel).addClass('target-sem');
-  $(pos_rel).append('<br>');
-
-  var container = document.createElement('div');
-  $(container).addClass('container');
-  $(container).addClass('position-relative');
-
-  container.appendChild(table);
-  pos_rel.appendChild(container);
-  $(pos_rel).attr('id', year_sem);
-
-  document.body.appendChild(pos_rel);
-
-  $(container).append('<br>');
-
-  $(table).append('<caption></caption>');
-
-  caption = table.firstChild;
-
-  var th = document.createElement('th');
-  var node = document.createTextNode(year_sem);
-  th.appendChild(node);
-  caption.appendChild(th);
-
-  for (i = 0; i<modules.length; i++){
-    var row = table.insertRow(-1)
-    var firstcell = row.insertCell(-1);
-    firstcell.className = "btn-cell";
-    $(firstcell).append(
-    '<button class="btn wave-effect wave-light deletor_sem grad-btn" type="button"><i class="material-icons">delete_forever</i> </button>');
-    for (j = 0; j<modules[i].length; j++){
-      var cell = row.insertCell(-1);
-      cell.className = "cell-sem" + String(j);
-      cell.textContent = modules[i][j];
-    }
-  }
-  
-}
-
-
-function createBox_Prefix(modules, prefix){
-  var table = document.createElement('table');
-  $(table).addClass('responsive-table tblclr round');
-  $(table).attr('id', prefix + 'tbl');
-
-  var pos_rel = document.createElement('div');
-  $(pos_rel).addClass('position-relative');
-  $(pos_rel).addClass('table-container');
-  $(pos_rel).addClass('target-prefix');
-  $(pos_rel).append('<br>');
-
-  var container = document.createElement('div');
-  $(container).addClass('container');
-  $(container).addClass('position-relative');
-
-  container.appendChild(table);
-  pos_rel.appendChild(container);
-  $(pos_rel).attr('id', prefix);
-
-  document.body.appendChild(pos_rel);
-
-  $(container).append('<br>');
-
-  $(table).append('<caption></caption>');
-
-  caption = table.firstChild;
-
-  var th = document.createElement('th');
-  var node = document.createTextNode(prefix);
-  th.appendChild(node);
-  caption.appendChild(th);
-
-  for (i = 0; i<modules.length; i++){
-    var row = table.insertRow(-1)
-    var firstcell = row.insertCell(-1);
-    firstcell.className = "btn-cell";
-    $(firstcell).append(
-    '<button class="btn wave-effect wave-light deletor_prefix grad-btn" type="button"><i class="material-icons">delete_forever</i> </button>');
-    for (j = 0; j<modules[i].length; j++){
-      var cell = row.insertCell(-1);
-      cell.className = "cell-pre" + String(j);
-      cell.textContent = modules[i][j];
-    }
-  }
-  
-}
-
-
+// initialise all saved modules when loading planner page
 function showModSem(){
   var str_modules = localStorage.getItem('stored_modules');
   if (str_modules == null || str_modules == 'undefined' || str_modules == "[]"){
@@ -228,6 +136,7 @@ function showModSem(){
         temp.push(modules[k][2]);
         temp.push(modules[k][3]);
         temp.push(modules[k][4]);
+        temp.push(modules[k][5]);
         sem_mods.push(temp);
       }
     }
@@ -235,7 +144,6 @@ function showModSem(){
   }
 
 }
-
 
 
 function showModPrefix(){
@@ -283,6 +191,7 @@ function showModPrefix(){
         temp.push(modules[k][2]);
         temp.push(modules[k][3]);
         temp.push(modules[k][4]);
+        temp.push(modules[k][5]);
         pre_mods.push(temp);
       }
     }
@@ -290,12 +199,14 @@ function showModPrefix(){
   }
 
 }
+// end of initialising functions
+
 
 
 // Function to control view by AYSem or Prefix
 function showOnlySem(){
-  var x = document.getElementsByClassName("target-sem");
-  var y = document.getElementsByClassName("target-prefix");
+  var x = document.getElementById("bysem");
+  var y = document.getElementById("byprefix");
   for (i = 0; i<x.length; i++){
     x[i].style.display = 'inline';
   }
@@ -306,8 +217,8 @@ function showOnlySem(){
 
 
 function showOnlyPrefix(){
-  var x = document.getElementsByClassName("target-sem");
-  var y = document.getElementsByClassName("target-prefix");
+  var x = document.getElementById("bysem");
+  var y = document.getElementById("byprefix");
   for (i = 0; i<x.length; i++){
     x[i].style.display = 'none';
   }
@@ -315,8 +226,34 @@ function showOnlyPrefix(){
     y[j].style.display = 'inline';
   }
 }
+// end of control view
+
+// function to control form view
+function showNusForm(){
+  var x = document.getElementsByClassName("nus-form");
+  var y = document.getElementsByClassName("custom-form");
+  for (i = 0; i<x.length; i++){
+    x[i].style.display = 'block';
+  }
+  for (j = 0; j<y.length; j++){
+    y[j].style.display = 'none';
+  }
+}
 
 
+function showCustomForm(){
+  var x = document.getElementsByClassName("nus-form");
+  var y = document.getElementsByClassName("custom-form");
+  for (i = 0; i<x.length; i++){
+    x[i].style.display = 'none';
+  }
+  for (j = 0; j<y.length; j++){
+    y[j].style.display = 'block';
+  }
+}
+// end of form control view functions
+
+// functions to dynamically delete modules
 function deleteMod_Sem(id){
   var row = id.parentNode.parentNode;
   var row_num = id.parentNode.parentNode.parentNode.rows.length;
@@ -442,32 +379,83 @@ function deleteMod_Prefix(id){
   }
 
 }
+// end of dynamic deletion functions
 
 
-function showNusForm(){
-  var x = document.getElementsByClassName("nus-form");
-  var y = document.getElementsByClassName("custom-form");
-  for (i = 0; i<x.length; i++){
-    x[i].style.display = 'block';
+// functions to insert modules dynamically
+function formToRowSem(mod){
+  var aysem_id = mod[0] + "tbl";
+  var aysem = mod[0];
+  var code = mod[1];
+  var counter = 0;
+  try{
+    var tbl = document.getElementById(aysem_id);
+    var tblrows = tbl.childNodes[1].childNodes;
+    for (i=0; i<tblrows.length; i++){
+      var curr = tblrows[i];
+      if(code > curr.cells[1].textContent){
+        counter = counter + 1;
+        continue;
+      }
+    }
+    var row = tbl.insertRow(counter);
+    var firstcell = row.insertCell(-1);
+    firstcell.className = "btn-cell";
+    $(firstcell).append(
+    '<button class="btn wave-effect wave-light deletor_sem del-btn" type="button"><i class="dustbin material-icons">delete_forever</i> </button>');
+    for (j=1; j<mod.length; j++){
+      var cell = row.insertCell(-1);
+      cell.className = "cell-sem" + String(j-1);
+      cell.textContent = mod[j];
+    } 
   }
-  for (j = 0; j<y.length; j++){
-    y[j].style.display = 'none';
+  catch(err) {
+    var modules_sem = [];
+    var sem_mod = mod.slice(1,6);
+    modules_sem.push(sem_mod);
+    createBox_Sem(modules_sem, aysem);
+  }
+}
+
+function formToRowPre(mod){
+  var aysem = mod[0];
+  var code = mod[1];
+  var pro_pre = code.split(/[^A-Za-z]/);
+  var prefix_id = pro_pre[0] + 'tbl';
+  var prefix = pro_pre[0];
+  var counter = 0;
+  try{
+    var tbl = document.getElementById(prefix_id);
+    var tblrows = tbl.childNodes[1].childNodes;
+    for (i=0; i<tblrows.length; i++){
+      var curr = tblrows[i];
+      if(aysem > curr.cells[1].textContent){
+        counter = counter + 1;
+        continue;
+      }
+    }
+    var row = tbl.insertRow(counter);
+    var firstcell = row.insertCell(-1);
+    firstcell.className = "btn-cell";
+    $(firstcell).append(
+    '<button class="btn wave-effect wave-light deletor_prefix del-btn" type="button"><i class="dustbin material-icons">delete_forever</i> </button>');
+    for (j=0; j<mod.length; j++){
+      var cell = row.insertCell(-1);
+      cell.className = "cell-pre" + String(j);
+      cell.textContent = mod[j];
+    } 
+  }
+  catch(err) {
+    var modules_pre = [];
+    modules_pre.push(mod);
+    createBox_Prefix(modules_pre, prefix);
   }
 }
 
 
-function showCustomForm(){
-  var x = document.getElementsByClassName("nus-form");
-  var y = document.getElementsByClassName("custom-form");
-  for (i = 0; i<x.length; i++){
-    x[i].style.display = 'none';
-  }
-  for (j = 0; j<y.length; j++){
-    y[j].style.display = 'block';
-  }
-}
 
 
+// csv function upload
 function csvUpload(){
 
   document.getElementById('upload-target').addEventListener('change', upload, false);
@@ -495,11 +483,13 @@ function csvUpload(){
         data = $.csv.toArrays(csvData);
       }
       catch(err) {
-        alert('Is not a CSV file');
+        M.toast({html: 
+        "Are you sure it is a csv file? Please choose a csv file.",
+        classes: 'alert-planner'});
         return;
       }
       if (!data || data.length == 0){
-        M.toast({html: "There is no data to import!", classes: 'alert-modlist'});
+        M.toast({html: "There is no data to import!", classes: 'alert-planner'});
         return;
       }
       data.shift();
@@ -545,6 +535,8 @@ function csvUpload(){
 
 }
 
+
+
 //jQuery
 $(document).ready(function(){
 
@@ -566,14 +558,17 @@ $(document).ready(function(){
   validate();
   $('input').on('keyup', validate);
 
-  $('.deletor_sem').click(function(){
+  $("body").on("click", ".deletor_sem", function(){
     deleteMod_Sem(this);
   });
 
-  $('.deletor_prefix').click(function(){
+  $("body").on("click", ".deletor_prefix", function(){
     deleteMod_Prefix(this);
   });
 
+  // initialisation of select2 with nusmods data
+  var initialise_s2;
+  var ct_only = [];
 
   $.getJSON('https://api.nusmods.com/2018-2019/moduleInformation.json', function(nusmods){
     var info = [];
@@ -586,27 +581,31 @@ $(document).ready(function(){
       temp.push(mc);
       info.push(temp);
     }
-    var ct_only = [];
     for (j=0; j<info.length; j++){
       var ct = info[j][0];
       ct_only.push(ct);
     }
 
-    $('#nus_all').select2({
-      placeholder: "Search NUS modules by module code or module title",
-      data: ct_only,
-    })
+    initialise_s2 = $('#nus_all').select2({
+                      placeholder: "Search NUS modules by module code or module title",
+                      data: ct_only,
+                      allowClear: true,
+                      });
 
   });
- 
+  //end of select2 initialisation
 
+  // csv download function
   $('#download-planner').click(function(){
     var data = localStorage.getItem('stored_modules');
     var arr = JSON.parse(data);
     if (!arr || arr.length == 0){
-       alert("no modules");
+       M.toast({html: 
+        "No modules added. Add some modules and try again.",
+        classes: 'alert-download'});
+        return;
     }else{
-      var csvPlanner = "Module Code,Module Title,MCs,Grade";
+      var csvPlanner = "Module Code,Module Title,MCs,Grade,Category";
       csvPlanner += "\n\n";
       var aysem = [];
       for (i=0; i<arr.length; i++){
@@ -642,5 +641,33 @@ $(document).ready(function(){
   });
 
   csvUpload();
+
+
+  // NUS form submission control
+  $('#modnus').submit(function(e){
+    e.preventDefault();
+    saveModuleNus();
+    var modlst = NusFormToList();
+    formToRowSem(modlst);
+    formToRowPre(modlst);
+    document.getElementById("modnus").reset();
+    Materialize.updateTextFields();
+    // reset select2 here - find method to do so later
+    // insert materialise toast for mod added
+  });
+
+
+  // Custom form submission control
+  $('#modcustom').submit(function(e){
+    e.preventDefault();
+    saveModuleCustom();
+    var modlst = customFormToList();
+    formToRowSem(modlst);
+    formToRowPre(modlst);
+    document.getElementById("modcustom").reset();
+    Materialize.updateTextFields();
+    // reset select2 here - find method to do so later
+    // insert materialise toast for mod added
+  });
 
 });

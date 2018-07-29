@@ -38,3 +38,18 @@ function schoolNUSCodeSort(a,b){
     return 1;
   }
 }
+
+//helper function to sort localstorage for planner
+ function CompareSem(a, b) {
+   if (a[0] < b[0]) return -1;
+   if (a[0] > b[0]) return 1;
+   return 0;
+ }
+
+function CompareModCode(a, b) {
+   if (a[1] < b[1]) return -1;
+   if (a[1] > b[1]) return 1;
+   return 0;
+ }
+// end of helper function
+
