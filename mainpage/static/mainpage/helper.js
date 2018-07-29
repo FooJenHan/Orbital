@@ -118,8 +118,7 @@ function calCap(){
     mc = mc + cmc;
   }
   var inter = points/mc;
-  var raw = Math.round((inter * 1000)/1000);
-  var result = raw.toString();
+  var result = inter.toFixed(2);
   if (isNaN(result)){
     return "NIL"
   }
