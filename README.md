@@ -68,6 +68,8 @@ There are 2 forms that students can use to key in their modules. The first is a 
 
 A tab allows users to choose how added modules are displayed; by grouping under academic year and semesters, or by module prefix. Delete buttons in each row allow users to remove entries. Users can download the graduation planner modules as CSV and by Download Planner button and upload previously downloaded CSV files by Upload Planner button. On upload, module data from the CSV file will be rendered on screen.
 
+We include a total module credits counter and a Cumulative Average Point (*CAP*) calculator in the planner, so users do not need to manually calculate them on their own.
+
 #### 2)  Selected Modules
  
 On the *Selected* page that stores module mappings that have been selected on the mainpage, we included buttons to download selected mappings as CSV files and upload previously downloaded CSV files. Upon upload, all mappings will be rendered on screen, similar to CSV features of graduation planner as mentioned previously.
