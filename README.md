@@ -34,7 +34,9 @@ Python dependencies can be found in the repository's [Pipfile](https://github.co
 
 # Core Features
 ![mainpage](https://imgur.com/HqFNfMM.png)
-*Project can be found [here](https://nusmm.herokuapp.com/)*.
+*Project can be found [here](https://nusmm.herokuapp.com/). Only Chrome and Firefox are tested and supported.*
+
+*Note that certain browser extensions (such as adblockers) may disable some functionalities on the website. Please disable extensions or browse in incognito mode for Chrome / private browsing for Firefox to avoid problems when viewing the site.*
 
 #### 1) Search function to get a list of modules that can be mapped to NUS
 
@@ -103,7 +105,7 @@ However, we realised that some queries will still result in large amounts of dat
 
 For the graduation planner’s webpage, any addition or deletion of modules would result in a page reload so that the page with the newly updated information will be re-rendered. However, when viewing the planner and it’s modules in the By Module Prefix tab, adding or deleting modules will result in a page reload, and thus switch to the default tab By Semester. This is not ideal for the user’s experience as the user is unable to easily make multiple changes to the planner while still viewing modules by any non-default tab, such as deleting multiple modules in a semester.
 
-To replace the page reloading on changes, we used *JavaScript* and *JQuery* to implement our own functions to handle the updating of the page information when adding or deleting modules. Separate functions were defined for addition and deletion for each of the tabs used to view the modules by adding or removing the relevant html elements in the webpage, considering edge cases such as removing the last element from a semester.
+To replace the page reloading on changes, we used *JavaScript* and *JQuery* to implement our own functions to handle the updating of the page information when adding or deleting modules. Separate functions were defined for addition and deletion for each of the tabs used to view the modules by adding or removing the relevant html elements in the webpage, considering edge cases such as removing the last element from a semester. This allows users to add and delete modules without experiencing a “jump” in the page as it reloads, especially when making changes while viewing in non-default tabs, making the user’s experience smoother. 
 
 # Testing
 
