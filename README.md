@@ -17,7 +17,7 @@ The information is presented in a PDF file (as is the case for the Faculty of Sc
 
 #### Aim
 
-We aim to create a web application with a database of module mappings to make the searching process for possible module mappings faster and easier via different filtering criteria, and to be able to track and store a list of modules (with their mappings) that the student intends to take on exchange. The project will start by targeting modules from the Faculty of Science.
+As part of Orbital 2018, we aim to create a web application with a database of module mappings to make the searching process for possible module mappings faster and easier via different filtering criteria, and to be able to track and store a list of modules (with their mappings) that the student intends to take on exchange. The project will start by targeting modules from the Faculty of Science.
 
 #### Technical Tools / Dependencies
 
@@ -82,7 +82,7 @@ Changes to the UI were made to both the overall layout and individual webpages. 
 
 For the main page, the original two search boxes have been replaced with only one *Materialize.css* search box (using input-field) and two *select2* pillboxes, with a clearer indication of where exactly users can type in.
 
-For the *Selected* page, we include a description of what the page is used for and what users can do in that page. The card containing the PU name for each table now also includes the sum of module credits for both NUS modules and PU modules for the modules selected for that particular PU. To reduce clutter for the tables in Selected, PU codes in the table and now replaced by a button for each row, that when clicked on will copy the relevant PU code into the clipboard.
+For the *Selected* page, we include a description of what the page is used for and what users can do in that page. The card containing the PU name for each table now also includes the sum of module credits for both NUS modules and PU modules for the modules selected for that particular PU. To reduce clutter for the tables in *Selected*, PU codes in the table are now replaced by a button for each row, that when clicked on will copy the relevant PU code into the clipboard.
 
 # Problems encountered
 
@@ -96,7 +96,7 @@ Originally, all the module mapping data from the database in the back-end was se
 
 To improve load times for searching, we refactored the searching process. The combined search queries are sent to the back-end whenever there are changes detected in any of the search boxes. All the querying of data and filtering is done in the back-end before the data is sent back to the front-end, and the table entries are updated.
 
-However, we realised that some queries will still result in large amounts of data being sent over to the front-end, which can still cause long loading times. We thus improved this by adding pagination to the main page’s table, so that not all the table entries need to be rendered at once. This also helped improve the UX, as the user will only have to click on the pagination arrows or page numbers to maneuver between different sections of the data, instead of scrolling through a large amount of entries
+However, we realised that some queries will still result in large amounts of data being sent over to the front-end, which can still cause long loading times. We thus improved this by adding pagination to the main page’s table, so that not all the table entries need to be rendered at once. Buttons to skip forward and backward by 10 pages, and to go to the first and last pages are also implemented for easier navigation throughout the pages. This helped improve the UX, as the user will only have to click on the pagination arrows or page numbers to maneuver between different sections of the data, instead of scrolling through a large amount of entries.
 
 
 #### 3) Page reloading for addition & deletion
@@ -105,7 +105,7 @@ For the graduation planner’s webpage, any addition or deletion of modules woul
 
 To replace the page reloading on changes, we used *JavaScript* and *JQuery* to implement our own functions to handle the updating of the page information when adding or deleting modules. Separate functions were defined for addition and deletion for each of the tabs used to view the modules by adding or removing the relevant html elements in the webpage, considering edge cases such as removing the last element from a semester.
 
-## Testing
+# Testing
 
 Using Django, we implemented simple tests used to test the functionality of our data model, and to check if the correct html pages are rendered. The application is tested locally, and then deployed on Heroku. Manual testing of all the features to ensure that they work is done after each deployment.
 
