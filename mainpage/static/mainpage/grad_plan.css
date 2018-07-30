@@ -82,6 +82,14 @@
   width: 58px;
 }
 
+.add-btn, .add-btn:focus {
+  background-color: rgb(255,138,101);
+}
+
+.add-btn:hover {
+  background-color: rgb(255,149,116);
+}
+
 .dustbin{
   transform: translate(-10px);
 }
